@@ -1,0 +1,51 @@
+# dependencies
+node_modules
+
+# build outputs
+dist
+build
+.out
+.next
+coverage
+
+# logs
+logs
+*.log
+
+# env files
+.env
+.env.*
+!.env.example
+
+# lock files (optional, usually not formatted)
+bun.lock
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# generated files
+*.generated.*
+*.gen.*
+
+# cache
+.cache
+.tmp
+.temp
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE/editor
+.vscode
+.idea
+
+# git
+.git
+
+# docker
+docker-compose.override.yml
+
+# misc
+public
+uploads
