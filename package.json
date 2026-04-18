@@ -1,9 +1,11 @@
 {
-  "name": "gradified-maths-engine",
+  "name": "maths-engine",
   "type": "module",
   "private": true,
   "scripts": {
     "dev": "bun run src/index.ts",
+    "build": "bun build src/index.ts --outdir dist --target bun --minify",
+    "start": "bun run build && bun run dist/index.js",
     "format": "biome format --write .",
     "lint": "biome lint .",
     "check": "biome check .",
