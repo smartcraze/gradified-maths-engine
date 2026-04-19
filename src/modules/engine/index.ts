@@ -1,16 +1,23 @@
-// test code for openrouter ai sdk provider
+import { classifyQuestionType } from "@/modules/engine/router";
+import { type EngineRoutingResult, type RoutingInput, routingInputSchema } from "@/types";
 
-import { createOpenRouter } from "@openrouter/ai-sdk-provider";
-import { generateText } from "ai";
-import { env } from "@/config/env";
+export const identifyQuestionType = async (payload: RoutingInput): Promise<EngineRoutingResult> => {
+  const input = routingInputSchema.parse(payload);
 
-const openrouter = createOpenRouter({
-  apiKey: env.OPENROUTER_API_KEY,
-});
+  const { result, usedFallback, routerModel } = await classifyQuestionType(input);
 
-const { text } = await generateText({
-  model: openrouter.chat("openai/gpt-oss-120b:free"),
-  prompt: "Write a short story about AI.",
-});
+  return {
+    paperId: input.paperId,
+    questionId: input.questionId,
+    questionType: result.questionType,
+    confidence: result.confidence,
+    rationale: result.rationale,
+    usedFallback,
+    routerModel,
+    nextStage: "rubric-loading",
+  };
+};
 
-console.log(text);
+export const engine = {
+  identifyQuestionType,
+};

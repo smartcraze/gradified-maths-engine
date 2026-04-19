@@ -27,9 +27,10 @@ bun run dev          # start dev server (server.ts with hot reload)
 bun run eval         # run full eval suite against golden dataset
 bun run eval:watch   # re-run eval on file changes
 bun run build        # production build
-bun test             # run unit tests
-bun biome check .    # lint check
+bun run check        # lint check
+bun run check:fix    # lint check
 bun biome check --apply .  # lint + autofix
+bun run prepare      
 ```
 
 ---
@@ -218,9 +219,7 @@ All model calls use `generateObject` with Zod schemas for structured output. Nev
 Required in `.env`:
 
 ```
-ANTHROPIC_API_KEY=
-OPENAI_API_KEY=
-CONSENSUS_THRESHOLD=1        # max mark gap before tiebreaker triggers
+OPENROUTER_API_KEY             # using openRouter with different model inside that
 EVAL_DATASET_PATH=src/config/golden/golden.json
 LOG_LEVEL=info               # debug | info | warn | error
 ```
@@ -308,3 +307,28 @@ Flags are important — they surface patterns across papers (e.g. students syste
 - MCQ scoring is reliable (>88% exact match) and should not need changes.
 - The question type router occasionally misclassifies combined algebra+calculus questions — these get routed to `algebra` by default.
 - Tiebreaker invocation rate is tracked in eval output. Target is < 10% of papers triggering tiebreaker.
+
+---
+
+## Agent task tracker (maintain this)
+
+Use this checklist for active implementation status so agents do not need to rescan the repository to infer what is done.
+
+Update rules:
+- Mark completed items with `[x]`.
+- Mark pending items with `[ ]`.
+- If work starts but is not complete, keep it as `[ ]` and append `(in progress)`.
+- Add new tasks at the bottom with concise action phrases.
+
+Current tracker:
+- [x] Add shared routing types
+- [x] Add model registry config
+- [x] Implement OpenRouter provider helper
+- [x] Build engine question router
+- [x] Rewrite engine index orchestrator
+- [x] Run lint and build checks
+- [ ] Wire routing into `/evaluate` endpoint
+- [ ] Add rubric registry and loader wiring
+- [ ] Implement judge pass 1 and pass 2 modules
+- [ ] Implement consensus gate and tiebreaker flow
+- [ ] Add eval runner endpoint and dataset integration
