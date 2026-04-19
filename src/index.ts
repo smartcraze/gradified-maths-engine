@@ -2,6 +2,7 @@ import express, { type Request, type Response } from "express";
 import helmet from "helmet";
 import { globalErrorHandler } from "@/core/middleware/error.middleware";
 import logger from "@/core/middleware/logger.middleware";
+import { ApiResponse } from "@/core/utils/api.response";
 
 const app = express();
 
@@ -10,7 +11,7 @@ app.use(logger);
 app.use(express.json());
 
 app.get("/health", (_req: Request, res: Response) => {
-  res.send("OK");
+  res.status(200).json(ApiResponse.success("OK", { status: "healthy" }));
 });
 
 app.use(globalErrorHandler);
