@@ -1,22 +1,23 @@
-import winston from "winston";
-import { env } from "@/config/env";
+import pinoHttp from "pino-http";
+import logger from "../utils/logger";
 
-const logger = winston.createLogger({
-  level: "info",
-  format: winston.format.json(),
-  defaultMeta: { service: "user-service" },
-  transports: [
-    new winston.transports.File({ filename: "error.log", level: "error" }),
-    new winston.transports.File({ filename: "combined.log" }),
-  ],
+const httpLogger = pinoHttp({
+  logger,
+  customLogLevel: (_req, res, err) => {
+    if (res.statusCode >= 500 || err) return "error";
+    if (res.statusCode >= 400) return "warn";
+    return "info";
+  },
+  customSuccessMessage: (req, res) => `${req.method} ${req.url} -> ${res.statusCode}`,
+  customErrorMessage: (req, res, err) => `${req.method} ${req.url} -> ${res.statusCode} ${err.message}`,
+  serializers: {
+    req: () => undefined,
+    res: () => undefined,
+    err: (err) => ({
+      type: err.type,
+      message: err.message,
+    }),
+  },
 });
 
-if (env.NODE_ENV !== "production") {
-  logger.add(
-    new winston.transports.Console({
-      format: winston.format.simple(),
-    }),
-  );
-}
-
-export default logger;
+export default httpLogger;
