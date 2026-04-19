@@ -9,5 +9,9 @@ export const globalErrorHandler = (err: Error, _req: Request, res: Response, _ne
     return res.status(err.statusCode).json(ApiResponse.error(err.message));
   }
 
+  if (err instanceof Error && err.name === "ZodError") {
+    return res.status(400).json(ApiResponse.error("Invalid request data"));
+  }
+
   return res.status(500).json(ApiResponse.error("Something went wrong"));
 };

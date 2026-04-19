@@ -2,7 +2,7 @@ import { env } from "@/config/env";
 import app from "./index";
 
 const server = app.listen(env.PORT, () => {
-  console.log(`Server running on port ${env.PORT}`);
+  console.log(`Server running on http://localhost:${env.PORT}`);
 });
 
 const shutdown = (message: string) => {

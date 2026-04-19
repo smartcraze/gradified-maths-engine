@@ -3,6 +3,7 @@ import { z } from "zod";
 const envSchema = z.object({
   NODE_ENV: z.enum(["development", "production", "test"]).default("development"),
   PORT: z.string().default("3000"),
+  OPENROUTER_API_KEY: z.string(),
 });
 
 export type Env = z.infer<typeof envSchema>;
