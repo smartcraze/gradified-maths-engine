@@ -3,6 +3,7 @@ import helmet from "helmet";
 import { globalErrorHandler } from "@/core/middleware/error.middleware";
 import logger from "@/core/middleware/logger.middleware";
 import { ApiResponse } from "@/core/utils/api.response";
+import paperEvaluationRouter from "@/modules/evaluation/paper.route";
 
 const app = express();
 
@@ -13,6 +14,8 @@ app.use(express.json());
 app.get("/health", (_req: Request, res: Response) => {
   res.status(200).json(ApiResponse.success("OK", { status: "healthy" }));
 });
+
+app.use("/api/evaluation", paperEvaluationRouter);
 
 app.use(globalErrorHandler);
 

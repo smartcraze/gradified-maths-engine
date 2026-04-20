@@ -50,17 +50,12 @@ PORT=3000
 
 OPENROUTER_API_KEY=your_openrouter_api_key_here
 
-LOG_LEVEL=info
-ROUTER_MODEL=openai/gpt-4o-mini
-JUDGE_PASS1_MODEL=anthropic/claude-sonnet-4-5
-JUDGE_PASS2_MODEL=openai/gpt-4o
-TIEBREAKER_MODEL=anthropic/claude-opus-4-5
-CONSENSUS_THRESHOLD=1
+MODEL_NAME=openai/gpt-oss-120b:free
 ```
 
 Notes:
 - `OPENROUTER_API_KEY` is required.
-- If model variables are omitted, defaults in `src/config/models.ts` are used.
+- For now, model selection is controlled through a single `MODEL_NAME` value.
 - Environment validation is defined in `src/config/env.ts`.
 
 ## Run the Project
@@ -126,12 +121,9 @@ src/
 	server.ts                # Server bootstrap and shutdown handlers
 	config/
 		env.ts                 # Environment schema and parsing
-		models.ts              # Model registry by role
-		open-router.ts         # OpenRouter model provider helpers
 	modules/
 		engine/
-			router.ts            # LLM-based question type classifier
-			index.ts             # Engine entry for routing stage
+			index.ts             # OpenRouter generation helpers using MODEL_NAME
 	types/
 		index.ts               # Shared Zod schemas and TypeScript types
 ```
@@ -140,7 +132,7 @@ src/
 
 
 - Runtime is Bun, not Node. Use `bun` commands throughout.
-- Keep model IDs in `src/config/models.ts` (avoid hardcoding in modules).
+- Keep model IDs in environment variables (avoid hardcoding in modules).
 - Use structured outputs for model responses (Zod schemas in `src/types/index.ts`).
 - Linting and formatting are enforced with Biome.
 
