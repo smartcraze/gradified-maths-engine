@@ -6,6 +6,7 @@ const envSchema = z.object({
   OPENROUTER_API_KEY: z.string(),
   MODEL_NAME: z.string().default("openai/gpt-oss-120b:free"),
   OPENAI_API_KEY: z.string(),
+  DATABASE_URL: z.string(),
 });
 
 export type Env = z.infer<typeof envSchema>;

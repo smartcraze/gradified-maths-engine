@@ -1,0 +1,81 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum ExamStructureStatus {
+  PROCESSING
+  READY
+  FAILED
+}
+
+enum SubmissionParseStatus {
+  PARSED
+  FAILED
+}
+
+enum EvaluationStatus {
+  PENDING
+  COMPLETED
+  FAILED
+}
+
+model ExamCache {
+  id                      String              @id @default(cuid())
+  examCode                String?
+  questionPaperHash       String
+  modelAnswerHash         String
+  questionPaperRaw        String?             @db.Text
+  modelAnswerRaw          String?             @db.Text
+  structuredQuestionPaper Json
+  structuredModelAnswer   Json
+  alignmentReport         Json?
+  status                  ExamStructureStatus @default(READY)
+  createdAt               DateTime            @default(now())
+  updatedAt               DateTime            @updatedAt
+
+  studentSubmissions StudentSubmission[]
+
+  @@unique([questionPaperHash, modelAnswerHash], map: "exam_hash_pair_unique")
+  @@index([examCode])
+  @@index([createdAt])
+}
+
+model StudentSubmission {
+  id                     String                @id @default(cuid())
+  examId                 String
+  studentIdentifier      String
+  studentName            String?
+  studentSheetHash       String
+  studentSheetRaw        String?               @db.Text
+  structuredStudentSheet Json
+  parseStatus            SubmissionParseStatus @default(PARSED)
+  createdAt              DateTime              @default(now())
+  updatedAt              DateTime              @updatedAt
+
+  exam       ExamCache         @relation(fields: [examId], references: [id], onDelete: Cascade)
+  evaluation EvaluationResult?
+
+  @@unique([examId, studentIdentifier, studentSheetHash], map: "submission_dedupe_unique")
+  @@index([examId, studentIdentifier])
+}
+
+model EvaluationResult {
+  id                String           @id @default(cuid())
+  submissionId      String           @unique
+  totalMarks        Decimal?         @db.Decimal(6, 2)
+  maxMarks          Decimal?         @db.Decimal(6, 2)
+  percentage        Decimal?         @db.Decimal(5, 2)
+  questionWiseMarks Json?
+  rubricBreakdown   Json?
+  feedback          Json?
+  status            EvaluationStatus @default(PENDING)
+  createdAt         DateTime         @default(now())
+  updatedAt         DateTime         @updatedAt
+
+  submission StudentSubmission @relation(fields: [submissionId], references: [id], onDelete: Cascade)
+}
