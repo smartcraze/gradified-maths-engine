@@ -13,8 +13,7 @@
     "prepare": "husky",
     "db:generate": "prisma generate",
     "db:migrate": "prisma migrate dev",
-    "db:studio": "prisma studio",
-    "db:dev": ""
+    "db:studio": "prisma studio"
   },
   "devDependencies": {
     "@biomejs/biome": "2.4.12",

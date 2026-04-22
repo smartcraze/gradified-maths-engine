@@ -3,6 +3,7 @@ import helmet from "helmet";
 import { globalErrorHandler } from "@/core/middleware/error.middleware";
 import logger from "@/core/middleware/logger.middleware";
 import { ApiResponse } from "@/core/utils/api.response";
+import engineRouter from "@/modules/engine/routes";
 import structureRouter from "@/modules/structure/routes";
 
 const app = express();
@@ -13,6 +14,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static(`${process.cwd()}/public`));
+app.use("/api/engine", engineRouter);
 app.use("/api/structure", structureRouter);
 
 app.get("/health", (_req: Request, res: Response) => {
