@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Maths Engine - Structure Inputs</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        margin: 0;
+        padding: 24px;
+        background: #f7f7f8;
+        color: #111;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 12px;
+        padding: 20px;
+      }
+
+      h1 {
+        margin-top: 0;
+      }
+
+      .field {
+        margin-bottom: 14px;
+      }
+
+      label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 6px;
+      }
+
+      input,
+      textarea,
+      button {
+        width: 100%;
+        box-sizing: border-box;
+        font: inherit;
+      }
+
+      input,
+      textarea {
+        border: 1px solid #bbb;
+        border-radius: 8px;
+        padding: 10px;
+        background: #fff;
+      }
+
+      textarea {
+        min-height: 160px;
+        resize: vertical;
+      }
+
+      button {
+        border: 0;
+        border-radius: 8px;
+        padding: 12px;
+        background: #0b6bcb;
+        color: #fff;
+        cursor: pointer;
+      }
+
+      button:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+
+      pre {
+        background: #0f172a;
+        color: #e2e8f0;
+        padding: 12px;
+        border-radius: 8px;
+        overflow: auto;
+        min-height: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="container">
+      <h1>Structure Exam Inputs</h1>
+
+      <div class="field">
+        <label for="examCode">Exam Code (optional)</label>
+        <input id="examCode" placeholder="e.g. class11-unit-test-1" />
+      </div>
+
+      <div class="field">
+        <label for="questionPaperRaw">Question Paper Text</label>
+        <textarea id="questionPaperRaw" placeholder="Paste extracted question paper text..."></textarea>
+      </div>
+
+      <div class="field">
+        <label for="modelAnswerRaw">Model Answer Text</label>
+        <textarea id="modelAnswerRaw" placeholder="Paste extracted model answer text..."></textarea>
+      </div>
+
+      <button id="prepareBtn" type="button">Prepare Exam Structure</button>
+
+      <h2>Response</h2>
+      <pre id="result">Waiting for request...</pre>
+    </main>
+
+    <script src="/app.js"></script>
+  </body>
+</html>

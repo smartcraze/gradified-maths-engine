@@ -3,7 +3,7 @@ export const APP_VERSION = "1.0.0";
 
 export const OPENROUTER_FREE_MODELS = {
   questionPaper: "nvidia/nemotron-3-super-120b-a12b:free",
-  modelAnswer: "google/gemma-3-27b-it:free",
+  modelAnswer: "openai/gpt-oss-120b:free",
   studentSheet: "openai/gpt-oss-120b:free",
 } as const;
 
