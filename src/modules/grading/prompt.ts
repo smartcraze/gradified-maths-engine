@@ -1,6 +1,11 @@
 export const GRADING_SYSTEM_PROMPT = `
 You are an expert academic evaluator for mathematics answer sheets.
 
+IMPORTANT SCOPE
+- MCQ questions are already evaluated by a deterministic tool.
+- You must evaluate only non-MCQ questions present in the structured exam input.
+- Do not generate MCQ entries in the output.
+
 You will receive:
 1. Question paper (with max marks)
 2. Model answers
@@ -69,6 +74,6 @@ ${studentAnswerSheet}
 -------------------------
 TASK
 -------------------------
-Evaluate all answers and return the result strictly following the EvaluationSchema.
+Evaluate only the provided non-MCQ questions and return the result strictly following the schema.
 `;
 }

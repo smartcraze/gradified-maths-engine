@@ -1,5 +1,10 @@
 import { z } from "zod";
 
+const FeedbackSchema = z.object({
+	strengths: z.string().describe("What the student did well for this question."),
+	improvements: z.string().describe("How the student can improve for this question."),
+});
+
 export const QuestionEvaluationSchema = z
 	.object({
 		question_id: z.string().describe("Unique identifier of the question being evaluated."),
@@ -12,11 +17,14 @@ export const QuestionEvaluationSchema = z
 		correctness: z
 			.enum(["correct", "partially_correct", "incorrect"])
 			.describe("Overall correctness classification of the student's response."),
-		correct_option: z.string().nullable().describe("Correct option for objective questions (if applicable)."),
+		correct_option: z
+			.string()
+			.nullable()
+			.describe("Correct MCQ option letter (A/B/C/D) for objective questions, otherwise null."),
 		student_option: z
 			.string()
 			.nullable()
-			.describe("Option selected by the student for objective questions (if applicable)."),
+			.describe("Student-selected MCQ option letter (A/B/C/D) for objective questions, otherwise null."),
 
 		steps_analysis: z
 			.array(
@@ -40,15 +48,57 @@ export const QuestionEvaluationSchema = z
 			.nullable()
 			.describe("Important expected points missing from the student answer."),
 
-		feedback: z
-			.object({
-				strengths: z.string().describe("What the student did well for this question."),
-				improvements: z.string().describe("How the student can improve for this question."),
-			})
-			.describe("Question-level feedback for the student."),
+		feedback: FeedbackSchema.nullable().describe("Question-level feedback for the student."),
 	})
 	.describe("Evaluation details for a single question.")
 
+	.superRefine((data, ctx) => {
+		if (data.marks_awarded > data.max_marks) {
+			ctx.addIssue({
+				code: z.ZodIssueCode.custom,
+				path: ["marks_awarded"],
+				message: "marks_awarded cannot exceed max_marks",
+			});
+		}
+	});
+
+export const NonMcqQuestionEvaluationSchema = z
+	.object({
+		question_id: z.string().describe("Unique identifier of the question being evaluated."),
+		max_marks: z.number().describe("Maximum marks available for this question."),
+		marks_awarded: z
+			.number()
+			.describe("Marks awarded to the student for this question. Must be between 0 and max_marks.")
+			.min(0),
+		answer_type: z.enum(["numerical", "short", "long"]).describe("Type of non-MCQ answer expected for the question."),
+		correctness: z
+			.enum(["correct", "partially_correct", "incorrect"])
+			.describe("Overall correctness classification of the student's response."),
+		correct_option: z.null().describe("Always null for non-MCQ questions."),
+		student_option: z.null().describe("Always null for non-MCQ questions."),
+		steps_analysis: z
+			.array(
+				z
+					.object({
+						step: z.string().describe("One evaluation step or reasoning point considered during marking."),
+						is_correct: z.boolean().describe("Whether this individual step is correct."),
+						marks: z.number().describe("Marks allocated for this specific step."),
+					})
+					.describe("Step-level breakdown item for analytical marking."),
+			)
+			.nullable()
+			.describe("Optional step-wise analysis for descriptive or numerical answers."),
+		key_points_covered: z
+			.array(z.string())
+			.nullable()
+			.describe("Important expected points that the student answer includes."),
+		key_points_missing: z
+			.array(z.string())
+			.nullable()
+			.describe("Important expected points missing from the student answer."),
+		feedback: FeedbackSchema.describe("Question-level feedback for the student."),
+	})
+	.describe("Evaluation details for a single non-MCQ question.")
 	.superRefine((data, ctx) => {
 		if (data.marks_awarded > data.max_marks) {
 			ctx.addIssue({
@@ -86,3 +136,14 @@ export const EvaluationSchema = z
 		overall_feedback: z.string().describe("Overall feedback summary for the entire response sheet."),
 	})
 	.describe("Complete evaluation output schema for one student's assessment.");
+
+export const NonMcqEvaluationSchema = z
+	.object({
+		student: StudentSchema.nullable().describe("Optional student identity and context information."),
+		evaluation: z.array(NonMcqQuestionEvaluationSchema).describe("List of per-question non-MCQ evaluation entries."),
+		overall_feedback: z.string().describe("Overall feedback summary for the entire response sheet."),
+	})
+	.describe("AI-evaluated output schema containing only non-MCQ question evaluations.");
+
+export type QuestionEvaluation = z.infer<typeof QuestionEvaluationSchema>;
+export type Evaluation = z.infer<typeof EvaluationSchema>;
