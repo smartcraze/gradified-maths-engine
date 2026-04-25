@@ -1,43 +1,28 @@
-import { createOpenRouter } from "@openrouter/ai-sdk-provider";
+import { openai } from "@ai-sdk/openai";
 import { generateText, Output } from "ai";
-import { env } from "@/config/env";
-import { MODEL_ANSWER, QUESTIONS } from "./input";
-import { STRUCTURE_PROMPT } from "./promt";
+import { SYSTEM_STRUCTURE_PROMPT } from "./promt";
+import { type StructuredExam, StructuredExamSchema } from "./schema";
 
-const openrouter = createOpenRouter({
-  apiKey: env.OPENROUTER_API_KEY,
-});
+export async function GetStructuredExamData(questionPaper: string, modelAnswers: string): Promise<StructuredExam> {
+	const prompt = `
+  You are given a question paper and model answers.
+  Your task is to convert this raw exam data into a clean, machine-readable structured object following the strict schema contract provided.
 
-const structuredprompt = `
-You are given a question paper and model answers.
+  Question Paper:
+  ${questionPaper}
+  \n-----------------\n
+  Model Answers:
+  ${modelAnswers}
+  `;
 
-Your job is to align and structure them into JSON.
+	const { output } = await generateText({
+		model: openai("gpt-4.1-mini"),
+		system: SYSTEM_STRUCTURE_PROMPT,
+		prompt,
+		output: Output.object({
+			schema: StructuredExamSchema,
+		}),
+	});
 
--------------------------
-INPUT FORMAT
--------------------------
-Question Paper:
-${QUESTIONS}
-
-Model Answers:
-${MODEL_ANSWER}
-
--------------------------
-IMPORTANT
--------------------------
-- Questions and answers correspond by numbering
-- Do not mismatch answers
-- Preserve hierarchy (sections, sub-questions)
-- Use LaTeX for math expressions
-
-Return only JSON.
-`;
-
-const { text } = await generateText({
-  model: openrouter.chat("openai/gpt-oss-120b:free"),
-  system: STRUCTURE_PROMPT,
-  prompt: structuredprompt,
-  output: Output.json(),
-});
-
-console.log(text);
+	return output;
+}

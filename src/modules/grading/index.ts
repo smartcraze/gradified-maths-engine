@@ -27,17 +27,17 @@ Evaluate all answers and return the result strictly following the EvaluationSche
 `;
 
 const { output } = await generateText({
-  model: openai("gpt-4.1"),
-  system: SYSTEM_PROMPT,
-  prompt: outputPrompt,
-  output: Output.object({
-    schema: EvaluationSchema,
-  }),
-  providerOptions: {
-    openai: {
-      reasoningEffort: "low",
-    } satisfies OpenAILanguageModelResponsesOptions,
-  },
+	model: openai("gpt-4.1"),
+	system: SYSTEM_PROMPT,
+	prompt: outputPrompt,
+	output: Output.object({
+		schema: EvaluationSchema,
+	}),
+	providerOptions: {
+		openai: {
+			reasoningEffort: "low",
+		} satisfies OpenAILanguageModelResponsesOptions,
+	},
 });
 
 console.log(output);

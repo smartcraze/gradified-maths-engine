@@ -82,10 +82,10 @@ Section A – MCQs
 8. (c) Transitive
 Section B – Very Short Answer
 9. A set is a well-defined collection of objects. Example: A = {1, 2, 3}.
-10. Domain = ■, Range = {x : x ≥ 0}.
+10. Domain = ℝ, Range = {x : x ≥ 0}.
 11. sin 45° cos 45° = (1/√2)(1/√2) = 1/2.
-12. ■P■ = 5 × 4 = 20.
-13. Number of elements in power set = 2■ = 16.
+12. ⁿPᵣ = 5 × 4 = 20.
+13. Number of elements in power set = 2ⁿ = 16.
 14. (i) One–one: f(x) = x + 1
 (ii) Many–one: f(x) = x²
 Section C – Short Answer
@@ -96,7 +96,7 @@ Section C – Short Answer
 = 2 / sinθ = 2 cosecθ = RHS. Hence proved.
 16. (i) A ∪ B = {1, 2, 3, 4, 5, 6}
 (ii) A ∩ B = {3, 4}.
-17. Number of 3-digit numbers = ■P■ = 5 × 4 × 3 = 60.
+17. Number of 3-digit numbers = ⁿPᵣ = 5 × 4 × 3 = 60.
 18. The relation is reflexive since (a,a) ∈ R for all a ∈ A. It is symmetric and transitive. Hence, it is
 an equivalence relation.
 Section D – Long Answer
