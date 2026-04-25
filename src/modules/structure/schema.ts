@@ -3,10 +3,7 @@ import { z } from "zod";
 const StructuredQuestionSchema = z.object({
 	question_id: z.string(),
 	question_text: z.string(),
-	options: z
-		.array(z.enum(["A", "B", "C", "D"]))
-		.optional()
-		.describe("Use [] for non-MCQ questions"),
+	options: z.array(z.enum(["A", "B", "C", "D"])).describe("Use [] for non-MCQ questions"),
 	model_answer: z.string(),
 	max_marks: z.number(),
 	marks_inferred: z.boolean(),

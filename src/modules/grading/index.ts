@@ -1,43 +1,50 @@
-import { type OpenAILanguageModelResponsesOptions, openai } from "@ai-sdk/openai";
+import { openai } from "@ai-sdk/openai";
 import { generateText, Output } from "ai";
-import { EvaluationSchema } from "./output-schema";
-import { SYSTEM_PROMPT } from "./promt";
+import { GRADE_MODEL } from "@/config/constant";
+import { getStructuredExamData } from "../structure";
+import { MODEL_ANSWER, QUESTIONS } from "../structure/input";
+import { buildGradingPrompt, GRADING_SYSTEM_PROMPT } from "./prompt";
+import { EvaluationSchema } from "./schema";
 import { STUDENT_ANSWER_SHEET } from "./student-sheet";
 
-const StructureResponse = "";
+type GradeStudentAnswerSheetInput = {
+	questionPaper: string;
+	modelAnswers: string;
+	studentAnswerSheet: string;
+};
 
-const outputPrompt = `
-Evaluate the student answer s   heet using the provided structured exam data.
+export async function gradeStudentAnswerSheet({
+	questionPaper,
+	modelAnswers,
+	studentAnswerSheet,
+}: GradeStudentAnswerSheetInput) {
+	const structuredExamData = await getStructuredExamData(questionPaper, modelAnswers);
+	const prompt = buildGradingPrompt({
+		structuredExamData: JSON.stringify(structuredExamData),
+		studentAnswerSheet,
+	});
 
--------------------------
-STRUCTURED EXAM DATA
-(questions, model answers, marks)
--------------------------
-${StructureResponse}
+	const { output } = await generateText({
+		model: openai(GRADE_MODEL),
+		system: GRADING_SYSTEM_PROMPT,
+		prompt,
+		output: Output.object({ schema: EvaluationSchema }),
+		temperature: 0,
+	});
 
--------------------------
-STUDENT ANSWER SHEET
--------------------------
-${STUDENT_ANSWER_SHEET}
+	return output;
+}
 
--------------------------
-TASK
--------------------------
-Evaluate all answers and return the result strictly following the EvaluationSchema.
-`;
+export async function runGradingDemo() {
+	const result = await gradeStudentAnswerSheet({
+		questionPaper: QUESTIONS,
+		modelAnswers: MODEL_ANSWER,
+		studentAnswerSheet: STUDENT_ANSWER_SHEET,
+	});
 
-const { output } = await generateText({
-	model: openai("gpt-4.1"),
-	system: SYSTEM_PROMPT,
-	prompt: outputPrompt,
-	output: Output.object({
-		schema: EvaluationSchema,
-	}),
-	providerOptions: {
-		openai: {
-			reasoningEffort: "low",
-		} satisfies OpenAILanguageModelResponsesOptions,
-	},
-});
+	console.log(result);
+}
 
-console.log(output);
+if (import.meta.main) {
+	await runGradingDemo();
+}

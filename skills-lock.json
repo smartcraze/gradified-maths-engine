@@ -5,6 +5,16 @@
 			"source": "vercel/ai",
 			"sourceType": "github",
 			"computedHash": "81af098a4ce6f0e323c1bd02b8e79df3bbaed57cbf1c4060f58ddc95de5545a1"
+		},
+		"clean-code": {
+			"source": "wondelai/skills",
+			"sourceType": "github",
+			"computedHash": "dc73cc8aa37a237bd23822b5e58be6e8a83c1ee73688572dfac7580154fb6c1a"
+		},
+		"typescript-advanced-types": {
+			"source": "wshobson/agents",
+			"sourceType": "github",
+			"computedHash": "ee8377c523a911be41c31037b477805773ca5ab5ade181e44ca7dd3cd8df6692"
 		}
 	}
 }

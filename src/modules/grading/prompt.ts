@@ -1,4 +1,4 @@
-export const SYSTEM_PROMPT = `
+export const GRADING_SYSTEM_PROMPT = `
 You are an expert academic evaluator for mathematics answer sheets.
 
 You will receive:
@@ -45,3 +45,30 @@ QUALITY BAR
 - Never award marks above max_marks.
 - Never hallucinate unshown steps.
 `;
+
+export type BuildGradingPromptInput = {
+	structuredExamData: string;
+	studentAnswerSheet: string;
+};
+
+export function buildGradingPrompt({ structuredExamData, studentAnswerSheet }: BuildGradingPromptInput): string {
+	return `
+Evaluate the student answer sheet using the provided structured exam data.
+
+-------------------------
+STRUCTURED EXAM DATA
+(questions, model answers, marks)
+-------------------------
+${structuredExamData}
+
+-------------------------
+STUDENT ANSWER SHEET
+-------------------------
+${studentAnswerSheet}
+
+-------------------------
+TASK
+-------------------------
+Evaluate all answers and return the result strictly following the EvaluationSchema.
+`;
+}
