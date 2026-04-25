@@ -1,1 +1,0 @@
-export { STRUCTURE_SYSTEM_PROMPT as SYSTEM_STRUCTURE_PROMPT } from "./prompt";
