@@ -14,6 +14,17 @@ type GradeStudentAnswerSheetInput = {
 	studentAnswerSheet: string;
 };
 
+/**
+ * Evaluates a student's answer sheet using hybrid grading.
+ *
+ * MCQ questions are graded by deterministic tool logic, and non-MCQ questions
+ * are graded by the model using structured output.
+ *
+ * @param questionPaper Raw question paper text.
+ * @param modelAnswers Raw model answer text.
+ * @param studentAnswerSheet Raw student answer sheet text.
+ * @returns The final merged and validated evaluation result.
+ */
 export async function gradeStudentAnswerSheet({
 	questionPaper,
 	modelAnswers,
@@ -80,6 +91,11 @@ export async function gradeStudentAnswerSheet({
 	return EvaluationSchema.parse(finalResult);
 }
 
+/**
+ * Runs a local grading demo using sample inputs and prints the result.
+ *
+ * @returns Promise that resolves when demo execution completes.
+ */
 export async function runGradingDemo() {
 	const result = await gradeStudentAnswerSheet({
 		questionPaper: QUESTIONS,

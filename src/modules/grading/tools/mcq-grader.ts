@@ -74,6 +74,14 @@ function gradeSingleMcqQuestion(question: StructuredQuestion, studentAnswerSheet
 	};
 }
 
+/**
+ * Creates the deterministic MCQ grading tool.
+ *
+ * The tool compares student-selected option against the correct option inferred
+ * from the model answer, and returns a `QuestionEvaluation` for one question.
+ *
+ * @returns AI SDK tool instance with strict MCQ grading execute function.
+ */
 export function createMcqTool() {
 	return tool({
 		description: "Strictly grade MCQ questions by option matching only.",
@@ -104,6 +112,13 @@ export function createMcqTool() {
 	});
 }
 
+/**
+ * Grades all MCQ questions by invoking the MCQ tool's execute function.
+ *
+ * @param mcqQuestions Structured MCQ question list.
+ * @param studentAnswerSheet Raw student answer sheet text.
+ * @returns Evaluations for all MCQ questions.
+ */
 export async function gradeAllMcqWithTool(
 	mcqQuestions: StructuredQuestion[],
 	studentAnswerSheet: string,
@@ -149,6 +164,13 @@ export async function gradeAllMcqWithTool(
 	);
 }
 
+/**
+ * Filters MCQ questions from the structured exam and grades them.
+ *
+ * @param structuredExamData Structured exam object containing all sections/questions.
+ * @param studentAnswerSheet Raw student answer sheet text.
+ * @returns Evaluations for MCQ questions only.
+ */
 export async function evaluateMcqQuestions({
 	structuredExamData,
 	studentAnswerSheet,
@@ -161,6 +183,13 @@ export async function evaluateMcqQuestions({
 	);
 	return gradeAllMcqWithTool(mcqQuestions, studentAnswerSheet);
 }
+
+/**
+ * Splits the structured exam into non-MCQ sections and recalculates metadata.
+ *
+ * @param structuredExamData Structured exam object containing all sections/questions.
+ * @returns Object with `nonMcqExam` including filtered sections and totals.
+ */
 
 export function splitExamByQuestionType(structuredExamData: StructuredExam) {
 	const nonMcqSections = structuredExamData.sections

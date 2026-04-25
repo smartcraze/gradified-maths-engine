@@ -9,6 +9,13 @@ type GetStructuredExamDataInput = {
 	modelAnswers: string;
 };
 
+/**
+ * Converts raw question paper and model answers into structured exam JSON.
+ *
+ * @param questionPaper Raw question paper text.
+ * @param modelAnswers Raw model answer text.
+ * @returns A validated structured exam object.
+ */
 export async function getStructuredExamData(questionPaper: string, modelAnswers: string): Promise<StructuredExam> {
 	const prompt = buildStructurePrompt({ questionPaper, modelAnswers });
 
@@ -24,6 +31,13 @@ export async function getStructuredExamData(questionPaper: string, modelAnswers:
 	return output;
 }
 
+/**
+ * Convenience wrapper to get structured exam data from a named input object.
+ *
+ * @param questionPaper Raw question paper text.
+ * @param modelAnswers Raw model answer text.
+ * @returns A validated structured exam object.
+ */
 export async function getStructuredExamDataFromInput({
 	questionPaper,
 	modelAnswers,

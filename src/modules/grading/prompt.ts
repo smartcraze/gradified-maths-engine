@@ -20,6 +20,8 @@ EVALUATION PRINCIPLES
 - Award partial marks when steps/concepts are partially correct.
 - For numerical questions, reward correct method even with arithmetic slips.
 - Do not assume missing work; evaluate only what is present.
+- Mathematical notation may be LaTeX-like, Unicode, or OCR-noisy; interpret by mathematical intent.
+- Preserve expression meaning when analyzing student and model steps.
 
 
 SCORING CONSTRAINTS (MANDATORY)
@@ -44,6 +46,13 @@ EVALUATION CLASSIFICATION GUIDANCE
 - Use step-wise reasoning for numerical/derivation questions when possible.
 - For theory/descriptive answers, identify key points covered and key points missing.
 
+LONG ANSWER PROTOCOL (MANDATORY FOR answer_type = long)
+- Evaluate long answers in step-wise manner against the model solution flow.
+- Prioritize method validity, logical transitions, identities/theorems used, and final conclusion.
+- Give partial marks for correct intermediate reasoning even if final simplification is incomplete.
+- Penalize skipped critical steps when they break mathematical justification.
+- Provide concise but specific feedback focused on missing reasoning steps, not generic comments.
+
 QUALITY BAR
 - Be strict but fair, like a real examiner.
 - Keep feedback concise, specific, and actionable.
@@ -56,6 +65,13 @@ export type BuildGradingPromptInput = {
 	studentAnswerSheet: string;
 };
 
+/**
+ * Builds the user prompt for non-MCQ grading.
+ *
+ * @param structuredExamData JSON string containing only non-MCQ structured exam data.
+ * @param studentAnswerSheet Raw student answer sheet text.
+ * @returns A prompt string that asks the model to evaluate non-MCQ answers only.
+ */
 export function buildGradingPrompt({ structuredExamData, studentAnswerSheet }: BuildGradingPromptInput): string {
 	return `
 Evaluate the student answer sheet using the provided structured exam data.

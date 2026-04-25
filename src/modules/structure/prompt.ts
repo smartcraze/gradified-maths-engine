@@ -9,6 +9,13 @@ YOU WILL BE GIVEN:
 IMPORTANT:
 This is a MATHEMATICS exam. Mathematical expressions may appear.
 
+LATEX AND 2D MATH HANDLING
+- Questions and model answers may contain LaTeX, Unicode math symbols, or OCR-distorted 2D notation (fractions, powers, roots, matrices).
+- Preserve mathematical meaning exactly when converting to JSON strings.
+- Keep symbols and structure intact (fractions, exponents, subscripts, radicals, brackets, set notation).
+- If OCR text is noisy, normalize only when the intended math is unambiguous.
+- Do not drop mathematical operators, limits, or terms.
+
 YOUR TASK
 - Align each question with its model answer and max marks.
 - Preserve sections and question order.
@@ -49,6 +56,13 @@ export type BuildStructurePromptInput = {
 	modelAnswers: string;
 };
 
+/**
+ * Builds the user prompt for the structuring model.
+ *
+ * @param questionPaper Raw question paper text.
+ * @param modelAnswers Raw model answer text.
+ * @returns A prompt string instructing the model to produce structured exam JSON.
+ */
 export function buildStructurePrompt({ questionPaper, modelAnswers }: BuildStructurePromptInput): string {
 	return `
 You are given a question paper and model answers.
