@@ -3,8 +3,6 @@ import { z } from "zod";
 const envSchema = z.object({
 	NODE_ENV: z.enum(["development", "production", "test"]).default("development"),
 	PORT: z.string().default("3000"),
-	OPENROUTER_API_KEY: z.string(),
-	MODEL_NAME: z.string().default("openai/gpt-oss-120b:free"),
 	OPENAI_API_KEY: z.string(),
 	DATABASE_URL: z.string(),
 });

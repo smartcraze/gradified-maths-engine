@@ -1,6 +1,7 @@
 import { openai } from "@ai-sdk/openai";
 import { generateText, Output } from "ai";
 import { GRADE_MODEL } from "@/config/constant";
+import { logLlmResponse } from "@/core/utils/llm-response-logger";
 import { getStructuredExamData } from "../structure";
 import { MODEL_ANSWER, QUESTIONS } from "../structure/input";
 import { buildGradingPrompt, GRADING_SYSTEM_PROMPT } from "./prompt";
@@ -88,7 +89,26 @@ export async function gradeStudentAnswerSheet({
 		overall_feedback: aiEvaluation.overall_feedback,
 	};
 
-	return EvaluationSchema.parse(finalResult);
+	const parsedFinalResult = EvaluationSchema.parse(finalResult);
+
+	await logLlmResponse({
+		module: "grading",
+		model: GRADE_MODEL,
+		response: {
+			final_summary: parsedFinalResult.summary,
+			student: parsedFinalResult.student,
+			overall_feedback: parsedFinalResult.overall_feedback,
+			mcq_evaluation: mcqEvaluations,
+			non_mcq_evaluation: aiEvaluation.evaluation,
+		},
+		metadata: {
+			totalQuestions: parsedFinalResult.summary.total_questions,
+			mcqQuestionCount: mcqEvaluations.length,
+			nonMcqQuestionCount: aiEvaluation.evaluation.length,
+		},
+	});
+
+	return parsedFinalResult;
 }
 
 /**
