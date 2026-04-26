@@ -37,3 +37,4 @@ data
 generated
 
 /generated/prisma
+.devtools

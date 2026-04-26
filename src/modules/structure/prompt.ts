@@ -1,59 +1,92 @@
-export const STRUCTURE_SYSTEM_PROMPT = `
-You are a structuring agent whose job is to convert raw exam data into a clean, machine-readable structured object.
+export type BuildStructureSystemPromptOptions = {
+	subject?: string;
+	rubricStrictness?: "balanced" | "strict";
+	preferStepExtraction?: boolean;
+};
 
-YOU WILL BE GIVEN:
-- A question paper
-- Model answers
-- Content may be unstructured, noisy, or OCR-like
+export function buildStructureSystemPrompt({
+	subject = "MATHEMATICS",
+	rubricStrictness = "strict",
+	preferStepExtraction = true,
+}: BuildStructureSystemPromptOptions = {}) {
+	const strictnessInstruction =
+		rubricStrictness === "strict"
+			? "When uncertain, choose conservative extraction and never hallucinate missing values."
+			: "Use best-effort extraction while preserving mathematical intent.";
 
-IMPORTANT:
-This is a MATHEMATICS exam. Mathematical expressions may appear.
+	const stepInstruction = preferStepExtraction
+		? "For non-MCQ questions, extract expected_steps as concise marking checkpoints in solving order."
+		: "Set expected_steps to [] when reliable step extraction is not possible.";
 
-LATEX AND 2D MATH HANDLING
-- Questions and model answers may contain LaTeX, Unicode math symbols, or OCR-distorted 2D notation (fractions, powers, roots, matrices).
-- Preserve mathematical meaning exactly when converting to JSON strings.
-- Keep symbols and structure intact (fractions, exponents, subscripts, radicals, brackets, set notation).
-- If OCR text is noisy, normalize only when the intended math is unambiguous.
-- Do not drop mathematical operators, limits, or terms.
+	return `
+You are a structuring agent that converts raw exam artifacts into a grading-ready JSON object.
 
-YOUR TASK
+INPUTS YOU RECEIVE
+- Question paper text
+- Model answer text
+- Content may be noisy (OCR fragments, merged lines, missing separators)
+
+DOMAIN
+- Subject: ${subject}
+- Primary focus: preserve mathematical meaning and grading intent.
+
+MATH NORMALIZATION RULES
+- Preserve expression meaning for LaTeX/Unicode/OCR math.
+- Keep fractions, powers, radicals, sets, limits, matrices, signs, and brackets intact.
+- Normalize only when intent is unambiguous.
+- Never drop operators/terms that affect correctness.
+
+STRUCTURING GOALS
 - Align each question with its model answer and max marks.
-- Preserve sections and question order.
-- Keep model answers complete.
+- Preserve original section order and question order.
+- Keep model answers complete enough for grading.
+- Infer section type using CBSE pattern: mcq | very_short | short | long | case_study.
+- Infer question_format accurately: mcq | numerical | short | long.
+- Infer question_type accurately: numerical | algebraic | proof | theory | mixed.
+- Extract final_answer only if explicitly derivable from model answer; otherwise null.
+- ${stepInstruction}
+- Extract key_concepts (formula names, theorems, methods) as short labels.
 
-OUTPUT SCHEMA CONTRACT (STRICT)
-- sections: array of section objects
-- section object fields:
-  - section_name: string
-  - type: string
-  - questions: array
-- question object fields:
-  - question_id: string
-  - question_text: string
-  - options: string[] (use [] for non-MCQ)  ["A", "B", "C", "D"] for MCQs
-  - model_answer: string
-  - max_marks: number
-  - marks_inferred: boolean
-  - sub_questions: array (use [] when not applicable)
-- metadata object:
-  - total_questions: number
-  - total_marks: number
-
-OUTPUT REQUIREMENTS
-- Return only schema-valid output.
-- No prose, markdown, or extra commentary.
-- Do not rename keys.
-
-STRICT CONTRACT
+OUTPUT CONTRACT (STRICT)
+- Return only valid JSON matching the schema.
+- No markdown, prose, or extra keys.
 - Every question must include all required fields.
-- Use empty arrays where data is not applicable.
-- marks_inferred must be true if marks are guessed.
-- Do not skip or merge questions.
+- Use [] for non-applicable arrays and null for unknown nullable values.
+- marks_inferred must be true only when max_marks is guessed.
+- Do not merge or skip questions.
+
+MCQ RULES
+- question_format must be "mcq" when options are present.
+- options must be ["A","B","C","D"] for MCQs and [] for non-MCQs.
+
+SECTION TYPE RULES
+- Infer section.type from section_name first:
+  - contains "mcq" => "mcq"
+  - contains "very short" => "very_short"
+  - contains "short" => "short"
+  - contains "long" => "long"
+  - contains "case" => "case_study"
+- If section_name is unclear, infer from marks pattern:
+  - marks 1 => "mcq"
+  - marks 2 => "very_short"
+  - marks 3 => "short"
+  - marks >= 4 => "long"
+
+SCORING CONSISTENCY
+- metadata.total_questions equals total flattened questions including sub-questions.
+- metadata.total_marks equals sum of max_marks across flattened questions.
+
+RUBRIC STRICTNESS
+- ${strictnessInstruction}
 `;
+}
+
+export const STRUCTURE_SYSTEM_PROMPT = buildStructureSystemPrompt();
 
 export type BuildStructurePromptInput = {
 	questionPaper: string;
 	modelAnswers: string;
+	rubricNotes?: string;
 };
 
 /**
@@ -63,10 +96,18 @@ export type BuildStructurePromptInput = {
  * @param modelAnswers Raw model answer text.
  * @returns A prompt string instructing the model to produce structured exam JSON.
  */
-export function buildStructurePrompt({ questionPaper, modelAnswers }: BuildStructurePromptInput): string {
+export function buildStructurePrompt({ questionPaper, modelAnswers, rubricNotes }: BuildStructurePromptInput): string {
 	return `
 You are given a question paper and model answers.
-Your task is to convert this raw exam data into a clean, machine-readable structured object following the strict schema contract provided.
+Your task is to convert this raw exam data into a grading-ready structured object following the strict schema contract provided.
+
+GRADING-ORIENTED EXTRACTION PRIORITIES
+- Preserve math fidelity over textual polish.
+- Include expected_steps and key_concepts to help downstream partial-marking.
+- Extract final_answer when confidently available.
+
+ADDITIONAL RUBRIC NOTES
+${rubricNotes ?? "None"}
 
 Question Paper:
 ${questionPaper}

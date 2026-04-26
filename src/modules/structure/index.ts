@@ -1,13 +1,6 @@
-import { openai } from "@ai-sdk/openai";
-import { generateText, Output } from "ai";
-import { GRADE_MODEL } from "@/config/constant";
-import { buildStructurePrompt, STRUCTURE_SYSTEM_PROMPT } from "./prompt";
+import { requestStructuredExamData } from "./llm";
+import { normalizeStructuredExamOutput, preprocessExamText } from "./normalization";
 import { type StructuredExam, StructuredExamSchema } from "./schema";
-
-type GetStructuredExamDataInput = {
-	questionPaper: string;
-	modelAnswers: string;
-};
 
 /**
  * Converts raw question paper and model answers into structured exam JSON.
@@ -17,30 +10,26 @@ type GetStructuredExamDataInput = {
  * @returns A validated structured exam object.
  */
 export async function getStructuredExamData(questionPaper: string, modelAnswers: string): Promise<StructuredExam> {
-	const prompt = buildStructurePrompt({ questionPaper, modelAnswers });
+	const cleanQuestionPaper = preprocessExamText(questionPaper);
+	const cleanModelAnswers = preprocessExamText(modelAnswers);
 
-	const { output } = await generateText({
-		model: openai(GRADE_MODEL),
-		system: STRUCTURE_SYSTEM_PROMPT,
-		prompt,
-		output: Output.object({
-			schema: StructuredExamSchema,
-		}),
-	});
+	try {
+		const output = await requestStructuredExamData({
+			questionPaper: cleanQuestionPaper,
+			modelAnswers: cleanModelAnswers,
+		});
 
-	return output;
-}
+		const normalizedExam = normalizeStructuredExamOutput(output);
+		return StructuredExamSchema.parse(normalizedExam);
+	} catch {
+		const output = await requestStructuredExamData({
+			questionPaper: cleanQuestionPaper,
+			modelAnswers: cleanModelAnswers,
+			rubricNotes:
+				"Previous extraction was inconsistent. Re-check section typing, question formats, and metadata totals carefully.",
+		});
 
-/**
- * Convenience wrapper to get structured exam data from a named input object.
- *
- * @param questionPaper Raw question paper text.
- * @param modelAnswers Raw model answer text.
- * @returns A validated structured exam object.
- */
-export async function getStructuredExamDataFromInput({
-	questionPaper,
-	modelAnswers,
-}: GetStructuredExamDataInput): Promise<StructuredExam> {
-	return getStructuredExamData(questionPaper, modelAnswers);
+		const normalizedExam = normalizeStructuredExamOutput(output);
+		return StructuredExamSchema.parse(normalizedExam);
+	}
 }
