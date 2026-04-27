@@ -12,8 +12,7 @@ type StructuredQuestion = StructuredExam["sections"][number]["questions"][number
 export function preprocessExamText(rawText: string): string {
 	return rawText
 		.replace(/\r\n/g, "\n")
-		.replace(/\t/g, " ")
-		.replace(/[ \f\v]+/g, " ")
+		.replace(/[ \t]+\n/g, "\n")
 		.replace(/\n{3,}/g, "\n\n")
 		.trim();
 }

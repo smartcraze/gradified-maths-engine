@@ -11,8 +11,6 @@ app.use(logger);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(express.static(`${process.cwd()}/public`));
-
 app.get("/health", (_req: Request, res: Response) => {
 	res.status(200).json(ApiResponse.success("OK", { status: "healthy" }));
 });

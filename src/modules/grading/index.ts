@@ -4,6 +4,7 @@ import { getStructuredExamData } from "../structure";
 import { MODEL_ANSWER, QUESTIONS } from "../structure/input";
 import { buildFinalEvaluation, buildGradingLogPayload, mergeQuestionEvaluations } from "./evaluation";
 import { requestNonMcqEvaluation } from "./llm";
+import { applyRubricPolicyToNonMcqEvaluation } from "./rubric";
 import type { Evaluation } from "./schema";
 import { STUDENT_ANSWER_SHEET } from "./student-sheet";
 import { evaluateMcqQuestions, splitExamByQuestionType } from "./tools";
@@ -33,10 +34,12 @@ export async function gradeStudentAnswerSheet({
 	const structuredExamData = await getStructuredExamData(questionPaper, modelAnswers);
 	const mcqEvaluations = await evaluateMcqQuestions({ structuredExamData, studentAnswerSheet });
 	const { nonMcqExam } = splitExamByQuestionType(structuredExamData);
-	const aiEvaluation = await requestNonMcqEvaluation({
-		nonMcqExam,
-		studentAnswerSheet,
-	});
+	const aiEvaluation = applyRubricPolicyToNonMcqEvaluation(
+		await requestNonMcqEvaluation({
+			nonMcqExam,
+			studentAnswerSheet,
+		}),
+	);
 
 	const mergedEvaluation = mergeQuestionEvaluations(mcqEvaluations, aiEvaluation.evaluation);
 	const finalEvaluation = buildFinalEvaluation({
