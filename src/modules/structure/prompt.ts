@@ -20,11 +20,11 @@ ROLE
 SCHEMA REQUIREMENTS (CRITICAL)
 
 Each question MUST have these exact fields:
-- question_id: string (unique identifier)
+- question_id: string (MUST be the question number as string: "1", "2", "3", etc. - matching question paper)
 - question_text: string (full question)
 - question_format: "mcq" | "numerical" | "short" | "long"
 - question_type: "numerical" | "algebraic" | "proof" | "theory" | "mixed"
-- options: ["A", "B", "C", "D"] for MCQ, [] for non-MCQ (MUST use A/B/C/D only, not option text)
+- options: actual option texts ["...", "...", "...", "..."] for MCQ (must match A→B→C→D order), [] for non-MCQ
 - model_answer: string (complete model solution)
 - max_marks: number (required; use marks_inferred=true if guessed)
 - marks_inferred: boolean (true only if max_marks was guessed)
@@ -35,10 +35,21 @@ Each question MUST have these exact fields:
 
 MCQ FIELD VALUES
 For MCQ questions (question_format="mcq"):
-- options: ["A", "B", "C", "D"] (always 4 letters, even if answer key says different)
-- final_answer: null (MCQ handled by deterministic tool)
+- options: ["text of A", "text of B", "text of C", "text of D"] (MUST extract actual option text from question paper)
+- model_answer: "(a) option_text" or just "(b)" format showing correct option letter
+- final_answer: the text of the correct option (e.g., "8" if answer is (b) 8)
 - expected_steps: [] (empty, MCQ is binary)
 - key_concepts: [] (empty)
+
+EXAMPLE MCQ EXTRACTION:
+Question: "1. If A = {1, 2, 3}, then number of subsets of A is:\n(a) 6 (b) 8 (c) 9 (d) 3"
+Model Answer: "1. (b) 8"
+
+Extract as:
+- question_id: "1"  (MUST match the question number in paper, not "Q1")
+- options: ["6", "8", "9", "3"]  (ACTUAL option texts in order A→B→C→D)
+- model_answer: "(b)"  (the correct option letter from model answer)
+- final_answer: "8"  (the text of the correct option)
 
 NON-MCQ FIELD VALUES
 For non-MCQ (numerical, short, long):
@@ -126,49 +137,35 @@ ${modelAnswers}
 
 ---
 
-FOR EACH QUESTION EXTRACT
-1. question_id: unique identifier (e.g., Q1, 2a)
-2. question_text: full question
-3. question_format: "mcq" | "numerical" | "short" | "long"
-4. question_type: "numerical" | "algebraic" | "proof" | "theory" | "mixed"
-5. max_marks: number (if missing, guess and set marks_inferred=true)
+CRITICAL: question_id MUST be just the question number as a string ("1", "2", "3", etc.)
+- Do NOT use "Q1", "2a", or section prefixes
+- Must match the student answer sheet question numbers exactly
 
-FOR MCQ:
-- options: ["A", "B", "C", "D"]
-- final_answer: null
-- expected_steps: []
-- key_concepts: []
+FOR MCQ QUESTIONS
+- question_format: "mcq"
+- question_id: "1", "2", "3", etc.
+- options: ["text of option A", "text of option B", "text of option C", "text of option D"]
+  EXAMPLE: For "Number of subsets: (a) 6 (b) 8 (c) 9 (d) 3", options: ["6", "8", "9", "3"]
+- model_answer: just the letter like "(a)" or "(b)"
+- final_answer: the text of the correct option (e.g., "8" if (b) is correct)
+- expected_steps: [] (empty for MCQ)
+- key_concepts: [] (empty for MCQ)
 
-FOR NON-MCQ:
-- options: []
-- final_answer: extracted final result (or null)
-- expected_steps: array with EXACTLY (max_marks) steps (or null if cannot extract exact count)
-- key_concepts: [1-3 concept labels] or []
+FOR NON-MCQ QUESTIONS
+- options: [] (empty array)
+- final_answer: extracted final result or null
+- expected_steps: string[] with EXACTLY (max_marks) strings, or null if cannot extract exact count
+- key_concepts: [1-3 labels] or []
 
-CRITICAL RULE
-expected_steps COUNT MUST EQUAL max_marks:
+EXPECTED_STEPS COUNT RULE (CRITICAL)
+Count must equal max_marks:
 - 2 marks => 2 steps
 - 3 marks => 3 steps
-- 4 marks => 4 steps
-- 5 marks => 5 steps
-- 6 marks => 6 steps
-- 8 marks => 8 steps
+- etc.
 
-If you cannot extract the exact number of steps required, use null (do NOT invent).
+If exact count cannot be extracted, use null (do NOT invent).
 
-STEP EXAMPLES (for 3-mark question: Find common denominator, add fractions, verify answer)
-1. "Find common denominator 8"
-2. "Convert fractions: 3/4 = 6/8, then 6/8 + 5/8 = 11/8"
-3. "State final answer: 11/8"
-
-FIELD CONSTRAINTS
-- options: MUST be ["A","B","C","D"] for MCQ; MUST be [] for non-MCQ
-- final_answer: string or null (never []or object)
-- expected_steps: string[] with exact count, or null
-- key_concepts: string[] (1-3 labels), or []
-- All other fields are required and must be present
-
-${rubricNotes ? `ADDITIONAL NOTES\n${rubricNotes}\n` : ""}
-Extract and return valid JSON only.
+${rubricNotes ? `RUBRIC NOTES:\n${rubricNotes}\n` : ""}
+Return ONLY valid JSON matching the system prompt schema. No explanations or comments.
 `;
 }

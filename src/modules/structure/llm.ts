@@ -1,12 +1,12 @@
 import { devToolsMiddleware } from "@ai-sdk/devtools";
 import { openai } from "@ai-sdk/openai";
 import { generateText, Output, wrapLanguageModel } from "ai";
-import { GRADE_MODEL } from "@/config/constant";
+import { STRUCTURE_MODEL } from "@/config/constant";
 import { env } from "@/config/env";
 import { buildStructurePrompt, STRUCTURE_SYSTEM_PROMPT } from "./prompt";
 import { type StructuredExam, StructuredExamSchema } from "./schema";
 
-const baseStructureModel = openai(GRADE_MODEL);
+const baseStructureModel = openai(STRUCTURE_MODEL);
 
 const structureModel =
 	env.NODE_ENV === "production"

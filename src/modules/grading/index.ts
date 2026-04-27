@@ -34,6 +34,7 @@ export async function gradeStudentAnswerSheet({
 	const structuredExamData = await getStructuredExamData(questionPaper, modelAnswers);
 	const mcqEvaluations = await evaluateMcqQuestions({ structuredExamData, studentAnswerSheet });
 	const { nonMcqExam } = splitExamByQuestionType(structuredExamData);
+
 	const aiEvaluation = applyRubricPolicyToNonMcqEvaluation(
 		await requestNonMcqEvaluation({
 			nonMcqExam,
