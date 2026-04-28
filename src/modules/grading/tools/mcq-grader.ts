@@ -3,15 +3,31 @@ import { z } from "zod";
 import type { StructuredExam, StructuredQuestion } from "@/modules/structure/schema";
 import type { QuestionEvaluation } from "../schema";
 
-const OPTION_PATTERN = /\(?\s*([A-D])\s*\)?/i;
+const OPTION_PATTERN = /\(?\s*(a|b|c|d|i{1,3}|iv)\s*\)?/i;
+const ROMAN_TO_OPTION: Record<string, string> = {
+	i: "A",
+	ii: "B",
+	iii: "C",
+	iv: "D",
+};
 
 function normalizeOption(rawOption: string | null): string | null {
 	if (!rawOption) {
 		return null;
 	}
 
-	const match = rawOption.toUpperCase().match(OPTION_PATTERN);
-	return match?.[1] ?? null;
+	const match = rawOption.trim().match(OPTION_PATTERN);
+	if (!match?.[1]) {
+		return null;
+	}
+
+	const normalized = match[1].toLowerCase();
+	const romanOption = ROMAN_TO_OPTION[normalized as keyof typeof ROMAN_TO_OPTION];
+	if (romanOption !== undefined) {
+		return romanOption;
+	}
+
+	return normalized.toUpperCase();
 }
 
 function extractAnswerLineByQuestionId(studentAnswerSheet: string): Map<string, string> {

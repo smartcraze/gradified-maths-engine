@@ -22,7 +22,7 @@ type LlmLogEntry = {
 
 function getUniqueLogFilePath(date = new Date()) {
 	const timestamp = date.toISOString().replace(/[:.]/g, "-");
-	return join(LOGS_DIR, `llm-${timestamp}-${randomUUID()}.json`);
+	return join(LOGS_DIR, `m005-${timestamp}}.json`);
 }
 
 /**

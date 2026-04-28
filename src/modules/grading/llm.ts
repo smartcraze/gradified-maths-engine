@@ -1,5 +1,5 @@
 import { devToolsMiddleware } from "@ai-sdk/devtools";
-import { openai } from "@ai-sdk/openai";
+import { type OpenAILanguageModelResponsesOptions, openai } from "@ai-sdk/openai";
 import { generateText, Output, wrapLanguageModel } from "ai";
 import { GRADE_MODEL } from "@/config/constant";
 import { env } from "@/config/env";
@@ -66,6 +66,11 @@ export async function requestNonMcqEvaluation({
 		prompt,
 		output: Output.object({ schema: NonMcqEvaluationSchema }),
 		temperature: 0,
+		providerOptions: {
+			openai: {
+				reasoningEffort: "medium",
+			} satisfies OpenAILanguageModelResponsesOptions,
+		},
 	});
 
 	return output;
