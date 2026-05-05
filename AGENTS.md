@@ -662,14 +662,6 @@ bun run dev
 # Run grading demo (uses sample data)
 bun run src/modules/grading/index.ts
 
-# Database commands
-bun run db:generate  # Generate Prisma client
-bun run db:migrate   # Run migrations
-bun run db:studio    # Open Prisma Studio
-```
-
----
-
 ## Self-Learning Feedback Loop
 
 The Maths Engine includes a built-in self-learning system that collects teacher corrections and analyzes error patterns to improve grading accuracy over time.
