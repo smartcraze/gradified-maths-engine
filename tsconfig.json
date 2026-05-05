@@ -4,7 +4,7 @@
 		"target": "ESNext",
 		"module": "Preserve",
 		"moduleDetection": "force",
-		"types": ["node", "bun"],
+		"types": ["node"],
 		"allowJs": true,
 		"paths": {
 			"@/*": ["./src/*"]

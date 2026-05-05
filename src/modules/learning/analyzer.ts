@@ -80,14 +80,22 @@ export class LearningAnalyzer {
 
 			if (diff > 0 && correction.aiAgreement === false) {
 				const key = "under_awarded";
-				const existing = patterns.get(key) || { count: 0, severity: "high", description: "AI under-awarded marks" };
+				const existing = patterns.get(key) || {
+					count: 0,
+					severity: "high",
+					description: "AI under-awarded marks",
+				};
 				existing.count++;
 				patterns.set(key, existing);
 			}
 
 			if (diff < 0 && correction.aiAgreement === false) {
 				const key = "over_awarded";
-				const existing = patterns.get(key) || { count: 0, severity: "high", description: "AI over-awarded marks" };
+				const existing = patterns.get(key) || {
+					count: 0,
+					severity: "high",
+					description: "AI over-awarded marks",
+				};
 				existing.count++;
 				patterns.set(key, existing);
 			}

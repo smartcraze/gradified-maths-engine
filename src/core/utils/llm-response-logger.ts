@@ -1,4 +1,3 @@
-import { randomUUID } from "node:crypto";
 import { mkdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import logger from "@/core/utils/logger";
