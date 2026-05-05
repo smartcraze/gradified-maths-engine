@@ -2,6 +2,15 @@
 
 > This file contains the complete architectural context for the Maths Engine grading system. Read this before making any changes.
 
+
+
+### Run this for the formating and all stuff 
+
+bun run lint
+bun run check
+bun run fix
+
+
 ## Quick Overview
 
 **Maths Engine** is an AI-powered exam evaluation system that grades student answer sheets using a hybrid approach:

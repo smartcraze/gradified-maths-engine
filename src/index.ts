@@ -3,23 +3,12 @@ import helmet from "helmet";
 import { globalErrorHandler } from "@/core/middleware/error.middleware";
 import logger from "@/core/middleware/logger.middleware";
 import { ApiResponse } from "@/core/utils/api.response";
+import gradingRoutes from "@/modules/grading/route";
 import learningRoutes from "@/modules/learning/route";
-import { db } from "./config/db";
-import { ocrRequests } from "./db/schema";
+import ocrRoutes from "@/modules/ocr/route";
+import structureRoutes from "@/modules/structure/route";
 
 const app = express();
-
-const [ocr] = await db
-	.insert(ocrRequests)
-	.values({
-		file_name: "maths.pdf",
-		mime_type: "application/pdf",
-		size_bytes: 1024,
-		request_id: "test-123",
-	})
-	.returning();
-
-console.log("Inserted OCR Request:", ocr);
 
 app.use(helmet());
 app.use(logger);
@@ -30,7 +19,10 @@ app.get("/health", (_req: Request, res: Response) => {
 	res.status(200).json(ApiResponse.success("OK", { status: "healthy" }));
 });
 
+app.use("/structure", structureRoutes);
+app.use("/grading", gradingRoutes);
 app.use("/learning", learningRoutes);
+app.use("/ocr", ocrRoutes);
 
 app.use(globalErrorHandler);
 
