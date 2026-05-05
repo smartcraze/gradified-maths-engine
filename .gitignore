@@ -39,3 +39,5 @@ generated
 /generated/prisma
 .devtools
 data
+
+/src/generated/prisma

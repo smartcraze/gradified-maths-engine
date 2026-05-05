@@ -11,10 +11,7 @@
 		"lint": "biome lint .",
 		"check": "biome check .",
 		"check:fix": "biome check --write .",
-		"prepare": "husky",
-		"db:generate": "prisma generate",
-		"db:migrate": "prisma migrate dev",
-		"db:studio": "prisma studio"
+		"prepare": "husky"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "2.4.12",
@@ -35,7 +32,9 @@
 		"@ai-sdk/devtools": "^0.0.15",
 		"@ai-sdk/openai": "^3.0.53",
 		"@prisma/adapter-pg": "^7.7.0",
+		"@types/node": "^25.6.0",
 		"ai": "^6.0.168",
+		"axios": "^1.16.0",
 		"dotenv": "^17.4.2",
 		"express": "^5.2.1",
 		"helmet": "^8.1.0",

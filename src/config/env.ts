@@ -5,6 +5,7 @@ const envSchema = z.object({
 	PORT: z.string().default("3000"),
 	OPENAI_API_KEY: z.string(),
 	DATABASE_URL: z.string(),
+	DATALAB_API_KEY: z.string(),
 });
 
 export type Env = z.infer<typeof envSchema>;
