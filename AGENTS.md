@@ -670,4 +670,132 @@ bun run db:studio    # Open Prisma Studio
 
 ---
 
-Last Updated: Auto-generated from codebase analysis
+## Self-Learning Feedback Loop
+
+The Maths Engine includes a built-in self-learning system that collects teacher corrections and analyzes error patterns to improve grading accuracy over time.
+
+### Learning Module (`src/modules/learning/`)
+
+| File | Purpose | Key Exports |
+|------|---------|-------------|
+| `index.ts` | Module entry point | `learningAnalyzer`, LearningAnalyzer class |
+| `analyzer.ts` | Core learning logic | Error pattern detection, correction submission |
+| `schema.ts` | API validation | SubmitCorrectionSchema, GetLearningMetricsSchema |
+| `route.ts` | API endpoints | POST corrections, GET patterns, GET metrics |
+
+### Database Models for Learning
+
+```prisma
+// Teacher corrections on AI evaluations
+model EvaluationCorrection {
+  id                    String            @id @default(cuid())
+  evaluationId          String
+  questionId            String
+  originalMarks         Decimal
+  correctedMarks        Decimal
+  originalCorrectness   String
+  correctedCorrectness  String
+  correctionReason      String?
+  teacherId             String?
+  aiAgreement           Boolean?          // Did AI already get it right?
+  stepCorrections       Json?             // Per-step corrections
+  status                CorrectionStatus // PENDING, APPROVED, REJECTED
+}
+
+// Track prompt versions for A/B testing
+model PromptVersion {
+  id            String   @id @default(cuid())
+  version       String   @unique
+  promptText    String   @db.Text
+  isActive      Boolean  @default(false)
+  successRate   Decimal? // % of evals without corrections
+  correctionRate Decimal? // % of evals that were corrected
+}
+
+// Error pattern detection
+model ErrorPattern {
+  id            String   @id @default(cuid())
+  patternType   String   @unique  // "under_awarded", "step_misclassification"
+  category      String?  // "marks", "correctness", "steps"
+  frequency     Int      // How often this pattern occurs
+  severity      String   // "high", "medium", "low"
+  description   String?
+  suggestedFix  String?
+  resolvedAt    DateTime?
+}
+
+// Daily learning metrics
+model LearningMetric {
+  id          String   @id @default(cuid())
+  metricType  String   // "correction_delta", "total_corrections", etc.
+  date        DateTime @db.Date
+  value       Decimal
+  metadata    Json?
+}
+```
+
+### Learning API Endpoints
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/learning/corrections` | POST | Submit a teacher correction |
+| `/learning/patterns` | GET | Get detected error patterns |
+| `/learning/metrics` | GET | Get learning metrics over time |
+| `/learning/correction-rate` | GET | Get correction rate (total/total_eval) |
+| `/learning/model-comparison` | GET | Compare performance across models |
+| `/learning/patterns/:id/resolve` | PATCH | Mark an error pattern as resolved |
+
+### How the Feedback Loop Works
+
+1. **Evaluation Completed**: Student answer sheet is graded, result stored with `modelUsed` and `promptVersion`
+
+2. **Teacher Review**: Teacher reviews the evaluation and can submit corrections via `/learning/corrections`:
+   ```json
+   POST /learning/corrections
+   {
+     "evaluationId": "eval_123",
+     "questionId": "6",
+     "correctedMarks": 2,
+     "correctedCorrectness": "correct",
+     "correctionReason": "Student showed correct method",
+     "teacherId": "teacher_456",
+     "stepCorrections": [
+       { "stepIndex": 0, "originalIsCorrect": false, "correctedIsCorrect": true }
+     ]
+   }
+   ```
+
+3. **AI Agreement Tracking**: System automatically determines if AI already got it right (`aiAgreement: true`) or made an error (`aiAgreement: false`)
+
+4. **Error Pattern Detection**: On demand, `/learning/patterns` analyzes all corrections and detects:
+   - **under_awarded**: AI gave fewer marks than deserved
+   - **over_awarded**: AI gave more marks than deserved
+   - **step_misclassification**: Step marked wrong when it was right
+   - **correctness_misclassification**: Overall correctness was wrong
+
+5. **Metrics Tracking**: Daily metrics track:
+   - Correction delta (sum of mark differences)
+   - Total corrections count
+   - Per-model correction rates
+
+6. **Model Comparison**: `/learning/model-comparison` shows which models have lowest correction rates
+
+### How to Use for Self-Learning
+
+1. **Start collecting corrections**: Have teachers review and correct evaluations
+2. **Monitor patterns**: Regularly call `/learning/patterns` to see recurring issues
+3. **Compare models**: Use `/learning/model-comparison` to pick best model
+4. **Resolve patterns**: When you fix the issue (e.g., update prompt), mark pattern as resolved
+5. **Track improvement**: Watch correction rate decrease over time
+
+### Future Enhancements (Not Implemented)
+
+- **Auto-apply corrections**: Automatically adjust future similar answers
+- **Prompt auto-generation**: Generate improved prompts based on error patterns
+- **Fine-tuning pipeline**: Create training data from corrections for fine-tuning
+- **A/B testing**: Route traffic to different prompt versions and measure correction rates
+- **Confidence scoring**: Flag borderline evaluations for manual review
+
+---
+
+Last Updated: Auto-generated from codebase analysis with Learning Module
