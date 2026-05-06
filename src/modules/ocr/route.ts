@@ -39,8 +39,8 @@ router.get(
 		if (!parsedParams.success) {
 			return res.status(400).json(ApiResponse.error("Validation failed", parsedParams.error.issues));
 		}
-
-		const result = await getOCRResult(parsedParams.data.ocrRequestId);
+		const { ocrRequestId } = parsedParams.data;
+		const result = await getOCRResult(ocrRequestId);
 
 		if (!result) {
 			return res.status(404).json(ApiResponse.error("OCR request not found", null));
