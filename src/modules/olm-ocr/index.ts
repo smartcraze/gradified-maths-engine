@@ -1,5 +1,5 @@
 import { ModalClient } from "modal";
-import type { OLMOCRInput, OLMOCRResult } from "./type.ts";
+import type { OLMOCRInput, OLMOCRResult } from "./type";
 
 const OCR_APP_NAME = "olmocr-diagram-extractor";
 const OCR_CLASS_NAME = "OLMOCREngine";

@@ -44,9 +44,8 @@ router.post(
 		if (result.success) {
 			return res.status(statusCode).json(
 				ApiResponse.success(result.message, {
-					rawmarkdown: result.results.raw_markdown,
-					equations: result.results.equations,
-					diagrams: result.results.diagrams,
+					rawmarkdown: result.results?.raw_markdown ?? null,
+					equations: result.results?.equations ?? [],
 				}),
 			);
 		} else {
