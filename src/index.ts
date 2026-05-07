@@ -6,6 +6,7 @@ import { ApiResponse } from "@/core/utils/api.response";
 import gradingRoutes from "@/modules/grading/route";
 import learningRoutes from "@/modules/learning/route";
 import ocrRoutes from "@/modules/ocr/route";
+import olmOcrRoutes from "@/modules/olm-ocr/route";
 import structureRoutes from "@/modules/structure/route";
 
 const app = express();
@@ -23,6 +24,7 @@ app.use("/structure", structureRoutes);
 app.use("/grading", gradingRoutes);
 app.use("/learning", learningRoutes);
 app.use("/ocr", ocrRoutes);
+app.use("/olm-ocr", olmOcrRoutes);
 
 app.use(globalErrorHandler);
 
