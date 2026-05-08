@@ -1,14 +1,50 @@
-services:
-  db:
-    image: postgres:latest
-    environment:
-      POSTGRES_USER: gradified
-      POSTGRES_PASSWORD: npg_OCd09wzJVktu
-      POSTGRES_DB: maths_engine
-    ports:
-      - "5432:5432"
-    volumes:
-      - db_data:/var/lib/postgresql
+version: '3.9'
 
-volumes:
-  db_data:
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: maths-engine-backend
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - DATABASE_URL=${DATABASE_URL}
+    volumes:
+      - ./logs:/app/logs
+    networks:
+      - maths-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "bun", "run", "-e", "const res = await fetch('http://localhost:3000/health'); process.exit(res.ok ? 0 : 1)"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  frontend:
+    build:
+      context: .
+      dockerfile: ./frontend/Dockerfile
+    container_name: maths-engine-frontend
+    ports:
+      - "3001:3001"
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - maths-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:3001/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+networks:
+  maths-network:
+    driver: bridge

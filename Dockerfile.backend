@@ -1,0 +1,26 @@
+FROM oven/bun:latest AS builder
+
+WORKDIR /app
+
+COPY package.json bun.lock ./
+COPY public ./public
+
+RUN bun install
+
+COPY src ./src
+COPY logs ./logs
+COPY public ./public
+COPY tsconfig.json .
+COPY biome.json .
+
+RUN bun run build
+
+# Runtime stage
+FROM builder AS runtime
+WORKDIR /app
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/logs ./logs
+COPY --from=builder /app/public ./public
+
+EXPOSE 3000
+CMD ["bun", "run", "start"]

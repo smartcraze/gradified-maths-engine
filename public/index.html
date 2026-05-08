@@ -1,0 +1,660 @@
+
+<h2 class="sr-only">AI Grading Log Analyzer — auto-loads all m00*.json logs for performance analysis</h2>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --color-bg:#0d0f1a;
+  --color-surface:#14162a;
+  --color-surface-2:#1a1d36;
+  --color-border:#24294a;
+  --color-text:#f1f1fb;
+  --color-muted:#9aa0b5;
+  --color-accent:#8d5cff;
+  --color-good:#39d98a;
+  --color-warn:#f7b731;
+  --color-bad:#ff6b6b;
+  font-family:"Space Grotesk",system-ui,Segoe UI,Arial,sans-serif;
+  color:var(--color-text);
+}
+body{background:radial-gradient(circle at top left, #1b1f4a, transparent 45%),radial-gradient(circle at top right, #2b1746, transparent 40%),var(--color-bg);min-height:100vh}
+.root{max-width:1400px;margin:0 auto;padding:32px 20px 60px}
+.top-bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;margin-bottom:24px}
+.title{font-size:24px;font-weight:600}
+.subtitle{font-size:13px;color:var(--color-muted);margin-top:4px}
+.chip{padding:4px 10px;border-radius:999px;background:var(--color-surface-2);border:1px solid var(--color-border);font-size:11px;color:var(--color-muted)}
+.controls{display:flex;gap:10px;align-items:center}
+.input{background:var(--color-surface-2);border:1px solid var(--color-border);border-radius:10px;padding:8px 12px;color:var(--color-text);font-size:12px;width:240px}
+.section{margin-bottom:28px}
+.section-title{font-size:14px;font-weight:600;color:var(--color-muted);margin-bottom:12px;text-transform:uppercase;letter-spacing:.12em}
+.grid{display:grid;gap:14px}
+.grid-2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.grid-3{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.grid-4{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+.card{background:var(--color-surface);border:1px solid var(--color-border);border-radius:16px;padding:16px}
+.card.highlight{border-color:var(--color-accent);background:linear-gradient(135deg, rgba(141,92,255,0.1) 0%, transparent 100%)}
+.metric{display:flex;flex-direction:column;gap:4px}
+.metric-label{font-size:12px;color:var(--color-muted)}
+.metric-val{font-size:22px;font-weight:600}
+.metric-sub{font-size:11px;color:var(--color-accent)}
+.chart-wrap{height:240px}
+.chart-wrap-small{height:200px}
+.progress-bar{height:6px;background:var(--color-border);border-radius:3px;overflow:hidden;margin-top:6px}
+.progress-fill{height:100%;background:var(--color-accent);border-radius:3px}
+.log-list{display:grid;gap:14px}
+.log-card{background:var(--color-surface);border:1px solid var(--color-border);border-radius:16px;padding:16px}
+.log-header{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:flex-start}
+.log-meta{display:flex;flex-direction:column;gap:4px}
+.log-title{font-size:16px;font-weight:600}
+.log-sub{font-size:12px;color:var(--color-muted)}
+.tag{font-size:10px;padding:2px 8px;border-radius:999px;border:1px solid var(--color-border);color:var(--color-muted)}
+.tag.good{color:var(--color-good);border-color:rgba(57,217,138,.4)}
+.tag.warn{color:var(--color-warn);border-color:rgba(247,183,49,.4)}
+.tag.bad{color:var(--color-bad);border-color:rgba(255,107,107,.4)}
+.table{width:100%;border-collapse:collapse;font-size:12px;margin-top:12px}
+.table th,.table td{padding:6px 8px;border-bottom:1px solid var(--color-border);text-align:left}
+.table th{color:var(--color-muted);font-weight:500}
+.table tr:hover{background:var(--color-surface-2)}
+.feedback{margin-top:10px;font-size:12px;color:#d9d9f7;line-height:1.5}
+.empty{text-align:center;padding:40px;border:1px dashed var(--color-border);border-radius:16px;color:var(--color-muted)}
+.stat-grid{display:grid;gap:10px}
+.stat-row{display:flex;justify-content:space-between;align-items:center;padding:8px;background:var(--color-surface-2);border-radius:8px;font-size:12px}
+.stat-row .label{color:var(--color-muted)}
+.stat-row .value{font-weight:600}
+@media(max-width:720px){.controls{width:100%}.input{width:100%}.chart-wrap{height:200px}.grid-3{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}}
+</style>
+
+<div class="root">
+  <div class="top-bar">
+    <div>
+      <div class="title">📊 AI Grading Analytics Dashboard</div>
+      <div class="subtitle">Comprehensive performance analysis • Auto-loads all <span class="chip">m00*.json</span> grading logs</div>
+    </div>
+    <div class="controls">
+      <input class="input" id="searchInput" placeholder="Filter by roll, name, or file" />
+      <span class="chip" id="countChip">0 logs</span>
+    </div>
+  </div>
+
+  <div id="dashboard"></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const dashboard = document.getElementById('dashboard');
+const searchInput = document.getElementById('searchInput');
+const countChip = document.getElementById('countChip');
+let charts = [];
+let allLogs = [];
+
+function clearCharts(){
+  charts.forEach(c=>c.destroy());
+  charts = [];
+}
+
+function parseLog(fileName, payload){
+  try{
+    const response = payload.response || payload;
+    const summary = response.final_summary || response.summary || null;
+    const mcqs = response.mcq_evaluation || [];
+    const nonMcqs = response.non_mcq_evaluation || [];
+    const allQ = [...mcqs, ...nonMcqs];
+    const correct = allQ.filter(q=>q.correctness==='correct').length;
+    const partial = allQ.filter(q=>q.correctness==='partially_correct').length;
+    const wrong = allQ.filter(q=>q.correctness==='incorrect' || q.correctness==='wrong').length;
+    
+    if(!summary){
+      console.warn(`No summary found in ${fileName}`);
+      return null;
+    }
+    
+    return {
+      fileName,
+      timestamp: payload.timestamp || response.timestamp || null,
+      model: payload.model || response.model || 'unknown',
+      student: response.student || null,
+      summary,
+      overallFeedback: response.overall_feedback || '',
+      allQ,
+      counts: { correct, partial, wrong },
+      totalQuestions: allQ.length || (summary ? summary.total_questions : 0)
+    };
+  }catch(err){
+    console.warn(`Error parsing ${fileName}:`, err.message);
+    return null;
+  }
+}
+
+async function loadLogs(){
+  try{
+    const listRes = await fetch('/logs/index.json');
+    if(!listRes.ok) throw new Error(`Failed to fetch log index: ${listRes.status} ${listRes.statusText}`);
+    
+    const files = await listRes.json();
+    if(!Array.isArray(files)) throw new Error('Log index is not an array');
+    
+    const logFiles = files.filter(name=>name.startsWith('m00') && name.endsWith('.json'));
+    if(logFiles.length === 0){
+      dashboard.innerHTML = '<div class="empty">No log files found (pattern: m00*.json)</div>';
+      return;
+    }
+    
+    const jsons = await Promise.all(
+      logFiles.map(async (file)=>{
+        try{
+          const res = await fetch(`/logs/${file}`);
+          if(!res.ok) throw new Error(`${res.status} ${res.statusText}`);
+          const data = await res.json();
+          return parseLog(file, data);
+        }catch(err){
+          console.warn(`Failed to load ${file}:`, err.message);
+          return null;
+        }
+      })
+    );
+    
+    allLogs = jsons.filter(log=>log !== null);
+    if(allLogs.length === 0) throw new Error('No logs could be parsed successfully');
+    
+    render();
+  }catch(err){
+    console.error('Load error:', err);
+    dashboard.innerHTML = `<div class="empty">
+      <div style="margin-bottom:12px">Failed to load logs</div>
+      <div style="font-size:11px;color:#9aa0b5">${err.message}</div>
+      <div style="font-size:10px;color:#9aa0b5;margin-top:8px">Check browser console for details</div>
+    </div>`;
+  }
+}
+
+function filterLogs(){
+  const term = searchInput.value.trim().toLowerCase();
+  if(!term) return allLogs;
+  return allLogs.filter(log=>{
+    const student = log.student || {};
+    const searchText = [
+      log.fileName, 
+      log.model, 
+      student.name, 
+      student.roll_number,
+      student.class,
+      student.subject
+    ].filter(Boolean).join(' ').toLowerCase();
+    return searchText.includes(term);
+  });
+}
+
+function computeAnalytics(logs){
+  const validLogs = logs.filter(l=>l.summary);
+  
+  // Basic counts
+  const totalEvals = validLogs.length;
+  const totalQuestions = validLogs.reduce((sum,l)=>sum + l.totalQuestions, 0);
+  const totalCorrect = validLogs.reduce((sum,l)=>sum + l.counts.correct, 0);
+  const totalPartial = validLogs.reduce((sum,l)=>sum + l.counts.partial, 0);
+  const totalWrong = validLogs.reduce((sum,l)=>sum + l.counts.wrong, 0);
+  const allAnswerCount = totalCorrect + totalPartial + totalWrong;
+  
+  // Percentages
+  const avgPercentage = validLogs.reduce((sum,l)=>sum + (l.summary?.percentage || 0), 0) / totalEvals;
+  const avgAwarded = validLogs.reduce((sum,l)=>sum + (l.summary?.total_awarded_marks || 0), 0) / totalEvals;
+  const avgMax = validLogs.reduce((sum,l)=>sum + (l.summary?.total_max_marks || 0), 0) / totalEvals;
+  const avgMarksPerQuestion = validLogs.reduce((sum,l)=>sum + (l.allQ.reduce((qs,q)=>qs + (q.marks_awarded || 0), 0) || 0), 0) / totalQuestions;
+  const avgMaxPerQuestion = validLogs.reduce((sum,l)=>sum + (l.allQ.reduce((qs,q)=>qs + (q.max_marks || 0), 0) || 0), 0) / totalQuestions;
+  
+  // Pass rate (>= 40%)
+  const passCount = validLogs.filter(l => (l.summary?.percentage || 0) >= 40).length;
+  const passRate = (passCount / totalEvals) * 100;
+  
+  // Median
+  const percentages = validLogs.map(l => l.summary?.percentage || 0).sort((a,b)=>a-b);
+  const medianPercentage = percentages.length % 2 === 0 
+    ? (percentages[percentages.length/2 - 1] + percentages[percentages.length/2]) / 2
+    : percentages[Math.floor(percentages.length/2)];
+  
+  // By answer type
+  const byAnswerType = {};
+  validLogs.forEach(log => {
+    log.allQ.forEach(q => {
+      const type = q.answer_type || 'unknown';
+      if(!byAnswerType[type]) {
+        byAnswerType[type] = { count: 0, correctCount: 0, avgMarks: 0, totalMarks: 0, avgMaxMarks: 0, totalMaxMarks: 0 };
+      }
+      byAnswerType[type].count++;
+      byAnswerType[type].totalMarks += q.marks_awarded || 0;
+      byAnswerType[type].totalMaxMarks += q.max_marks || 0;
+      if(q.correctness === 'correct') byAnswerType[type].correctCount++;
+    });
+  });
+  
+  Object.keys(byAnswerType).forEach(type => {
+    const stat = byAnswerType[type];
+    stat.avgMarks = stat.totalMarks / stat.count;
+    stat.avgMaxMarks = stat.totalMaxMarks / stat.count;
+    stat.avgCorrectPct = (stat.correctCount / stat.count) * 100;
+  });
+  
+  // By model
+  const byModel = {};
+  validLogs.forEach(log => {
+    const model = log.model || 'unknown';
+    if(!byModel[model]) {
+      byModel[model] = { evalCount: 0, totalPct: 0, passCount: 0, correctCount: 0, totalAnswers: 0 };
+    }
+    byModel[model].evalCount++;
+    byModel[model].totalPct += log.summary?.percentage || 0;
+    if((log.summary?.percentage || 0) >= 40) byModel[model].passCount++;
+    byModel[model].correctCount += log.counts.correct;
+    byModel[model].totalAnswers += log.totalQuestions;
+  });
+  
+  Object.keys(byModel).forEach(model => {
+    const stat = byModel[model];
+    stat.avgPercentage = stat.totalPct / stat.evalCount;
+    stat.passRate = (stat.passCount / stat.evalCount) * 100;
+    stat.correctPct = (stat.correctCount / stat.totalAnswers) * 100;
+  });
+  
+  // Top and bottom performers
+  const sorted = validLogs.sort((a,b) => (b.summary?.percentage || 0) - (a.summary?.percentage || 0));
+  const topPerformers = sorted.slice(0, 5).map(l => ({
+    name: l.student?.name || 'Unknown',
+    roll: l.student?.roll_number || 'N/A',
+    pct: l.summary?.percentage || 0
+  }));
+  const bottomPerformers = sorted.slice(-5).reverse().map(l => ({
+    name: l.student?.name || 'Unknown',
+    roll: l.student?.roll_number || 'N/A',
+    pct: l.summary?.percentage || 0
+  }));
+  
+  return {
+    totalEvals,
+    totalQuestions,
+    correctCount: totalCorrect,
+    partialCount: totalPartial,
+    wrongCount: totalWrong,
+    correctPct: (totalCorrect / allAnswerCount) * 100,
+    partialPct: (totalPartial / allAnswerCount) * 100,
+    wrongPct: (totalWrong / allAnswerCount) * 100,
+    avgPercentage,
+    avgAwarded,
+    avgMax,
+    avgMarksPerQuestion,
+    avgMaxPerQuestion,
+    passRate,
+    passCount,
+    medianPercentage,
+    byAnswerType,
+    byModel,
+    topPerformers,
+    bottomPerformers,
+    allLogs: validLogs
+  };
+}
+
+function buildAllCharts(logs, analytics){
+  try{
+    // 1. HISTOGRAM - Score Distribution
+    const histogram = [0,0,0,0,0,0,0,0,0,0];
+    logs.forEach(l => {
+      const pct = l.summary?.percentage || 0;
+      const bin = Math.floor(pct / 10);
+      if(bin < 10) histogram[bin]++;
+    });
+    charts.push(new Chart(document.getElementById('chartHistogram'), {
+      type: 'bar',
+      data: {
+        labels: ['0-10%','10-20%','20-30%','30-40%','40-50%','50-60%','60-70%','70-80%','80-90%','90-100%'],
+        datasets: [{
+          label: 'Number of Students',
+          data: histogram,
+          backgroundColor: 'rgba(141,92,255,0.7)',
+          borderRadius: 6,
+          borderSkipped: false
+        }]
+      },
+      options: {responsive: true, maintainAspectRatio: false, plugins: {legend: {display: false}}, scales: {y: {ticks: {precision: 0}}}}
+    }));
+
+    // 2. PIE - Correctness Distribution
+    charts.push(new Chart(document.getElementById('chartCorrectnessPie'), {
+      type: 'doughnut',
+      data: {
+        labels: ['Correct', 'Partial', 'Incorrect'],
+        datasets: [{
+          data: [analytics.correctCount, analytics.partialCount, analytics.wrongCount],
+          backgroundColor: ['rgba(57,217,138,0.8)', 'rgba(247,183,49,0.8)', 'rgba(255,107,107,0.8)'],
+          borderColor: ['#39d98a', '#f7b731', '#ff6b6b'],
+          borderWidth: 2
+        }]
+      },
+      options: {responsive: true, maintainAspectRatio: false, plugins: {legend: {position: 'bottom', labels: {color: '#9aa0b5'}}}}
+    }));
+
+    // 3. Bar - Student Scores
+    const studentLabels = logs.map(l => (l.student?.roll_number || l.fileName).substring(0, 12));
+    const studentPcts = logs.map(l => l.summary?.percentage || 0);
+    charts.push(new Chart(document.getElementById('chartStudentScores'), {
+      type: 'bar',
+      data: {
+        labels: studentLabels,
+        datasets: [{
+          label: 'Percentage',
+          data: studentPcts,
+          backgroundColor: studentPcts.map(p => p >= 75 ? 'rgba(57,217,138,0.7)' : p >= 45 ? 'rgba(247,183,49,0.7)' : 'rgba(255,107,107,0.7)'),
+          borderRadius: 6
+        }]
+      },
+      options: {responsive: true, maintainAspectRatio: false, plugins: {legend: {display: false}}, scales: {y: {min: 0, max: 100, ticks: {callback: v => v + '%'}}}}
+    }));
+
+    // 4. Line - Marks Distribution
+    const marksLabels = logs.map(l => (l.student?.roll_number || l.fileName).substring(0, 12));
+    const awarded = logs.map(l => l.summary?.total_awarded_marks || 0);
+    const maxMarks = logs.map(l => l.summary?.total_max_marks || 0);
+    charts.push(new Chart(document.getElementById('chartMarksDistribution'), {
+      type: 'line',
+      data: {
+        labels: marksLabels,
+        datasets: [
+          {
+            label: 'Awarded Marks',
+            data: awarded,
+            borderColor: 'rgba(141,92,255,1)',
+            backgroundColor: 'rgba(141,92,255,0.1)',
+            tension: 0.3,
+            fill: true,
+            pointBackgroundColor: 'rgba(141,92,255,1)'
+          },
+          {
+            label: 'Max Marks',
+            data: maxMarks,
+            borderColor: 'rgba(247,183,49,1)',
+            backgroundColor: 'rgba(247,183,49,0.1)',
+            tension: 0.3,
+            fill: false,
+            borderDash: [5, 5],
+            pointBackgroundColor: 'rgba(247,183,49,1)'
+          }
+        ]
+      },
+      options: {responsive: true, maintainAspectRatio: false, plugins: {legend: {labels: {color: '#9aa0b5'}}}, scales: {y: {ticks: {precision: 0}}}}
+    }));
+
+  }catch(err){
+    console.error('Chart error:', err);
+  }
+}
+
+function render(){
+  clearCharts();
+  const logs = filterLogs();
+  countChip.textContent = `${logs.length} logs`;
+
+  if(!logs.length){
+    dashboard.innerHTML = '<div class="empty">No logs match the current filter.</div>';
+    return;
+  }
+
+  let html = '';
+
+  // Compute comprehensive analytics
+  const analytics = computeAnalytics(logs);
+
+  // ===== KPI SECTION =====
+  html += `<div class="section">
+    <div class="section-title">Key Performance Indicators</div>
+    <div class="grid grid-4">
+      <div class="card highlight">
+        <div class="metric">
+          <div class="metric-label">Total Evaluations</div>
+          <div class="metric-val">${analytics.totalEvals}</div>
+          <div class="metric-sub">${analytics.totalQuestions} questions graded</div>
+        </div>
+      </div>
+      <div class="card highlight">
+        <div class="metric">
+          <div class="metric-label">Average Score</div>
+          <div class="metric-val">${analytics.avgPercentage.toFixed(1)}%</div>
+          <div class="metric-sub">${analytics.avgAwarded.toFixed(1)}/${analytics.avgMax.toFixed(1)} marks</div>
+        </div>
+      </div>
+      <div class="card highlight">
+        <div class="metric">
+          <div class="metric-label">Pass Rate</div>
+          <div class="metric-val">${analytics.passRate.toFixed(1)}%</div>
+          <div class="metric-sub">${analytics.passCount} students (≥40%)</div>
+        </div>
+      </div>
+      <div class="card highlight">
+        <div class="metric">
+          <div class="metric-label">Median Score</div>
+          <div class="metric-val">${analytics.medianPercentage.toFixed(1)}%</div>
+          <div class="metric-sub">Middle 50% range</div>
+        </div>
+      </div>
+    </div>
+  </div>`;
+
+  // ===== QUALITY METRICS =====
+  html += `<div class="section">
+    <div class="section-title">Answer Quality Distribution</div>
+    <div class="grid grid-4">
+      <div class="card">
+        <div class="metric">
+          <div class="metric-label">Correct Answers</div>
+          <div class="metric-val" style="color:var(--color-good)">${analytics.correctCount}</div>
+          <div class="metric-sub">${(analytics.correctPct).toFixed(1)}% of all answers</div>
+          <div class="progress-bar"><div class="progress-fill" style="width:${Math.min(100, analytics.correctPct)}%"></div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="metric">
+          <div class="metric-label">Partial Correct</div>
+          <div class="metric-val" style="color:var(--color-warn)">${analytics.partialCount}</div>
+          <div class="metric-sub">${(analytics.partialPct).toFixed(1)}% of all answers</div>
+          <div class="progress-bar"><div class="progress-fill" style="width:${Math.min(100, analytics.partialPct)}%;background:var(--color-warn)"></div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="metric">
+          <div class="metric-label">Incorrect Answers</div>
+          <div class="metric-val" style="color:var(--color-bad)">${analytics.wrongCount}</div>
+          <div class="metric-sub">${(analytics.wrongPct).toFixed(1)}% of all answers</div>
+          <div class="progress-bar"><div class="progress-fill" style="width:${Math.min(100, analytics.wrongPct)}%;background:var(--color-bad)"></div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="metric">
+          <div class="metric-label">Avg Marks/Question</div>
+          <div class="metric-val">${analytics.avgMarksPerQuestion.toFixed(2)}</div>
+          <div class="metric-sub">Out of ${analytics.avgMaxPerQuestion.toFixed(1)}</div>
+        </div>
+      </div>
+    </div>
+  </div>`;
+
+  // ===== PERFORMANCE CHARTS =====
+  html += `<div class="section">
+    <div class="section-title">Performance Visualization</div>
+    <div class="grid grid-2">
+      <div class="card">
+        <div class="metric-label">Score Distribution Histogram</div>
+        <div class="chart-wrap"><canvas id="chartHistogram"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="metric-label">Correctness Pie Chart</div>
+        <div class="chart-wrap"><canvas id="chartCorrectnessPie"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="metric-label">Student Performance Scores</div>
+        <div class="chart-wrap"><canvas id="chartStudentScores"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="metric-label">Marks Distribution</div>
+        <div class="chart-wrap"><canvas id="chartMarksDistribution"></canvas></div>
+      </div>
+    </div>
+  </div>`;
+
+  // ===== ANSWER TYPE BREAKDOWN =====
+  html += `<div class="section">
+    <div class="section-title">Performance by Answer Type</div>
+    <div class="grid grid-3">`;
+  
+  for(const [type, stats] of Object.entries(analytics.byAnswerType)){
+    const tagClass = stats.avgCorrectPct >= 75 ? 'good' : stats.avgCorrectPct >= 45 ? 'warn' : 'bad';
+    html += `<div class="card">
+      <div style="margin-bottom:12px">
+        <div class="metric-label">${type}</div>
+        <span class="tag ${tagClass}">${stats.avgCorrectPct.toFixed(1)}% correct</span>
+      </div>
+      <div class="stat-grid">
+        <div class="stat-row">
+          <span class="label">Count</span>
+          <span class="value">${stats.count}</span>
+        </div>
+        <div class="stat-row">
+          <span class="label">Avg marks</span>
+          <span class="value">${stats.avgMarks.toFixed(2)}</span>
+        </div>
+        <div class="stat-row">
+          <span class="label">Max marks</span>
+          <span class="value">${stats.avgMaxMarks.toFixed(1)}</span>
+        </div>
+        <div class="stat-row">
+          <span class="label">Correct %</span>
+          <span class="value" style="color:var(--color-good)">${stats.correctCount}/${stats.count}</span>
+        </div>
+      </div>
+    </div>`;
+  }
+  
+  html += `</div></div>`;
+
+  // ===== MODEL COMPARISON =====
+  if(Object.keys(analytics.byModel).length > 1){
+    html += `<div class="section">
+      <div class="section-title">Model Performance Comparison</div>
+      <div class="grid grid-2">`;
+    
+    for(const [model, stats] of Object.entries(analytics.byModel)){
+      const tagClass = stats.avgPercentage >= 75 ? 'good' : stats.avgPercentage >= 45 ? 'warn' : 'bad';
+      html += `<div class="card">
+        <div style="margin-bottom:12px">
+          <div class="metric-label">${model}</div>
+          <span class="tag ${tagClass}">${stats.avgPercentage.toFixed(1)}%</span>
+        </div>
+        <div class="stat-grid">
+          <div class="stat-row">
+            <span class="label">Evals</span>
+            <span class="value">${stats.evalCount}</span>
+          </div>
+          <div class="stat-row">
+            <span class="label">Avg Score</span>
+            <span class="value">${stats.avgPercentage.toFixed(1)}%</span>
+          </div>
+          <div class="stat-row">
+            <span class="label">Pass Rate</span>
+            <span class="value">${stats.passRate.toFixed(1)}%</span>
+          </div>
+          <div class="stat-row">
+            <span class="label">Correct %</span>
+            <span class="value" style="color:var(--color-good)">${stats.correctPct.toFixed(1)}%</span>
+          </div>
+        </div>
+      </div>`;
+    }
+    
+    html += `</div></div>`;
+  }
+
+  // ===== TOP PERFORMERS =====
+  html += `<div class="section">
+    <div class="section-title">Top Performers & Struggling Students</div>
+    <div class="grid grid-2">
+      <div class="card">
+        <div class="metric-label">🏆 Top 5 Students</div>
+        <table class="table" style="margin-top:8px;font-size:11px">
+          <tbody>
+            ${analytics.topPerformers.map((p,i)=>`<tr><td>${i+1}.</td><td>${p.roll}</td><td>${p.name}</td><td style="text-align:right;color:var(--color-good)">${p.pct.toFixed(1)}%</td></tr>`).join('')}
+          </tbody>
+        </table>
+      </div>
+      <div class="card">
+        <div class="metric-label">⚠️ Students Needing Support</div>
+        <table class="table" style="margin-top:8px;font-size:11px">
+          <tbody>
+            ${analytics.bottomPerformers.map((p,i)=>`<tr><td>${i+1}.</td><td>${p.roll}</td><td>${p.name}</td><td style="text-align:right;color:var(--color-bad)">${p.pct.toFixed(1)}%</td></tr>`).join('')}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>`;
+
+  // ===== DETAILED LOGS =====
+  html += `<div class="section">
+    <div class="section-title">Individual Evaluations</div>
+    <div class="log-list">`;
+
+  logs.forEach(log=>{
+    const pct = log.summary?.percentage ?? 0;
+    const tagClass = pct >= 75 ? 'good' : pct >= 45 ? 'warn' : 'bad';
+    const student = log.student || {};
+    html += `<div class="log-card">
+      <div class="log-header">
+        <div class="log-meta">
+          <div class="log-title">${student.name || 'Unknown'} <span style="color:var(--color-muted)">• ${student.roll_number || 'N/A'}</span></div>
+          <div class="log-sub">${log.fileName} • ${log.model} • ${log.timestamp || ''}</div>
+        </div>
+        <span class="tag ${tagClass}">${pct}%</span>
+      </div>
+      <div class="stat-grid" style="margin-top:8px;font-size:11px">
+        <div class="stat-row">
+          <span class="label">Score</span>
+          <span class="value">${log.summary?.total_awarded_marks || 0}/${log.summary?.total_max_marks || 0}</span>
+        </div>
+        <div class="stat-row">
+          <span class="label">Correct</span>
+          <span class="value" style="color:var(--color-good)">${log.counts.correct}/${log.totalQuestions}</span>
+        </div>
+        <div class="stat-row">
+          <span class="label">Partial</span>
+          <span class="value" style="color:var(--color-warn)">${log.counts.partial}/${log.totalQuestions}</span>
+        </div>
+        <div class="stat-row">
+          <span class="label">Incorrect</span>
+          <span class="value" style="color:var(--color-bad)">${log.counts.wrong}/${log.totalQuestions}</span>
+        </div>
+      </div>
+      ${log.allQ.length > 0 ? `<details style="margin-top:12px">
+        <summary style="cursor:pointer;font-size:12px;color:var(--color-muted)">View ${log.allQ.length} question breakdown</summary>
+        <table class="table">
+          <thead><tr><th>Q</th><th>Type</th><th>Marks</th><th>Status</th></tr></thead>
+          <tbody>
+            ${log.allQ.map(q=>{
+              const qClass = q.correctness === 'correct' ? 'good' : q.correctness === 'partially_correct' ? 'warn' : 'bad';
+              return `<tr><td>${q.question_id || '?'}</td><td>${(q.answer_type || 'unknown').substring(0,10)}</td><td>${q.marks_awarded || 0}/${q.max_marks || 0}</td><td><span style="color:var(--color-${qClass})">${q.correctness || 'unknown'}</span></td></tr>`;
+            }).join('')}
+          </tbody>
+        </table>
+      </details>` : ''}
+      <div class="feedback">${log.overallFeedback || 'No feedback.'}</div>
+    </div>`;
+  });
+
+  html += `</div></div>`;
+  dashboard.innerHTML = html;
+
+  // Build all charts
+  buildAllCharts(logs, analytics);
+}
+
+searchInput.addEventListener('input',render);
+
+// Log initialization
+console.log('Dashboard initialized, loading logs from /logs/index.json...');
+loadLogs();
+console.log('Log loading initiated');
+</script>
