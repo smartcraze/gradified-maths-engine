@@ -23,12 +23,14 @@ router.post(
 	upload.single("file"),
 	asyncHandler(async (req: Request, res: Response) => {
 		if (!req.file) {
-			return res.status(400).json(ApiResponse.error("PDF file is required", null));
+			res.status(400).json(ApiResponse.error("PDF file is required", null));
+			return;
 		}
 
 		const parsedBody = OLMOCRRequestSchema.safeParse(req.body);
 		if (!parsedBody.success) {
-			return res.status(400).json(ApiResponse.error("Validation failed", parsedBody.error.issues));
+			res.status(400).json(ApiResponse.error("Validation failed", parsedBody.error.issues));
+			return;
 		}
 
 		// Use provided pdfPath or default to filename

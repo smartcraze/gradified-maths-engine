@@ -3,6 +3,10 @@
 > This file contains the complete architectural context for the Maths Engine grading system. Read this before making any changes.
 
 
+# REMEBER DO NO TOUCH MODULES/OCR - it is not useful over here we have to use the olm-ocr
+
+
+
 
 ### Run this for the formating and all stuff 
 
