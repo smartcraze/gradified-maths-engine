@@ -1,171 +1,216 @@
-# maths-engine
+# Maths Engine
 
-Current implemented scope in this repository:
-- HTTP server with health endpoint
-- Question-type routing engine (algebra, calculus, proof, mcq)
-- OpenRouter-powered model routing with structured outputs
+AI-powered exam evaluation system with a Bun backend and a separate frontend app.
 
-Future stages (rubric loading, dual-pass judging, consensus, and full eval runner) are scaffolded in architecture/docs but not fully wired in the current API surface yet.
+The repository contains:
+- a Bun + Express backend at the project root
+- a Vite + React frontend in the `frontend/` folder
+- Docker files for running both services together
 
-## Prerequisites
+## Requirements
 
-Install these before running the project:
+Install these before running anything:
+- Docker Desktop
+- Bun 1.x
+- Git
+- an OpenAI API key
+- a database connection string if your local run needs persistence
 
-- Bun 
-- OpenRouter API key
-- Optional: VS Code with Biome extension
-
-Check your Bun version:
+Check that Bun is installed:
 
 ```bash
 bun --version
 ```
-Install if not available
-- Linux
+
+If Bun is missing:
+
+Windows PowerShell:
+
+```powershell
+powershell -c "irm bun.sh/install.ps1 | iex"
+```
+
+macOS and Linux:
+
 ```bash
 curl -fsSL https://bun.com/install | bash
 ```
-- Window powershell
 
-```bash
-powershell -c "irm bun.sh/install.ps1|iex"
-```
-
-
-## Clone and Install
+## Clone The Repo
 
 ```bash
 git clone https://github.com/smartcraze/maths-engine.git
 cd maths-engine
-bun install
 ```
 
 ## Environment Setup
 
-Create a `.env` file in the project root:
+Create a root `.env` file from the example:
+
+```bash
+copy .env.example .env
+```
+
+Set the values you need:
 
 ```env
 NODE_ENV=development
 PORT=3000
-
-OPENROUTER_API_KEY=your_openrouter_api_key_here
-
-MODEL_NAME=openai/gpt-oss-120b:free
+OPENAI_API_KEY=your_openai_key_here
+DATABASE_URL=your_database_url_here
+VITE_API_URL=http://localhost:3000
 ```
 
-Notes:
-- `OPENROUTER_API_KEY` is required.
-- For now, model selection is controlled through a single `MODEL_NAME` value.
-- Environment validation is defined in `src/config/env.ts`.
+If you run the frontend locally, also install dependencies inside the frontend folder:
 
-## Run the Project
+```bash
+cd frontend
+bun install
+cd ..
+```
 
-Start dev server:
+## Local Run With Bun
+
+Install root dependencies:
+
+```bash
+bun install
+```
+
+Start the backend:
 
 ```bash
 bun run dev
 ```
 
-Build production bundle:
+The backend runs on:
+- `http://localhost:3000`
+- health check: `http://localhost:3000/health`
+
+In another terminal, start the frontend:
+
+```bash
+cd frontend
+bun run dev
+```
+
+The frontend runs on the Vite dev server, usually:
+- `http://localhost:5173`
+
+## Build And Run Locally
+
+Backend build:
 
 ```bash
 bun run build
 ```
 
-Build and run compiled output:
+Backend production start:
 
 ```bash
 bun run start
 ```
 
-## Available Scripts
-
-- `bun run dev` - run the server in development
-- `bun run build` - bundle server to `dist/`
-- `bun run start` - build then run production output
-- `bun run format` - format files using Biome
-- `bun run lint` - lint with Biome
-- `bun run check` - run Biome checks
-- `bun run check:fix` - apply safe Biome fixes
-- `bun run prepare` - initialize Husky hooks
-
-## API Endpoints (Current)
-
-### GET /health
-
-Health check endpoint.
-
-Example:
+Frontend build:
 
 ```bash
-curl http://localhost:3000/health
-```
-
-Example response:
-
-```json
-{
-	"success": true,
-	"message": "OK",
-	"data": {
-		"status": "healthy"
-	}
-}
-```
-
-## Project Structure
-
-```text
-src/
-	index.ts                 # Express app and middleware setup
-	server.ts                # Server bootstrap and shutdown handlers
-	config/
-		env.ts                 # Environment schema and parsing
-	modules/
-		engine/
-			index.ts             # OpenRouter generation helpers using MODEL_NAME
-	types/
-		index.ts               # Shared Zod schemas and TypeScript types
-```
-
-## Development Notes
-
-
-- Runtime is Bun, not Node. Use `bun` commands throughout.
-- Keep model IDs in environment variables (avoid hardcoding in modules).
-- Use structured outputs for model responses (Zod schemas in `src/types/index.ts`).
-- Linting and formatting are enforced with Biome.
-
-## Troubleshooting
-
-### Missing environment variable warnings
-
-If startup prints env warnings, verify your `.env` matches `src/config/env.ts`.
-
-### OpenRouter authentication errors
-
-- Ensure `OPENROUTER_API_KEY` is valid.
-- Confirm the selected model IDs are accessible in your OpenRouter account.
-
-### Port already in use
-
-Change `PORT` in `.env` and restart:
-
-```env
-PORT=3001
-```
-
-## Contributing
-
-Before opening a PR:
-
-```bash
-bun run check
+cd frontend
 bun run build
 ```
 
-If checks fail due to formatting/lint issues:
+Frontend preview:
 
 ```bash
-bun run check:fix
+cd frontend
+bun run preview
 ```
+
+## Run With Docker
+
+Build both services:
+
+```bash
+docker-compose build
+```
+
+Start both services:
+
+```bash
+docker-compose up
+```
+
+Start in the background:
+
+```bash
+docker-compose up -d
+```
+
+Rebuild and start again:
+
+```bash
+docker-compose up --build
+```
+
+Stop everything:
+
+```bash
+docker-compose down
+```
+
+View logs:
+
+```bash
+docker-compose logs -f
+```
+
+With Docker, the usual ports are:
+- backend: `http://localhost:3000`
+- frontend: `http://localhost:5173`
+
+## Helpful Commands
+
+Root backend commands:
+
+```bash
+bun run lint
+bun run check
+bun run fix
+bun run types
+bun run studio
+```
+
+Frontend commands:
+
+```bash
+cd frontend
+bun run lint
+bun run build
+bun run preview
+```
+
+## What The App Does
+
+- exposes a backend API for grading and log analysis
+- serves log data from the `logs/` folder
+- loads files that start with `m00` and end with `.json`
+- provides a frontend dashboard for score and log analysis
+
+## Project Layout
+
+```text
+.
+├── src/               # backend source
+├── frontend/          # React/Vite frontend
+├── public/            # static backend-served assets
+├── logs/              # grading logs
+├── data/              # sample input data
+├── docker-compose.yml # Docker setup
+└── Dockerfile.backend # backend image build
+```
+
+## Notes
+
+- If Docker fails to build, check that `.env` exists and that both Bun and Docker are installed.
+- If the frontend cannot reach the backend, confirm both containers are running on the same compose network.
+- If you only want the backend, use `bun run dev` at the repo root.
+- If you only want the frontend, use `cd frontend && bun run dev`.
