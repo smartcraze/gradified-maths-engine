@@ -1,50 +1,20 @@
-version: '3.9'
-
 services:
   backend:
     build:
       context: .
       dockerfile: Dockerfile.backend
-    container_name: maths-engine-backend
+    container_name: maths-backend
     ports:
       - "3000:3000"
-    environment:
-      - NODE_ENV=production
-      - PORT=3000
-      - OPENAI_API_KEY=${OPENAI_API_KEY}
-      - DATABASE_URL=${DATABASE_URL}
-    volumes:
-      - ./logs:/app/logs
-    networks:
-      - maths-network
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "bun", "run", "-e", "const res = await fetch('http://localhost:3000/health'); process.exit(res.ok ? 0 : 1)"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 10s
+    env_file:
+      - .env
 
   frontend:
     build:
-      context: .
-      dockerfile: ./frontend/Dockerfile
-    container_name: maths-engine-frontend
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: maths-frontend
     ports:
-      - "3001:3001"
+      - "5173:4173"
     depends_on:
-      backend:
-        condition: service_healthy
-    networks:
-      - maths-network
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:3001/"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 10s
-
-networks:
-  maths-network:
-    driver: bridge
+      - backend
