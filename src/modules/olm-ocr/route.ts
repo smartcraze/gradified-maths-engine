@@ -13,7 +13,16 @@ const upload = multer({ storage: multer.memoryStorage() });
 
 const OLMOCRRequestSchema = z.object({
 	pdfPath: z.string().min(1).optional(),
+	slug: z.string().min(1).optional(),
 });
+
+function normalizeSlug(input: string): string {
+	return input
+		.trim()
+		.toLowerCase()
+		.replace(/\s+/g, "_")
+		.replace(/[^a-z0-9_-]/g, "");
+}
 
 /**
  * POST /olm-ocr
@@ -47,7 +56,12 @@ router.post(
 		const statusCode = result.success ? 200 : 500;
 
 		if (result.success) {
-			const slug = generateSlug("ocr");
+			const providedSlug = parsedBody.data.slug ? normalizeSlug(parsedBody.data.slug) : null;
+			if (parsedBody.data.slug && !providedSlug) {
+				return res.status(400).json(ApiResponse.error("Invalid slug"));
+			}
+
+			const slug = providedSlug ?? generateSlug("ocr");
 			const requestId = generateRequestId();
 
 			const [row] = await db
