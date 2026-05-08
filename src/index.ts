@@ -3,11 +3,7 @@ import helmet from "helmet";
 import { globalErrorHandler } from "@/core/middleware/error.middleware";
 import logger from "@/core/middleware/logger.middleware";
 import { ApiResponse } from "@/core/utils/api.response";
-import gradingRoutes from "@/modules/grading/route";
-import learningRoutes from "@/modules/learning/route";
-import ocrRoutes from "@/modules/ocr/route";
-import olmOcrRoutes from "@/modules/olm-ocr/route";
-import structureRoutes from "@/modules/structure/route";
+import apiRoutes from "@/modules/api";
 
 const app = express();
 
@@ -20,11 +16,7 @@ app.get("/health", (_req: Request, res: Response) => {
 	res.status(200).json(ApiResponse.success("OK", { status: "healthy" }));
 });
 
-app.use("/structure", structureRoutes);
-app.use("/grading", gradingRoutes);
-app.use("/learning", learningRoutes);
-app.use("/ocr", ocrRoutes);
-app.use("/olm-ocr", olmOcrRoutes);
+app.use("/api", apiRoutes);
 
 app.use(globalErrorHandler);
 
