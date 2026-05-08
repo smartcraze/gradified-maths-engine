@@ -4,6 +4,7 @@ import { globalErrorHandler } from "@/core/middleware/error.middleware";
 import logger from "@/core/middleware/logger.middleware";
 import { ApiResponse } from "@/core/utils/api.response";
 import apiRoutes from "@/modules/api";
+import olmOcrRoutes from "@/modules/olm-ocr/route";
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.get("/health", (_req: Request, res: Response) => {
 });
 
 app.use("/api", apiRoutes);
+app.use("/api/olm-ocr", olmOcrRoutes);
 
 app.use(globalErrorHandler);
 

@@ -1,7 +1,7 @@
 import { type Request, type Response, Router } from "express";
 import { z } from "zod";
-import logger from "@/core/middleware/logger.middleware";
 import { ApiResponse } from "@/core/utils/api.response";
+import logger from "@/core/utils/logger";
 import { generateSlug, validateOcrResponse } from "@/core/utils/slug.util";
 import { db } from "@/db";
 import { ocrRequests } from "@/db/schema";
@@ -60,9 +60,9 @@ router.post("/", async (req: Request, res: Response) => {
 		);
 	} catch (error) {
 		if (error instanceof z.ZodError) {
-			return res.status(400).json(ApiResponse.error("Validation error", error.errors));
+			return res.status(400).json(ApiResponse.error("Validation error", error.issues));
 		}
-		logger.error("OCR upload error:", error);
+		logger.error("OCR upload error:");
 		return res.status(500).json(ApiResponse.error("Internal server error"));
 	}
 });
