@@ -4,8 +4,6 @@ import { z } from "zod";
 import { asyncHandler } from "@/core/middleware/async.handler";
 import { ApiResponse } from "@/core/utils/api.response";
 import { generateRequestId, generateSlug } from "@/core/utils/slug.util";
-import { db } from "@/db";
-import { ocrRequests } from "@/db/schema";
 import { processOLMOCR } from "./index";
 
 const router = Router();
@@ -64,25 +62,11 @@ router.post(
 			const slug = providedSlug ?? generateSlug("ocr");
 			const requestId = generateRequestId();
 
-			const [row] = await db
-				.insert(ocrRequests)
-				.values({
-					file_name: req.file.originalname,
-					mime_type: req.file.mimetype,
-					size_bytes: req.file.size,
-					request_id: requestId,
-					slug,
-					status: "complete",
-					parsed: true,
-					raw_response: result.results as Record<string, unknown>,
-				})
-				.returning({ id: ocrRequests.id });
-
 			return res.status(statusCode).json(
 				ApiResponse.success(result.message, {
 					slug,
 					request_id: requestId,
-					id: row?.id ?? null,
+					id: null,
 					rawmarkdown: result.results?.raw_markdown ?? null,
 					equations: result.results?.equations ?? [],
 				}),

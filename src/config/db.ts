@@ -1,9 +1,7 @@
-import "dotenv/config";
-import { drizzle } from "drizzle-orm/node-postgres";
-import { Pool } from "pg";
-import { env } from "./env";
+export const db = {
+	async execute() {
+		throw new Error("Database is disabled in this build");
+	},
+};
 
-const pool = new Pool({
-	connectionString: env.DATABASE_URL,
-});
-export const db = drizzle({ client: pool });
+export type Database = typeof db;

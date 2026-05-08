@@ -1,6 +1,3 @@
-import { eq } from "drizzle-orm";
-import { db } from "@/config/db";
-import { questionsPaper } from "@/db/schema";
 import { type StructuredExam, StructuredExamSchema } from "./schema";
 
 export type StructuredExamPaperRecord = {
@@ -42,39 +39,27 @@ function buildStructuredExamRecord(input: {
 	};
 }
 
-export function createStructureRepository(database = db): StructureRepository {
+const structuredExamStore = new Map<number, StructuredExamPaperRecord>();
+let structuredExamId = 1;
+
+export function createStructureRepository(): StructureRepository {
 	async function findStructuredExamPaperRecordByOcrRequestId(
 		ocrRequestId: number,
 	): Promise<StructuredExamPaperRecord | null> {
-		const [row] = await database.select().from(questionsPaper).where(eq(questionsPaper.ocr_request_id, ocrRequestId));
-
-		if (!row) {
-			return null;
-		}
-
-		return buildStructuredExamRecord({
-			id: row.id,
-			ocrRequestId: row.ocr_request_id,
-			sourceText: row.content,
-			structuredExam: parseStructuredExam(row.structure_question),
-		});
+		return structuredExamStore.get(ocrRequestId) ?? null;
 	}
 
 	return {
 		async saveStructuredExam({ ocrRequestId, structuredExam, sourceText }) {
 			const structuredExamJson = parseStructuredExam(structuredExam);
-
-			await database.transaction(async (transaction) => {
-				await transaction.delete(questionsPaper).where(eq(questionsPaper.ocr_request_id, ocrRequestId));
-				await transaction.insert(questionsPaper).values({
-					ocr_request_id: ocrRequestId,
-					question_number: 0,
-					content: sourceText ?? JSON.stringify(structuredExamJson),
-					structure_question: structuredExamJson,
-					metadata: null,
-				});
+			const record = buildStructuredExamRecord({
+				id: structuredExamId++,
+				ocrRequestId,
+				sourceText: sourceText ?? JSON.stringify(structuredExamJson),
+				structuredExam: structuredExamJson,
 			});
 
+			structuredExamStore.set(ocrRequestId, record);
 			return structuredExamJson;
 		},
 		async findStructuredExamByOcrRequestId(ocrRequestId) {

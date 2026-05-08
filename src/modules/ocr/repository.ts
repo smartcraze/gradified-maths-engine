@@ -1,11 +1,4 @@
-import { eq } from "drizzle-orm";
-import { db } from "@/config/db";
-import { ocrRequests } from "@/db/schema";
 import type { OcrRequestRecord, OcrStatus } from "./type";
-
-type Database = typeof db;
-
-type OcrRequestRow = typeof ocrRequests.$inferSelect;
 
 type CreateOcrRequestInput = {
 	fileName: string;
@@ -21,61 +14,58 @@ type UpdateOcrRequestInput = {
 	parsed?: boolean;
 };
 
-function mapOcrRequest(row: OcrRequestRow): OcrRequestRecord {
+const ocrStore = new Map<number, OcrRequestRecord>();
+let ocrIdCounter = 1;
+
+function buildOcrRecord(id: number, input: CreateOcrRequestInput): OcrRequestRecord {
 	return {
-		id: row.id,
-		fileName: row.file_name,
-		mimeType: row.mime_type,
-		sizeBytes: row.size_bytes,
-		requestId: row.request_id,
-		status: row.status as OcrStatus,
-		parsed: row.parsed,
-		createdAt: row.created_at,
+		id,
+		fileName: input.fileName,
+		mimeType: input.mimeType,
+		sizeBytes: input.sizeBytes,
+		requestId: input.requestId,
+		status: input.status ?? "processing",
+		parsed: input.parsed ?? false,
+		createdAt: new Date(),
 	};
 }
 
-export function createOcrRepository(database: Database = db) {
+export function createOcrRepository() {
 	async function createOcrRequest(input: CreateOcrRequestInput): Promise<OcrRequestRecord> {
-		const [row] = await database
-			.insert(ocrRequests)
-			.values({
-				file_name: input.fileName,
-				mime_type: input.mimeType,
-				size_bytes: input.sizeBytes,
-				request_id: input.requestId,
-				status: input.status ?? "processing",
-				parsed: input.parsed ?? false,
-			})
-			.returning();
-
-		if (!row) {
-			throw new Error("Failed to create OCR request record");
-		}
-
-		return mapOcrRequest(row);
+		const id = ocrIdCounter++;
+		const record = buildOcrRecord(id, input);
+		ocrStore.set(id, record);
+		return record;
 	}
 
 	async function findOcrRequestById(id: number): Promise<OcrRequestRecord | null> {
-		const [row] = await database.select().from(ocrRequests).where(eq(ocrRequests.id, id)).limit(1);
-		return row ? mapOcrRequest(row) : null;
+		return ocrStore.get(id) ?? null;
 	}
 
 	async function findOcrRequestByRequestId(requestId: string): Promise<OcrRequestRecord | null> {
-		const [row] = await database.select().from(ocrRequests).where(eq(ocrRequests.request_id, requestId)).limit(1);
-		return row ? mapOcrRequest(row) : null;
+		for (const record of ocrStore.values()) {
+			if (record.requestId === requestId) {
+				return record;
+			}
+		}
+
+		return null;
 	}
 
 	async function updateOcrRequestById(id: number, input: UpdateOcrRequestInput): Promise<OcrRequestRecord | null> {
-		const [row] = await database
-			.update(ocrRequests)
-			.set({
-				...(input.status ? { status: input.status } : {}),
-				...(input.parsed !== undefined ? { parsed: input.parsed } : {}),
-			})
-			.where(eq(ocrRequests.id, id))
-			.returning();
+		const record = ocrStore.get(id);
+		if (!record) {
+			return null;
+		}
 
-		return row ? mapOcrRequest(row) : null;
+		const updated: OcrRequestRecord = {
+			...record,
+			status: input.status ?? record.status,
+			parsed: input.parsed ?? record.parsed,
+		};
+
+		ocrStore.set(id, updated);
+		return updated;
 	}
 
 	return {
