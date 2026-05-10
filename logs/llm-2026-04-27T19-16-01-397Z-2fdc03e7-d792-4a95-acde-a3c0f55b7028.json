@@ -1,0 +1,468 @@
+{
+	"timestamp": "2026-04-27T19:16:01.397Z",
+	"module": "grading",
+	"model": "gpt-5.4",
+	"metadata": {
+		"totalQuestions": 19,
+		"mcqQuestionCount": 8,
+		"nonMcqQuestionCount": 11
+	},
+	"response": {
+		"final_summary": {
+			"total_questions": 19,
+			"total_max_marks": 36,
+			"total_awarded_marks": 29,
+			"percentage": 80.56
+		},
+		"student": {
+			"name": "Utkarsh Kumar Shukla",
+			"roll_number": "M003",
+			"registration_number": null,
+			"class": null,
+			"subject": "Mathematics"
+		},
+		"overall_feedback": "The student performs well on direct definitions, set operations, and numerical permutation questions. Marks were lost mainly where required intermediate steps or justifications were omitted, especially in proof and relation-based questions. Be more careful in copying identities exactly and show all essential algebraic steps explicitly.",
+		"mcq_evaluation": [
+			{
+				"question_id": "1",
+				"max_marks": 1,
+				"marks_awarded": 1,
+				"answer_type": "mcq",
+				"correctness": "correct",
+				"correct_option": "B",
+				"student_option": "B",
+				"steps_analysis": null,
+				"key_points_covered": null,
+				"key_points_missing": null,
+				"feedback": null
+			},
+			{
+				"question_id": "2",
+				"max_marks": 1,
+				"marks_awarded": 1,
+				"answer_type": "mcq",
+				"correctness": "correct",
+				"correct_option": "B",
+				"student_option": "B",
+				"steps_analysis": null,
+				"key_points_covered": null,
+				"key_points_missing": null,
+				"feedback": null
+			},
+			{
+				"question_id": "3",
+				"max_marks": 1,
+				"marks_awarded": 0,
+				"answer_type": "mcq",
+				"correctness": "incorrect",
+				"correct_option": "A",
+				"student_option": "C",
+				"steps_analysis": null,
+				"key_points_covered": null,
+				"key_points_missing": null,
+				"feedback": null
+			},
+			{
+				"question_id": "4",
+				"max_marks": 1,
+				"marks_awarded": 1,
+				"answer_type": "mcq",
+				"correctness": "correct",
+				"correct_option": "C",
+				"student_option": "C",
+				"steps_analysis": null,
+				"key_points_covered": null,
+				"key_points_missing": null,
+				"feedback": null
+			},
+			{
+				"question_id": "5",
+				"max_marks": 1,
+				"marks_awarded": 1,
+				"answer_type": "mcq",
+				"correctness": "correct",
+				"correct_option": "B",
+				"student_option": "B",
+				"steps_analysis": null,
+				"key_points_covered": null,
+				"key_points_missing": null,
+				"feedback": null
+			},
+			{
+				"question_id": "6",
+				"max_marks": 1,
+				"marks_awarded": 1,
+				"answer_type": "mcq",
+				"correctness": "correct",
+				"correct_option": "C",
+				"student_option": "C",
+				"steps_analysis": null,
+				"key_points_covered": null,
+				"key_points_missing": null,
+				"feedback": null
+			},
+			{
+				"question_id": "7",
+				"max_marks": 1,
+				"marks_awarded": 1,
+				"answer_type": "mcq",
+				"correctness": "correct",
+				"correct_option": "B",
+				"student_option": "B",
+				"steps_analysis": null,
+				"key_points_covered": null,
+				"key_points_missing": null,
+				"feedback": null
+			},
+			{
+				"question_id": "8",
+				"max_marks": 1,
+				"marks_awarded": 0,
+				"answer_type": "mcq",
+				"correctness": "incorrect",
+				"correct_option": "C",
+				"student_option": "A",
+				"steps_analysis": null,
+				"key_points_covered": null,
+				"key_points_missing": null,
+				"feedback": null
+			}
+		],
+		"non_mcq_evaluation": [
+			{
+				"question_id": "9",
+				"max_marks": 2,
+				"marks_awarded": 2,
+				"answer_type": "numerical",
+				"correctness": "correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[concept] Defined a set as a well-defined collection of objects.",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[final] Gave a valid example A = {1, 2, 3}.",
+						"is_correct": true,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["set as a well-defined collection of objects", "valid example of a set"],
+				"key_points_missing": [],
+				"feedback": {
+					"strengths": "Correct definition and suitable example were provided.",
+					"improvements": "No improvement needed."
+				}
+			},
+			{
+				"question_id": "10",
+				"max_marks": 2,
+				"marks_awarded": 2,
+				"answer_type": "numerical",
+				"correctness": "correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[concept] Stated the domain of x² as all real numbers R.",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[final] Stated the range as [0, ∞), equivalent to x ≥ 0.",
+						"is_correct": true,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["domain is R", "range is non-negative reals"],
+				"key_points_missing": [],
+				"feedback": {
+					"strengths": "Both domain and range are correctly stated.",
+					"improvements": "No improvement needed."
+				}
+			},
+			{
+				"question_id": "11",
+				"max_marks": 2,
+				"marks_awarded": 2,
+				"answer_type": "numerical",
+				"correctness": "correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[concept] Substituted sin45° = 1/√2 and cos45° = 1/√2 correctly.",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[final] Multiplied to obtain 1/2.",
+						"is_correct": true,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["correct trigonometric values", "correct multiplication result"],
+				"key_points_missing": [],
+				"feedback": {
+					"strengths": "Correct substitution and final value.",
+					"improvements": "No improvement needed."
+				}
+			},
+			{
+				"question_id": "12",
+				"max_marks": 2,
+				"marks_awarded": 2,
+				"answer_type": "numerical",
+				"correctness": "correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[concept] Evaluated 5P2 as 5 × 4.",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[final] Stated the result as 20.",
+						"is_correct": true,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["permutation evaluation", "correct final answer"],
+				"key_points_missing": [],
+				"feedback": {
+					"strengths": "Correctly computed the permutation value.",
+					"improvements": "No improvement needed."
+				}
+			},
+			{
+				"question_id": "13",
+				"max_marks": 2,
+				"marks_awarded": 1,
+				"answer_type": "numerical",
+				"correctness": "partially_correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[concept] Used 2^4 for the size of the power set of a 4-element set.",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[final] Wrote the final number of elements as 16.",
+						"is_correct": false,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["power set size uses powers of 2"],
+				"key_points_missing": ["explicit statement that |P(A)| = 2^n"],
+				"feedback": {
+					"strengths": "Applied the correct idea using 2^4 for a set with 4 elements.",
+					"improvements": "State the general formula explicitly before concluding. The complete result is |P(A)| = 2^n = 2^4 = 16."
+				}
+			},
+			{
+				"question_id": "14",
+				"max_marks": 2,
+				"marks_awarded": 2,
+				"answer_type": "numerical",
+				"correctness": "correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[concept] Gave a valid one-one function example f(x) = x.",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[final] Gave a valid many-one function example f(x) = x².",
+						"is_correct": true,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["valid one-one example", "valid many-one example"],
+				"key_points_missing": [],
+				"feedback": {
+					"strengths": "Both examples are mathematically valid.",
+					"improvements": "No improvement needed."
+				}
+			},
+			{
+				"question_id": "15",
+				"max_marks": 3,
+				"marks_awarded": 2,
+				"answer_type": "short",
+				"correctness": "partially_correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[setup] Wrote the LHS expression correctly.",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[steps] Mentioned taking LCM and simplifying but did not show the actual fraction work.",
+						"is_correct": false,
+						"marks": 1
+					},
+					{
+						"step": "[final] Reached RHS = 2 cosecθ.",
+						"is_correct": true,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["correct LHS expression", "correct final identity result"],
+				"key_points_missing": ["single fraction after LCM", "numerator simplification using sin²θ + cos²θ = 1"],
+				"feedback": {
+					"strengths": "Started with the correct LHS and concluded with the correct RHS.",
+					"improvements": "Show the intermediate algebra after taking LCM. The simplification to 2/sinθ must be explicitly written."
+				}
+			},
+			{
+				"question_id": "16",
+				"max_marks": 3,
+				"marks_awarded": 3,
+				"answer_type": "short",
+				"correctness": "correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[setup] Found A ∪ B = {1, 2, 3, 4, 5, 6}.",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[steps] Found A ∩ B = {3, 4}.",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[final] Stated both final answers clearly.",
+						"is_correct": true,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["correct union", "correct intersection", "clear final statement"],
+				"key_points_missing": [],
+				"feedback": {
+					"strengths": "Both set operations are correct and clearly presented.",
+					"improvements": "No improvement needed."
+				}
+			},
+			{
+				"question_id": "17",
+				"max_marks": 3,
+				"marks_awarded": 3,
+				"answer_type": "short",
+				"correctness": "correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[setup] Identified formation of 3-digit numbers from 5 digits without repetition.",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[steps] Used 5P3 = 5 × 4 × 3 correctly.",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[final] Stated the final answer as 60.",
+						"is_correct": true,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["no repetition condition used", "correct permutation method", "correct final answer"],
+				"key_points_missing": [],
+				"feedback": {
+					"strengths": "Correct counting method and correct final result.",
+					"improvements": "No improvement needed."
+				}
+			},
+			{
+				"question_id": "18",
+				"max_marks": 3,
+				"marks_awarded": 1,
+				"answer_type": "short",
+				"correctness": "partially_correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[setup] Identified the relation as reflexive.",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[steps] Stated it is symmetric without justification.",
+						"is_correct": false,
+						"marks": 1
+					},
+					{
+						"step": "[final] Stated it is transitive but did not conclude equivalence relation explicitly.",
+						"is_correct": false,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["reflexive classification", "symmetric classification", "transitive classification"],
+				"key_points_missing": [
+					"justification for symmetry",
+					"justification for transitivity",
+					"explicit conclusion that it is an equivalence relation"
+				],
+				"feedback": {
+					"strengths": "The overall nature of the relation was identified correctly.",
+					"improvements": "Show why each property holds: all (a,a) are present, reversed pairs remain in R, and composition stays in R. Conclude explicitly that it is an equivalence relation."
+				}
+			},
+			{
+				"question_id": "19",
+				"max_marks": 4,
+				"marks_awarded": 3,
+				"answer_type": "long",
+				"correctness": "partially_correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[concept] Wrote the expression but changed sin²θ to sin2θ.",
+						"is_correct": false,
+						"marks": 1
+					},
+					{
+						"step": "[steps] Used the identity 1 + tan²θ = sec²θ correctly.",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[steps] Converted the first factor to sec²θ consistently.",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[final] Concluded LHS = RHS for the written expression.",
+						"is_correct": true,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["identity 1 + tan²θ = sec²θ", "proof structure attempted"],
+				"key_points_missing": [
+					"correct retention of sin²θ in the expression",
+					"proof of the original identity exactly as asked"
+				],
+				"feedback": {
+					"strengths": "Correctly used the identity 1 + tan²θ = sec²θ and completed the proof pattern.",
+					"improvements": "Do not replace sin²θ with sin2θ. The given identity must be copied and proved exactly as written."
+				}
+			}
+		]
+	}
+}

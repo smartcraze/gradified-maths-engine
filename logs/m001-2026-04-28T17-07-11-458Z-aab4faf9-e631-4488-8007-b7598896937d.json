@@ -1,0 +1,373 @@
+{
+	"timestamp": "2026-04-28T17:07:11.458Z",
+	"module": "grading",
+	"model": "gpt-5.4",
+	"metadata": {
+		"totalQuestions": 14,
+		"mcqQuestionCount": 5,
+		"nonMcqQuestionCount": 9
+	},
+	"response": {
+		"final_summary": {
+			"total_questions": 14,
+			"total_max_marks": 30,
+			"total_awarded_marks": 27,
+			"percentage": 90
+		},
+		"student": {
+			"name": "suraj",
+			"roll_number": "2M001",
+			"registration_number": null,
+			"class": "6th",
+			"subject": "Mathematics"
+		},
+		"overall_feedback": "The student shows strong understanding in fraction comparison, linear equations, proportion, factors, unitary method, and inverse proportion. Most final answers are correct. Marks were deducted where the required representation was not explicitly shown, especially for number line questions and for one missing intermediate algebraic step. To improve, present diagrams when asked and include all working steps clearly.",
+		"mcq_evaluation": [
+			{
+				"question_id": "1",
+				"max_marks": 1,
+				"marks_awarded": 1,
+				"answer_type": "mcq",
+				"correctness": "correct",
+				"correct_option": "C",
+				"student_option": "C",
+				"steps_analysis": null,
+				"key_points_covered": null,
+				"key_points_missing": null,
+				"feedback": null
+			},
+			{
+				"question_id": "2",
+				"max_marks": 1,
+				"marks_awarded": 1,
+				"answer_type": "mcq",
+				"correctness": "correct",
+				"correct_option": "B",
+				"student_option": "B",
+				"steps_analysis": null,
+				"key_points_covered": null,
+				"key_points_missing": null,
+				"feedback": null
+			},
+			{
+				"question_id": "3",
+				"max_marks": 1,
+				"marks_awarded": 1,
+				"answer_type": "mcq",
+				"correctness": "correct",
+				"correct_option": "B",
+				"student_option": "B",
+				"steps_analysis": null,
+				"key_points_covered": null,
+				"key_points_missing": null,
+				"feedback": null
+			},
+			{
+				"question_id": "4",
+				"max_marks": 1,
+				"marks_awarded": 1,
+				"answer_type": "mcq",
+				"correctness": "correct",
+				"correct_option": "A",
+				"student_option": "A",
+				"steps_analysis": null,
+				"key_points_covered": null,
+				"key_points_missing": null,
+				"feedback": null
+			},
+			{
+				"question_id": "5",
+				"max_marks": 1,
+				"marks_awarded": 1,
+				"answer_type": "mcq",
+				"correctness": "correct",
+				"correct_option": "A",
+				"student_option": "A",
+				"steps_analysis": null,
+				"key_points_covered": null,
+				"key_points_missing": null,
+				"feedback": null
+			}
+		],
+		"non_mcq_evaluation": [
+			{
+				"question_id": "6",
+				"max_marks": 2,
+				"marks_awarded": 1,
+				"answer_type": "numerical",
+				"correctness": "partially_correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[concept] Listed the relevant fractional positions including 1/5, 2/5, 3/5, 4/5 on the number line.",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[final] Did not clearly draw/indicate the point 3/5 on a proper number line representation.",
+						"is_correct": false,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["Marked fractional values including 3/5", "Used number line idea"],
+				"key_points_missing": ["Proper number line representation showing 3/5 as a point"],
+				"feedback": {
+					"strengths": "Included the correct fractional positions and identified 3/5.",
+					"improvements": "Draw a proper number line and clearly mark the point at 3/5 instead of only listing values."
+				}
+			},
+			{
+				"question_id": "7",
+				"max_marks": 2,
+				"marks_awarded": 2,
+				"answer_type": "numerical",
+				"correctness": "correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[concept] Converted 3/8 to decimal as 0.375.",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[final] Converted 4/5 to 0.8 and concluded correctly that 4/5 is greater.",
+						"is_correct": true,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["Converted 3/8 to 0.375", "Converted 4/5 to 0.8", "Correctly compared the decimals"],
+				"key_points_missing": [],
+				"feedback": {
+					"strengths": "Both decimal conversions and the comparison are correct.",
+					"improvements": "No improvement needed."
+				}
+			},
+			{
+				"question_id": "8",
+				"max_marks": 2,
+				"marks_awarded": 2,
+				"answer_type": "numerical",
+				"correctness": "correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[concept] Formed the equation 6x - 10 = 32 correctly.",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[final] Solved the equation correctly to get x = 7.",
+						"is_correct": true,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["Correct linear equation formed", "Correct solution x = 7"],
+				"key_points_missing": [],
+				"feedback": {
+					"strengths": "Set up and solved the equation correctly.",
+					"improvements": "No improvement needed."
+				}
+			},
+			{
+				"question_id": "9",
+				"max_marks": 2,
+				"marks_awarded": 2,
+				"answer_type": "numerical",
+				"correctness": "correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[concept] Wrote the proportion as a/21 = 5/15 correctly.",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[final] Solved the proportion correctly to get a = 7.",
+						"is_correct": true,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["Correct proportion equation", "Correct final value a = 7"],
+				"key_points_missing": [],
+				"feedback": {
+					"strengths": "Set up the proportion correctly and found the right value.",
+					"improvements": "No improvement needed."
+				}
+			},
+			{
+				"question_id": "10",
+				"max_marks": 3,
+				"marks_awarded": 3,
+				"answer_type": "short",
+				"correctness": "correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[setup] Expressed 24 as factor pairs such as 1×24, 2×12, 3×8, 4×6.",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[steps] Identified the factors from these pairs correctly.",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[final] Stated all factors explicitly as 1, 2, 3, 4, 6, 8, 12, 24.",
+						"is_correct": true,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["Factor pairs of 24", "Complete list of factors"],
+				"key_points_missing": [],
+				"feedback": {
+					"strengths": "Listed valid factor pairs and gave the complete set of factors.",
+					"improvements": "Avoid repeating reversed factor pairs unnecessarily."
+				}
+			},
+			{
+				"question_id": "11",
+				"max_marks": 3,
+				"marks_awarded": 3,
+				"answer_type": "short",
+				"correctness": "correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[setup] Calculated unit cost as 2850/15 = 190.",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[steps] Multiplied 190 by 11 to get 2090.",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[final] Stated the total cost correctly as ₹2090.",
+						"is_correct": true,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["Correct unit cost", "Correct multiplication", "Correct final cost"],
+				"key_points_missing": [],
+				"feedback": {
+					"strengths": "Used the unitary method correctly and obtained the right cost.",
+					"improvements": "No improvement needed."
+				}
+			},
+			{
+				"question_id": "12",
+				"max_marks": 3,
+				"marks_awarded": 2,
+				"answer_type": "short",
+				"correctness": "partially_correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[setup] Set up the proportion 15 : 25 = x : 50 correctly.",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[steps] Did not explicitly show the fraction form and simplification before solving.",
+						"is_correct": false,
+						"marks": 1
+					},
+					{
+						"step": "[final] Solved correctly to obtain x = 30.",
+						"is_correct": true,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["Correct proportion equation", "Correct final answer 30"],
+				"key_points_missing": ["Explicit fraction form 15/25 = x/50 or simplification to 3/5"],
+				"feedback": {
+					"strengths": "Set up the proportion correctly and found the correct third term.",
+					"improvements": "Show the intermediate fraction equation or simplification step explicitly before cross-multiplying."
+				}
+			},
+			{
+				"question_id": "13",
+				"max_marks": 4,
+				"marks_awarded": 3,
+				"answer_type": "long",
+				"correctness": "partially_correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[concept] Identified the numbers to be added as 8 and -5.",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[steps] Performed the integer addition correctly as 8 + (-5) = 3.",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[steps] Did not represent the movement or point on a number line.",
+						"is_correct": false,
+						"marks": 1
+					},
+					{
+						"step": "[final] Final sum 3 is stated correctly.",
+						"is_correct": true,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["Correct numbers identified", "Correct sum 3"],
+				"key_points_missing": ["Number line representation of the addition"],
+				"feedback": {
+					"strengths": "Computed the addition correctly and gave the correct final sum.",
+					"improvements": "Since the question asks for number line addition, show the jumps or marked point on the number line."
+				}
+			},
+			{
+				"question_id": "14",
+				"max_marks": 4,
+				"marks_awarded": 4,
+				"answer_type": "long",
+				"correctness": "correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[concept] Used the inverse work relation men × days = constant.",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[steps] Set up the equation 10 × 25 = 50 × x correctly.",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[steps] Solved the equation correctly to get x = 5.",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[final] Stated correctly that 50 men take 5 days.",
+						"is_correct": true,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["Correct men-days relation", "Correct equation", "Correct final answer 5 days"],
+				"key_points_missing": [],
+				"feedback": {
+					"strengths": "Applied inverse proportion correctly and solved accurately.",
+					"improvements": "No improvement needed."
+				}
+			}
+		]
+	}
+}

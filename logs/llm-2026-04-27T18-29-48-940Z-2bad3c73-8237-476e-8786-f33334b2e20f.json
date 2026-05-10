@@ -1,0 +1,512 @@
+{
+	"timestamp": "2026-04-27T18:29:48.942Z",
+	"module": "grading",
+	"model": "gpt-5.4-mini",
+	"metadata": {
+		"totalQuestions": 20,
+		"mcqQuestionCount": 8,
+		"nonMcqQuestionCount": 12
+	},
+	"response": {
+		"final_summary": {
+			"total_questions": 20,
+			"total_max_marks": 40,
+			"total_awarded_marks": 23,
+			"percentage": 57.5
+		},
+		"student": {
+			"name": "Utkarsh Kumar Shukla",
+			"roll_number": "M003",
+			"registration_number": null,
+			"class": null,
+			"subject": "Mathematics"
+		},
+		"overall_feedback": "Most short factual answers are correct. Proof-based responses need fuller algebraic justification, and Q20 requires the complete permutation-with-repetitions working rather than only the final value.",
+		"mcq_evaluation": [
+			{
+				"question_id": "Q1",
+				"max_marks": 1,
+				"marks_awarded": 0,
+				"answer_type": "mcq",
+				"correctness": "incorrect",
+				"correct_option": "B",
+				"student_option": null,
+				"steps_analysis": null,
+				"key_points_covered": null,
+				"key_points_missing": null,
+				"feedback": null
+			},
+			{
+				"question_id": "Q2",
+				"max_marks": 1,
+				"marks_awarded": 0,
+				"answer_type": "mcq",
+				"correctness": "incorrect",
+				"correct_option": "B",
+				"student_option": null,
+				"steps_analysis": null,
+				"key_points_covered": null,
+				"key_points_missing": null,
+				"feedback": null
+			},
+			{
+				"question_id": "Q3",
+				"max_marks": 1,
+				"marks_awarded": 0,
+				"answer_type": "mcq",
+				"correctness": "incorrect",
+				"correct_option": "A",
+				"student_option": null,
+				"steps_analysis": null,
+				"key_points_covered": null,
+				"key_points_missing": null,
+				"feedback": null
+			},
+			{
+				"question_id": "Q4",
+				"max_marks": 1,
+				"marks_awarded": 0,
+				"answer_type": "mcq",
+				"correctness": "incorrect",
+				"correct_option": "C",
+				"student_option": null,
+				"steps_analysis": null,
+				"key_points_covered": null,
+				"key_points_missing": null,
+				"feedback": null
+			},
+			{
+				"question_id": "Q5",
+				"max_marks": 1,
+				"marks_awarded": 0,
+				"answer_type": "mcq",
+				"correctness": "incorrect",
+				"correct_option": "B",
+				"student_option": null,
+				"steps_analysis": null,
+				"key_points_covered": null,
+				"key_points_missing": null,
+				"feedback": null
+			},
+			{
+				"question_id": "Q6",
+				"max_marks": 1,
+				"marks_awarded": 0,
+				"answer_type": "mcq",
+				"correctness": "incorrect",
+				"correct_option": "C",
+				"student_option": null,
+				"steps_analysis": null,
+				"key_points_covered": null,
+				"key_points_missing": null,
+				"feedback": null
+			},
+			{
+				"question_id": "Q7",
+				"max_marks": 1,
+				"marks_awarded": 0,
+				"answer_type": "mcq",
+				"correctness": "incorrect",
+				"correct_option": "B",
+				"student_option": null,
+				"steps_analysis": null,
+				"key_points_covered": null,
+				"key_points_missing": null,
+				"feedback": null
+			},
+			{
+				"question_id": "Q8",
+				"max_marks": 1,
+				"marks_awarded": 0,
+				"answer_type": "mcq",
+				"correctness": "incorrect",
+				"correct_option": "C",
+				"student_option": null,
+				"steps_analysis": null,
+				"key_points_covered": null,
+				"key_points_missing": null,
+				"feedback": null
+			}
+		],
+		"non_mcq_evaluation": [
+			{
+				"question_id": "Q9",
+				"max_marks": 2,
+				"marks_awarded": 2,
+				"answer_type": "short",
+				"correctness": "correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[concept] Defined a set as a well-defined collection of objects.",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[final] Gave a correct example: A = {1, 2, 3}.",
+						"is_correct": true,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["Defined a set", "Gave one example of a set"],
+				"key_points_missing": [],
+				"feedback": {
+					"strengths": "Correct definition and valid example.",
+					"improvements": "No improvement needed; the answer is complete."
+				}
+			},
+			{
+				"question_id": "Q10",
+				"max_marks": 2,
+				"marks_awarded": 2,
+				"answer_type": "short",
+				"correctness": "correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[concept] Stated the domain of f(x)=x² as all real numbers.",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[final] Stated the range as [0, ∞).",
+						"is_correct": true,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["State the domain of f(x) = x²", "State the range of f(x) = x²"],
+				"key_points_missing": [],
+				"feedback": {
+					"strengths": "Correctly identified both domain and range.",
+					"improvements": "No improvement needed."
+				}
+			},
+			{
+				"question_id": "Q11",
+				"max_marks": 2,
+				"marks_awarded": 2,
+				"answer_type": "numerical",
+				"correctness": "correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[concept] Used the standard values sin 45° = 1/√2 and cos 45° = 1/√2.",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[final] Multiplied them correctly to get 1/2.",
+						"is_correct": true,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["Write values of sin 45° and cos 45°", "Multiply sin 45° and cos 45° correctly"],
+				"key_points_missing": [],
+				"feedback": {
+					"strengths": "Correct trigonometric values and multiplication.",
+					"improvements": "No improvement needed."
+				}
+			},
+			{
+				"question_id": "Q12",
+				"max_marks": 2,
+				"marks_awarded": 2,
+				"answer_type": "numerical",
+				"correctness": "correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[concept] Recalled the permutation calculation for 5P2.",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[final] Computed 5 × 4 = 20.",
+						"is_correct": true,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["Recall formula for permutation nPr", "Calculate 5P2 using the formula"],
+				"key_points_missing": [],
+				"feedback": {
+					"strengths": "Correct use of permutation formula and final value.",
+					"improvements": "No improvement needed."
+				}
+			},
+			{
+				"question_id": "Q13",
+				"max_marks": 2,
+				"marks_awarded": 2,
+				"answer_type": "numerical",
+				"correctness": "correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[concept] Recalled that the power set size is 2^n.",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[final] Calculated 2^4 = 16.",
+						"is_correct": true,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["Recall formula for size of power set", "Calculate 2^4 to get the answer"],
+				"key_points_missing": [],
+				"feedback": {
+					"strengths": "Correct formula and evaluation.",
+					"improvements": "No improvement needed."
+				}
+			},
+			{
+				"question_id": "Q14",
+				"max_marks": 2,
+				"marks_awarded": 1,
+				"answer_type": "short",
+				"correctness": "partially_correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[concept] Gave a correct example of a one-one function: f(x)=x.",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[final] Gave an incorrect example for many-one; f(x)=x² is not many-one over the usual domain.",
+						"is_correct": false,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["Give example of one-one function"],
+				"key_points_missing": ["Give example of many-one function"],
+				"feedback": {
+					"strengths": "Correctly provided an example of a one-one function.",
+					"improvements": "The many-one example should be a function where different inputs give the same output, for example f(x)=x² on a domain with positive and negative values."
+				}
+			},
+			{
+				"question_id": "Q15",
+				"max_marks": 3,
+				"marks_awarded": 1,
+				"answer_type": "short",
+				"correctness": "partially_correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[setup] Wrote the given LHS expression correctly.",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[steps] Stated that LCM and simplification lead to RHS, but did not show the algebraic steps.",
+						"is_correct": false,
+						"marks": 1
+					},
+					{
+						"step": "[final] Concluded the identity is 2 cosecθ without a complete derivation.",
+						"is_correct": false,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["Combine the two fractions on LHS"],
+				"key_points_missing": ["Simplify numerator using trig identities", "State final proved equality"],
+				"feedback": {
+					"strengths": "Correctly stated the left-hand side and the intended result.",
+					"improvements": "Show the actual algebra: combine the fractions over a common denominator, simplify using sin²θ+cos²θ=1, and then conclude the identity."
+				}
+			},
+			{
+				"question_id": "Q16",
+				"max_marks": 3,
+				"marks_awarded": 3,
+				"answer_type": "short",
+				"correctness": "correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[setup] Found the union A ∪ B = {1, 2, 3, 4, 5, 6}.",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[steps] Found the intersection A ∩ B = {3, 4}.",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[final] Stated both answers clearly and correctly.",
+						"is_correct": true,
+						"marks": 1
+					}
+				],
+				"key_points_covered": [
+					"Find union of sets A and B",
+					"Find intersection of sets A and B",
+					"State final answers clearly"
+				],
+				"key_points_missing": [],
+				"feedback": {
+					"strengths": "Both set operations are correct and clearly written.",
+					"improvements": "No improvement needed."
+				}
+			},
+			{
+				"question_id": "Q17",
+				"max_marks": 3,
+				"marks_awarded": 3,
+				"answer_type": "short",
+				"correctness": "correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[setup] Recalled the permutation approach 5P3 for forming 3-digit numbers without repetition.",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[steps] Calculated 5 × 4 × 3 = 60 correctly.",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[final] Stated the final answer as 60.",
+						"is_correct": true,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["Recall formula for nPr", "Calculate 5P3 as 5 x 4 x 3", "State final answer"],
+				"key_points_missing": [],
+				"feedback": {
+					"strengths": "Correct counting method and final result.",
+					"improvements": "No improvement needed."
+				}
+			},
+			{
+				"question_id": "Q18",
+				"max_marks": 3,
+				"marks_awarded": 1,
+				"answer_type": "short",
+				"correctness": "partially_correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[setup] Identified the relation as reflexive.",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[steps] Did not justify symmetry.",
+						"is_correct": false,
+						"marks": 1
+					},
+					{
+						"step": "[final] Did not justify transitivity or the equivalence relation conclusion.",
+						"is_correct": false,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["Check reflexivity of R"],
+				"key_points_missing": ["Check symmetry of R", "Check transitivity of R"],
+				"feedback": {
+					"strengths": "Correctly recognized reflexivity.",
+					"improvements": "You need to verify symmetry and transitivity explicitly before concluding that the relation is an equivalence relation."
+				}
+			},
+			{
+				"question_id": "Q19",
+				"max_marks": 4,
+				"marks_awarded": 4,
+				"answer_type": "long",
+				"correctness": "correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[concept] Stated the identity 1 + tan²θ = sec²θ.",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[steps] Showed LHS becomes sec²θ(1 + sin²θ).",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[concept] Applied the identity to the left-hand side expression.",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[final] Concluded LHS = RHS.",
+						"is_correct": true,
+						"marks": 1
+					}
+				],
+				"key_points_covered": [
+					"State LHS of identity",
+					"Use identity 1 + tan^2θ = sec^2θ",
+					"Show LHS equals RHS",
+					"State final conclusion"
+				],
+				"key_points_missing": [],
+				"feedback": {
+					"strengths": "Correct identity use and conclusion.",
+					"improvements": "No improvement needed."
+				}
+			},
+			{
+				"question_id": "Q20",
+				"max_marks": 4,
+				"marks_awarded": 0,
+				"answer_type": "long",
+				"correctness": "incorrect",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[concept] Did not count the total letters and repeated letters correctly for MATHEMATICS.",
+						"is_correct": false,
+						"marks": 1
+					},
+					{
+						"step": "[steps] Did not compute 11!/(2!2!2!) or the arrangement count.",
+						"is_correct": false,
+						"marks": 1
+					},
+					{
+						"step": "[method] Did not write the permutation-with-repetitions formula.",
+						"is_correct": false,
+						"marks": 1
+					},
+					{
+						"step": "[final] Final answer 4989600 is not supported by the shown working.",
+						"is_correct": false,
+						"marks": 1
+					}
+				],
+				"key_points_covered": [],
+				"key_points_missing": [
+					"Count total letters and repetitions",
+					"Write formula for permutations with repetitions",
+					"Calculate factorial values and compute arrangements",
+					"State final answer"
+				],
+				"feedback": {
+					"strengths": "The final numeric answer matches the correct value, but the working is not shown.",
+					"improvements": "Show the full counting: MATHEMATICS has 11 letters with M, A, and T repeated twice each, so use 11!/(2!2!2!) = 4,989,600."
+				}
+			}
+		]
+	}
+}

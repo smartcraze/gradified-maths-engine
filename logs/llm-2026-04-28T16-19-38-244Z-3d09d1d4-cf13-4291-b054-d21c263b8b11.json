@@ -1,0 +1,386 @@
+{
+	"timestamp": "2026-04-28T16:19:38.244Z",
+	"module": "grading",
+	"model": "gpt-5.4",
+	"metadata": {
+		"totalQuestions": 14,
+		"mcqQuestionCount": 5,
+		"nonMcqQuestionCount": 9
+	},
+	"response": {
+		"final_summary": {
+			"total_questions": 14,
+			"total_max_marks": 30,
+			"total_awarded_marks": 29,
+			"percentage": 96.67
+		},
+		"student": {
+			"name": "aryan",
+			"roll_number": null,
+			"registration_number": "M001",
+			"class": "6th",
+			"subject": "Mathematics"
+		},
+		"overall_feedback": "The student has answered almost all non-MCQ mathematics questions correctly with clear and accurate working. Fraction comparison, equations, proportion, factors, and unitary method questions are all fully correct. The only deduction is in Question 13, where the numerical answer is correct but the required number-line representation was not shown. To improve further, include the full visual or stepwise representation whenever a question specifically asks for a number-line method.",
+		"mcq_evaluation": [
+			{
+				"question_id": "1",
+				"max_marks": 1,
+				"marks_awarded": 1,
+				"answer_type": "mcq",
+				"correctness": "correct",
+				"correct_option": "C",
+				"student_option": "C",
+				"steps_analysis": null,
+				"key_points_covered": null,
+				"key_points_missing": null,
+				"feedback": null
+			},
+			{
+				"question_id": "2",
+				"max_marks": 1,
+				"marks_awarded": 1,
+				"answer_type": "mcq",
+				"correctness": "correct",
+				"correct_option": "B",
+				"student_option": "B",
+				"steps_analysis": null,
+				"key_points_covered": null,
+				"key_points_missing": null,
+				"feedback": null
+			},
+			{
+				"question_id": "3",
+				"max_marks": 1,
+				"marks_awarded": 1,
+				"answer_type": "mcq",
+				"correctness": "correct",
+				"correct_option": "B",
+				"student_option": "B",
+				"steps_analysis": null,
+				"key_points_covered": null,
+				"key_points_missing": null,
+				"feedback": null
+			},
+			{
+				"question_id": "4",
+				"max_marks": 1,
+				"marks_awarded": 1,
+				"answer_type": "mcq",
+				"correctness": "correct",
+				"correct_option": "A",
+				"student_option": "A",
+				"steps_analysis": null,
+				"key_points_covered": null,
+				"key_points_missing": null,
+				"feedback": null
+			},
+			{
+				"question_id": "5",
+				"max_marks": 1,
+				"marks_awarded": 1,
+				"answer_type": "mcq",
+				"correctness": "correct",
+				"correct_option": "A",
+				"student_option": "A",
+				"steps_analysis": null,
+				"key_points_covered": null,
+				"key_points_missing": null,
+				"feedback": null
+			}
+		],
+		"non_mcq_evaluation": [
+			{
+				"question_id": "6",
+				"max_marks": 2,
+				"marks_awarded": 2,
+				"answer_type": "numerical",
+				"correctness": "correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[concept] Drew a number line from -1 to 1 with equal fifth-part divisions.",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[final] Marked \\(\\frac{3}{5}\\) correctly on the number line.",
+						"is_correct": true,
+						"marks": 1
+					}
+				],
+				"key_points_covered": [
+					"Number line from -1 to 1",
+					"Equal fractional divisions",
+					"Correct location of \\(\\frac{3}{5}\\)"
+				],
+				"key_points_missing": [],
+				"feedback": {
+					"strengths": "Correctly represented the fraction on a suitably divided number line.",
+					"improvements": "No improvement needed."
+				}
+			},
+			{
+				"question_id": "7",
+				"max_marks": 2,
+				"marks_awarded": 2,
+				"answer_type": "numerical",
+				"correctness": "correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[concept] Converted \\(\\frac{3}{8}\\) to decimal as 0.375.",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[final] Converted \\(\\frac{4}{5}\\) to 0.8 and concluded \\(\\frac{4}{5}\\) is greater.",
+						"is_correct": true,
+						"marks": 1
+					}
+				],
+				"key_points_covered": [
+					"Decimal conversion of \\(\\frac{3}{8}\\)",
+					"Decimal conversion of \\(\\frac{4}{5}\\)",
+					"Correct comparison"
+				],
+				"key_points_missing": [],
+				"feedback": {
+					"strengths": "Both fractions were converted correctly and compared correctly.",
+					"improvements": "No improvement needed."
+				}
+			},
+			{
+				"question_id": "8",
+				"max_marks": 2,
+				"marks_awarded": 2,
+				"answer_type": "numerical",
+				"correctness": "correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[concept] Set up the equation \\(6x - 10 = 32\\) correctly.",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[final] Solved the equation correctly to get \\(x = 7\\).",
+						"is_correct": true,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["Correct linear equation formation", "Correct solution of equation"],
+				"key_points_missing": [],
+				"feedback": {
+					"strengths": "Formed the algebraic equation correctly and solved it accurately.",
+					"improvements": "No improvement needed."
+				}
+			},
+			{
+				"question_id": "9",
+				"max_marks": 2,
+				"marks_awarded": 2,
+				"answer_type": "numerical",
+				"correctness": "correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[concept] Wrote the proportion equation \\(\\frac{a}{21} = \\frac{5}{15}\\) correctly.",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[final] Simplified and solved correctly to obtain \\(a = 7\\).",
+						"is_correct": true,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["Correct proportion equation", "Correct simplification", "Correct value of \\(a\\)"],
+				"key_points_missing": [],
+				"feedback": {
+					"strengths": "Used the proportion correctly and found the correct value of \\(a\\).",
+					"improvements": "No improvement needed."
+				}
+			},
+			{
+				"question_id": "10",
+				"max_marks": 3,
+				"marks_awarded": 3,
+				"answer_type": "short",
+				"correctness": "correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[setup] Listed the factor pairs of 24 as 1×24, 2×12, 3×8, and 4×6.",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[steps] Identified the unique factors from the listed pairs correctly.",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[final] Wrote all factors of 24 as 1, 2, 3, 4, 6, 8, 12, 24.",
+						"is_correct": true,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["Factor pairs of 24", "Unique factors identified", "Complete factor list"],
+				"key_points_missing": [],
+				"feedback": {
+					"strengths": "All factor pairs and the complete list of factors are correct.",
+					"improvements": "No improvement needed."
+				}
+			},
+			{
+				"question_id": "11",
+				"max_marks": 3,
+				"marks_awarded": 3,
+				"answer_type": "short",
+				"correctness": "correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[setup] Calculated the cost per metre as \\(2850 \\div 15 = 190\\).",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[steps] Multiplied correctly to find the cost of 11 metres as \\(11 \\times 190 = 2090\\).",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[final] Stated the final cost as ₹2090.",
+						"is_correct": true,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["Unit cost calculation", "Multiplication for 11 metres", "Correct final cost"],
+				"key_points_missing": [],
+				"feedback": {
+					"strengths": "Used the unitary method correctly and obtained the right total cost.",
+					"improvements": "No improvement needed."
+				}
+			},
+			{
+				"question_id": "12",
+				"max_marks": 3,
+				"marks_awarded": 3,
+				"answer_type": "short",
+				"correctness": "correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[setup] Set up the proportion \\(15:25 = x:50\\) correctly.",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[steps] Simplified and solved the proportion correctly to get \\(x = 30\\).",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[final] Stated the third term as 30.",
+						"is_correct": true,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["Correct proportion setup", "Correct solving steps", "Correct third term"],
+				"key_points_missing": [],
+				"feedback": {
+					"strengths": "Set up the proportion correctly and solved it accurately.",
+					"improvements": "No improvement needed."
+				}
+			},
+			{
+				"question_id": "13",
+				"max_marks": 4,
+				"marks_awarded": 3,
+				"answer_type": "long",
+				"correctness": "partially_correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[concept] Identified the numbers to be added as 8 and -5.",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[steps] Performed the signed addition correctly: \\(8 + (-5) = 3\\).",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[steps] Did not show the number-line locations or movement on the line.",
+						"is_correct": false,
+						"marks": 1
+					},
+					{
+						"step": "[final] Stated the final result as 3.",
+						"is_correct": true,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["Correct integers identified", "Correct addition result", "Correct final answer"],
+				"key_points_missing": ["Number-line representation or movement was not shown"],
+				"feedback": {
+					"strengths": "The integer addition was computed correctly and the final answer is correct.",
+					"improvements": "Show the number-line steps explicitly, such as starting at 8 and moving 5 units left to justify the answer."
+				}
+			},
+			{
+				"question_id": "14",
+				"max_marks": 4,
+				"marks_awarded": 4,
+				"answer_type": "long",
+				"correctness": "correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[concept] Stated the inverse work relation as men × days = constant.",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[steps] Set up the equation \\(10 \\times 25 = 50 \\times x\\) correctly.",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[steps] Solved the equation correctly to get \\(x = 5\\).",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[final] Stated that 50 men will complete the work in 5 days.",
+						"is_correct": true,
+						"marks": 1
+					}
+				],
+				"key_points_covered": [
+					"Correct work relation",
+					"Correct equation setup",
+					"Correct solution",
+					"Correct final statement"
+				],
+				"key_points_missing": [],
+				"feedback": {
+					"strengths": "Used inverse proportion correctly and solved for the number of days accurately.",
+					"improvements": "No improvement needed."
+				}
+			}
+		]
+	}
+}

@@ -1,0 +1,380 @@
+{
+	"timestamp": "2026-05-08T19:09:38.486Z",
+	"module": "grading",
+	"model": "gpt-5.4",
+	"metadata": {
+		"totalQuestions": 14,
+		"mcqQuestionCount": 5,
+		"nonMcqQuestionCount": 9
+	},
+	"response": {
+		"final_summary": {
+			"total_questions": 14,
+			"total_max_marks": 30,
+			"total_awarded_marks": 9,
+			"percentage": 30
+		},
+		"student": null,
+		"overall_feedback": "You did well on the number line representation and showed correct setup in several algebra and comparison questions. However, many answers lost marks due to incorrect final conclusions or incomplete working. Check the last arithmetic step carefully, always state the final answer clearly, and complete all questions with full calculations.",
+		"mcq_evaluation": [
+			{
+				"question_id": "1",
+				"max_marks": 1,
+				"marks_awarded": 1,
+				"answer_type": "mcq",
+				"correctness": "correct",
+				"correct_option": "C",
+				"student_option": "C",
+				"steps_analysis": null,
+				"key_points_covered": null,
+				"key_points_missing": null,
+				"feedback": null
+			},
+			{
+				"question_id": "2",
+				"max_marks": 1,
+				"marks_awarded": 1,
+				"answer_type": "mcq",
+				"correctness": "correct",
+				"correct_option": "B",
+				"student_option": "B",
+				"steps_analysis": null,
+				"key_points_covered": null,
+				"key_points_missing": null,
+				"feedback": null
+			},
+			{
+				"question_id": "3",
+				"max_marks": 1,
+				"marks_awarded": 0,
+				"answer_type": "mcq",
+				"correctness": "incorrect",
+				"correct_option": "B",
+				"student_option": "C",
+				"steps_analysis": null,
+				"key_points_covered": null,
+				"key_points_missing": null,
+				"feedback": null
+			},
+			{
+				"question_id": "4",
+				"max_marks": 1,
+				"marks_awarded": 0,
+				"answer_type": "mcq",
+				"correctness": "incorrect",
+				"correct_option": "A",
+				"student_option": "C",
+				"steps_analysis": null,
+				"key_points_covered": null,
+				"key_points_missing": null,
+				"feedback": null
+			},
+			{
+				"question_id": "5",
+				"max_marks": 1,
+				"marks_awarded": 1,
+				"answer_type": "mcq",
+				"correctness": "correct",
+				"correct_option": "A",
+				"student_option": "A",
+				"steps_analysis": null,
+				"key_points_covered": null,
+				"key_points_missing": null,
+				"feedback": null
+			}
+		],
+		"non_mcq_evaluation": [
+			{
+				"question_id": "6",
+				"max_marks": 2,
+				"marks_awarded": 2,
+				"answer_type": "numerical",
+				"correctness": "correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[concept] Drew a number line divided into fifths from 0 to 1.",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[final] Marked and labeled \\(\\frac{3}{5}\\) at the correct point.",
+						"is_correct": true,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["number line divided into fifths", "correct marking of 3/5"],
+				"key_points_missing": [],
+				"feedback": {
+					"strengths": "Correctly showed a number line and placed \\(\\frac{3}{5}\\) accurately.",
+					"improvements": "Keep the labels clear and evenly spaced as shown."
+				}
+			},
+			{
+				"question_id": "7",
+				"max_marks": 2,
+				"marks_awarded": 1,
+				"answer_type": "numerical",
+				"correctness": "partially_correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[concept] Converted \\(\\frac{3}{8}\\) to 0.375 and \\(\\frac{4}{5}\\) to 0.8 correctly.",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[final] Stated that \\(\\frac{3}{8}\\) is greater, which is incorrect.",
+						"is_correct": false,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["3/8 = 0.375", "4/5 = 0.8"],
+				"key_points_missing": ["correct comparison 0.8 > 0.375", "final statement that 4/5 is greater"],
+				"feedback": {
+					"strengths": "Decimal conversions are correct.",
+					"improvements": "Compare the decimals carefully: 0.8 is greater than 0.375, so \\(\\frac{4}{5}\\) is greater."
+				}
+			},
+			{
+				"question_id": "8",
+				"max_marks": 2,
+				"marks_awarded": 1,
+				"answer_type": "numerical",
+				"correctness": "partially_correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[concept] Formed the equation \\(6x-10=32\\) and obtained \\(6x=42\\) correctly.",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[final] Solved \\(x\\) as 8, but \\(42\\div 6 = 7\\), not 8.",
+						"is_correct": false,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["equation 6x - 10 = 32", "transposition to 6x = 42"],
+				"key_points_missing": ["correct division 42 ÷ 6 = 7", "final answer 7"],
+				"feedback": {
+					"strengths": "The equation setup is correct.",
+					"improvements": "Check the last division step: \\(42\\div 6=7\\). The number is 7."
+				}
+			},
+			{
+				"question_id": "9",
+				"max_marks": 2,
+				"marks_awarded": 1,
+				"answer_type": "numerical",
+				"correctness": "partially_correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[concept] Wrote the proportion \\(\\frac{a}{21}=\\frac{5}{15}=\\frac{1}{3}\\) correctly.",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[final] Concluded \\(a=6\\), but from \\(3a=21\\), \\(a=7\\).",
+						"is_correct": false,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["proportion equation a/21 = 5/15", "simplification 5/15 = 1/3"],
+				"key_points_missing": ["correct solution a = 7", "final answer 7"],
+				"feedback": {
+					"strengths": "The proportion was set up correctly.",
+					"improvements": "After getting \\(3a=21\\), divide by 3 correctly to get \\(a=7\\)."
+				}
+			},
+			{
+				"question_id": "10",
+				"max_marks": 3,
+				"marks_awarded": 1,
+				"answer_type": "short",
+				"correctness": "partially_correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[setup] Identified correct factor pairs such as \\(1\\times24\\), \\(2\\times12\\), \\(3\\times8\\), and \\(4\\times6\\).",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[steps] Did not list the distinct factors properly and included repeated pairs and an incorrect entry.",
+						"is_correct": false,
+						"marks": 1
+					},
+					{
+						"step": "[final] Final set of factors was not stated clearly.",
+						"is_correct": false,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["correct factor pairs for 24"],
+				"key_points_missing": [
+					"distinct factor list 1, 2, 3, 4, 6, 8, 12, 24",
+					"clear final statement of all factors",
+					"avoid incorrect entry"
+				],
+				"feedback": {
+					"strengths": "You found the main multiplication pairs of 24 correctly.",
+					"improvements": "Write only the distinct factors: 1, 2, 3, 4, 6, 8, 12, 24. Do not repeat reversed pairs or include incorrect values."
+				}
+			},
+			{
+				"question_id": "11",
+				"max_marks": 3,
+				"marks_awarded": 0,
+				"answer_type": "short",
+				"correctness": "incorrect",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[setup] Cost per metre was not calculated.",
+						"is_correct": false,
+						"marks": 1
+					},
+					{
+						"step": "[steps] No multiplication for 11 metres was shown.",
+						"is_correct": false,
+						"marks": 1
+					},
+					{
+						"step": "[final] Final cost was not given.",
+						"is_correct": false,
+						"marks": 1
+					}
+				],
+				"key_points_covered": [],
+				"key_points_missing": [
+					"cost per metre = 2850 ÷ 15 = 190",
+					"cost of 11 metres = 11 × 190 = 2090",
+					"final answer ₹2090"
+				],
+				"feedback": {
+					"strengths": "No valid calculation was shown.",
+					"improvements": "First find unit cost: \\(2850\\div15=190\\). Then multiply by 11 to get ₹2090."
+				}
+			},
+			{
+				"question_id": "12",
+				"max_marks": 3,
+				"marks_awarded": 0,
+				"answer_type": "short",
+				"correctness": "incorrect",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[setup] The proportion equation was not written.",
+						"is_correct": false,
+						"marks": 1
+					},
+					{
+						"step": "[steps] No solution for the third term was shown.",
+						"is_correct": false,
+						"marks": 1
+					},
+					{
+						"step": "[final] Final value was not stated.",
+						"is_correct": false,
+						"marks": 1
+					}
+				],
+				"key_points_covered": [],
+				"key_points_missing": ["equation 15/25 = x/50", "solution x = 30", "final answer 30"],
+				"feedback": {
+					"strengths": "No answer was provided.",
+					"improvements": "Let the third term be \\(x\\), write \\(\\frac{15}{25}=\\frac{x}{50}\\), and solve to get \\(x=30\\)."
+				}
+			},
+			{
+				"question_id": "13",
+				"max_marks": 4,
+				"marks_awarded": 0,
+				"answer_type": "long",
+				"correctness": "incorrect",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[concept] A number line was not drawn.",
+						"is_correct": false,
+						"marks": 1
+					},
+					{
+						"step": "[steps] The point 8 was not located on the number line.",
+						"is_correct": false,
+						"marks": 1
+					},
+					{
+						"step": "[steps] No left movement of 5 steps from 8 was shown.",
+						"is_correct": false,
+						"marks": 1
+					},
+					{
+						"step": "[final] Final result 3 was not stated.",
+						"is_correct": false,
+						"marks": 1
+					}
+				],
+				"key_points_covered": [],
+				"key_points_missing": ["draw number line", "locate 8", "move 5 steps left for adding -5", "final answer 3"],
+				"feedback": {
+					"strengths": "No answer was provided.",
+					"improvements": "On a number line, start at 8 and move 5 steps left because you are adding -5. You reach 3."
+				}
+			},
+			{
+				"question_id": "14",
+				"max_marks": 4,
+				"marks_awarded": 0,
+				"answer_type": "long",
+				"correctness": "incorrect",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[concept] The inverse proportion relation between men and days was not stated.",
+						"is_correct": false,
+						"marks": 1
+					},
+					{
+						"step": "[steps] The equation \\(10\\times25=50\\times x\\) was not formed.",
+						"is_correct": false,
+						"marks": 1
+					},
+					{
+						"step": "[steps] No solving step for \\(x\\) was shown.",
+						"is_correct": false,
+						"marks": 1
+					},
+					{
+						"step": "[final] Final number of days was not given.",
+						"is_correct": false,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["given values 10 men and 25 days were noted"],
+				"key_points_missing": [
+					"inverse proportion relation",
+					"equation 10×25 = 50×x",
+					"solution x = 5",
+					"final answer 5 days"
+				],
+				"feedback": {
+					"strengths": "You noted the given values from the question.",
+					"improvements": "Use inverse proportion: men × days = constant. Write \\(10\\times25=50\\times x\\) and solve to get \\(x=5\\) days."
+				}
+			}
+		]
+	}
+}

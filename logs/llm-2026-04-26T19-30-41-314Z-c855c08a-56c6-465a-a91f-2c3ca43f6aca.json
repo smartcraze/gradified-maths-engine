@@ -1,0 +1,433 @@
+{
+	"timestamp": "2026-04-26T19:30:41.315Z",
+	"module": "grading",
+	"model": "gpt-4.1",
+	"metadata": {
+		"totalQuestions": 20,
+		"mcqQuestionCount": 8,
+		"nonMcqQuestionCount": 12
+	},
+	"response": {
+		"final_summary": {
+			"total_questions": 20,
+			"total_max_marks": 40,
+			"total_awarded_marks": 34,
+			"percentage": 85
+		},
+		"student": {
+			"name": "Utkarsh Kumar Shukla",
+			"roll_number": "M003",
+			"registration_number": null,
+			"class": null,
+			"subject": null
+		},
+		"overall_feedback": "The student demonstrates strong conceptual understanding and accuracy in short and numerical answers. For long and proof-based questions, more detailed stepwise working and explicit justifications are needed to secure full marks. Always show all intermediate steps and reasoning, especially in proofs and combinatorial problems.",
+		"mcq_evaluation": [
+			{
+				"question_id": "1",
+				"max_marks": 1,
+				"marks_awarded": 1,
+				"answer_type": "mcq",
+				"correctness": "correct",
+				"correct_option": "B",
+				"student_option": "B",
+				"steps_analysis": null,
+				"key_points_covered": null,
+				"key_points_missing": null,
+				"feedback": null
+			},
+			{
+				"question_id": "2",
+				"max_marks": 1,
+				"marks_awarded": 1,
+				"answer_type": "mcq",
+				"correctness": "correct",
+				"correct_option": "B",
+				"student_option": "B",
+				"steps_analysis": null,
+				"key_points_covered": null,
+				"key_points_missing": null,
+				"feedback": null
+			},
+			{
+				"question_id": "3",
+				"max_marks": 1,
+				"marks_awarded": 0,
+				"answer_type": "mcq",
+				"correctness": "incorrect",
+				"correct_option": "A",
+				"student_option": "C",
+				"steps_analysis": null,
+				"key_points_covered": null,
+				"key_points_missing": null,
+				"feedback": null
+			},
+			{
+				"question_id": "4",
+				"max_marks": 1,
+				"marks_awarded": 1,
+				"answer_type": "mcq",
+				"correctness": "correct",
+				"correct_option": "C",
+				"student_option": "C",
+				"steps_analysis": null,
+				"key_points_covered": null,
+				"key_points_missing": null,
+				"feedback": null
+			},
+			{
+				"question_id": "5",
+				"max_marks": 1,
+				"marks_awarded": 1,
+				"answer_type": "mcq",
+				"correctness": "correct",
+				"correct_option": "B",
+				"student_option": "B",
+				"steps_analysis": null,
+				"key_points_covered": null,
+				"key_points_missing": null,
+				"feedback": null
+			},
+			{
+				"question_id": "6",
+				"max_marks": 1,
+				"marks_awarded": 1,
+				"answer_type": "mcq",
+				"correctness": "correct",
+				"correct_option": "C",
+				"student_option": "C",
+				"steps_analysis": null,
+				"key_points_covered": null,
+				"key_points_missing": null,
+				"feedback": null
+			},
+			{
+				"question_id": "7",
+				"max_marks": 1,
+				"marks_awarded": 1,
+				"answer_type": "mcq",
+				"correctness": "correct",
+				"correct_option": "B",
+				"student_option": "B",
+				"steps_analysis": null,
+				"key_points_covered": null,
+				"key_points_missing": null,
+				"feedback": null
+			},
+			{
+				"question_id": "8",
+				"max_marks": 1,
+				"marks_awarded": 0,
+				"answer_type": "mcq",
+				"correctness": "incorrect",
+				"correct_option": "C",
+				"student_option": "A",
+				"steps_analysis": null,
+				"key_points_covered": null,
+				"key_points_missing": null,
+				"feedback": null
+			}
+		],
+		"non_mcq_evaluation": [
+			{
+				"question_id": "9",
+				"max_marks": 2,
+				"marks_awarded": 2,
+				"answer_type": "short",
+				"correctness": "correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": null,
+				"key_points_covered": ["Definition of set as well-defined collection", "Example: A = {1, 2, 3}"],
+				"key_points_missing": null,
+				"feedback": {
+					"strengths": "Clear and correct definition with a valid example.",
+					"improvements": "None."
+				}
+			},
+			{
+				"question_id": "10",
+				"max_marks": 2,
+				"marks_awarded": 2,
+				"answer_type": "short",
+				"correctness": "correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": null,
+				"key_points_covered": ["Domain: ℝ", "Range: [0, ∞)"],
+				"key_points_missing": null,
+				"feedback": {
+					"strengths": "Both domain and range are correctly stated.",
+					"improvements": "None."
+				}
+			},
+			{
+				"question_id": "11",
+				"max_marks": 2,
+				"marks_awarded": 2,
+				"answer_type": "numerical",
+				"correctness": "correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "sin45° = 1/√2, cos45° = 1/√2",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "Multiplication and simplification to 1/2",
+						"is_correct": true,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["Correct values for sin45° and cos45°", "Correct multiplication and simplification"],
+				"key_points_missing": null,
+				"feedback": {
+					"strengths": "All steps shown and correct.",
+					"improvements": "None."
+				}
+			},
+			{
+				"question_id": "12",
+				"max_marks": 2,
+				"marks_awarded": 2,
+				"answer_type": "numerical",
+				"correctness": "correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "5P2 = 5 × 4",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "Final answer = 20",
+						"is_correct": true,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["Correct formula and calculation"],
+				"key_points_missing": null,
+				"feedback": {
+					"strengths": "Correct use of permutation formula and calculation.",
+					"improvements": "None."
+				}
+			},
+			{
+				"question_id": "13",
+				"max_marks": 2,
+				"marks_awarded": 2,
+				"answer_type": "numerical",
+				"correctness": "correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "Power set formula 2⁴",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "Final answer = 16",
+						"is_correct": true,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["Correct formula for power set", "Correct calculation"],
+				"key_points_missing": null,
+				"feedback": {
+					"strengths": "Correct formula and answer.",
+					"improvements": "None."
+				}
+			},
+			{
+				"question_id": "14",
+				"max_marks": 2,
+				"marks_awarded": 2,
+				"answer_type": "short",
+				"correctness": "correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": null,
+				"key_points_covered": ["One-one function: f(x) = x", "Many-one function: f(x) = x²"],
+				"key_points_missing": null,
+				"feedback": {
+					"strengths": "Both examples are correct and appropriate.",
+					"improvements": "None."
+				}
+			},
+			{
+				"question_id": "15",
+				"max_marks": 3,
+				"marks_awarded": 2,
+				"answer_type": "long",
+				"correctness": "partially_correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "Writes LHS and states taking LCM and simplifying",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "States RHS = 2 cosecθ",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "Does not show intermediate algebraic steps (expansion, simplification)",
+						"is_correct": false,
+						"marks": 0
+					}
+				],
+				"key_points_covered": ["States LHS and RHS", "Mentions taking LCM"],
+				"key_points_missing": ["Detailed algebraic manipulation", "Expansion and simplification steps"],
+				"feedback": {
+					"strengths": "Correct identification of LHS and RHS and the general approach.",
+					"improvements": "Show all intermediate algebraic steps for full marks."
+				}
+			},
+			{
+				"question_id": "16",
+				"max_marks": 3,
+				"marks_awarded": 3,
+				"answer_type": "short",
+				"correctness": "correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": null,
+				"key_points_covered": ["A ∪ B = {1,2,3,4,5,6}", "A ∩ B = {3,4}"],
+				"key_points_missing": null,
+				"feedback": {
+					"strengths": "Both union and intersection are correct.",
+					"improvements": "None."
+				}
+			},
+			{
+				"question_id": "17",
+				"max_marks": 3,
+				"marks_awarded": 3,
+				"answer_type": "numerical",
+				"correctness": "correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "States 5P3",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "Expands as 5 × 4 × 3",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "Final answer = 60",
+						"is_correct": true,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["Correct use of permutation formula", "Correct calculation"],
+				"key_points_missing": null,
+				"feedback": {
+					"strengths": "All steps shown and correct.",
+					"improvements": "None."
+				}
+			},
+			{
+				"question_id": "18",
+				"max_marks": 3,
+				"marks_awarded": 2,
+				"answer_type": "short",
+				"correctness": "partially_correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": null,
+				"key_points_covered": ["States relation is reflexive, symmetric, transitive"],
+				"key_points_missing": ["Justification for each property"],
+				"feedback": {
+					"strengths": "Correctly identifies all three properties.",
+					"improvements": "Briefly justify why the relation is reflexive, symmetric, and transitive for full marks."
+				}
+			},
+			{
+				"question_id": "19",
+				"max_marks": 4,
+				"marks_awarded": 3,
+				"answer_type": "long",
+				"correctness": "partially_correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "Writes (1 + tan²θ)(1 + sin2θ) = sec²θ(1 + sin2θ)",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "Uses identity 1 + tan²θ = sec²θ",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "States LHS = RHS",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "Does not expand or justify the use of the identity in the context of the full expression",
+						"is_correct": false,
+						"marks": 0
+					}
+				],
+				"key_points_covered": ["States the identity to be proved", "Uses correct trigonometric identity"],
+				"key_points_missing": ["Detailed expansion and justification of each step"],
+				"feedback": {
+					"strengths": "Correct use of identity and structure of proof.",
+					"improvements": "Show the expansion and substitution steps explicitly for full marks."
+				}
+			},
+			{
+				"question_id": "20",
+				"max_marks": 4,
+				"marks_awarded": 3,
+				"answer_type": "numerical",
+				"correctness": "partially_correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "Identifies arrangement problem for MATHEMATICS (11 letters)",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "Does not show calculation or formula for repeated letters",
+						"is_correct": false,
+						"marks": 0
+					},
+					{
+						"step": "No final answer given",
+						"is_correct": false,
+						"marks": 0
+					},
+					{
+						"step": "States the problem context correctly",
+						"is_correct": true,
+						"marks": 2
+					}
+				],
+				"key_points_covered": ["Identifies arrangement problem"],
+				"key_points_missing": ["Formula for arrangements with repeated letters", "Final numerical answer"],
+				"feedback": {
+					"strengths": "Correctly identifies the type of problem.",
+					"improvements": "Show the formula for arrangements with repeated letters and compute the final answer for full marks."
+				}
+			}
+		]
+	}
+}

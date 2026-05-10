@@ -1,0 +1,464 @@
+{
+	"timestamp": "2026-04-27T17:40:30.931Z",
+	"module": "grading",
+	"model": "gpt-4.1",
+	"metadata": {
+		"totalQuestions": 19,
+		"mcqQuestionCount": 8,
+		"nonMcqQuestionCount": 11
+	},
+	"response": {
+		"final_summary": {
+			"total_questions": 19,
+			"total_max_marks": 36,
+			"total_awarded_marks": 29,
+			"percentage": 80.56
+		},
+		"student": {
+			"name": "Utkarsh Kumar Shukla",
+			"roll_number": "M003",
+			"registration_number": null,
+			"class": null,
+			"subject": null
+		},
+		"overall_feedback": "The student demonstrates strong understanding of basic set theory, functions, and permutations, with nearly all short answers correct. For proof-based questions, more detailed stepwise working is needed to earn full marks. Always show all intermediate steps and explicitly state conclusions in proofs.",
+		"mcq_evaluation": [
+			{
+				"question_id": "1",
+				"max_marks": 1,
+				"marks_awarded": 1,
+				"answer_type": "mcq",
+				"correctness": "correct",
+				"correct_option": "B",
+				"student_option": "B",
+				"steps_analysis": null,
+				"key_points_covered": null,
+				"key_points_missing": null,
+				"feedback": null
+			},
+			{
+				"question_id": "2",
+				"max_marks": 1,
+				"marks_awarded": 1,
+				"answer_type": "mcq",
+				"correctness": "correct",
+				"correct_option": "B",
+				"student_option": "B",
+				"steps_analysis": null,
+				"key_points_covered": null,
+				"key_points_missing": null,
+				"feedback": null
+			},
+			{
+				"question_id": "3",
+				"max_marks": 1,
+				"marks_awarded": 0,
+				"answer_type": "mcq",
+				"correctness": "incorrect",
+				"correct_option": "A",
+				"student_option": "C",
+				"steps_analysis": null,
+				"key_points_covered": null,
+				"key_points_missing": null,
+				"feedback": null
+			},
+			{
+				"question_id": "4",
+				"max_marks": 1,
+				"marks_awarded": 1,
+				"answer_type": "mcq",
+				"correctness": "correct",
+				"correct_option": "C",
+				"student_option": "C",
+				"steps_analysis": null,
+				"key_points_covered": null,
+				"key_points_missing": null,
+				"feedback": null
+			},
+			{
+				"question_id": "5",
+				"max_marks": 1,
+				"marks_awarded": 1,
+				"answer_type": "mcq",
+				"correctness": "correct",
+				"correct_option": "B",
+				"student_option": "B",
+				"steps_analysis": null,
+				"key_points_covered": null,
+				"key_points_missing": null,
+				"feedback": null
+			},
+			{
+				"question_id": "6",
+				"max_marks": 1,
+				"marks_awarded": 1,
+				"answer_type": "mcq",
+				"correctness": "correct",
+				"correct_option": "C",
+				"student_option": "C",
+				"steps_analysis": null,
+				"key_points_covered": null,
+				"key_points_missing": null,
+				"feedback": null
+			},
+			{
+				"question_id": "7",
+				"max_marks": 1,
+				"marks_awarded": 1,
+				"answer_type": "mcq",
+				"correctness": "correct",
+				"correct_option": "B",
+				"student_option": "B",
+				"steps_analysis": null,
+				"key_points_covered": null,
+				"key_points_missing": null,
+				"feedback": null
+			},
+			{
+				"question_id": "8",
+				"max_marks": 1,
+				"marks_awarded": 0,
+				"answer_type": "mcq",
+				"correctness": "incorrect",
+				"correct_option": "C",
+				"student_option": "A",
+				"steps_analysis": null,
+				"key_points_covered": null,
+				"key_points_missing": null,
+				"feedback": null
+			}
+		],
+		"non_mcq_evaluation": [
+			{
+				"question_id": "9",
+				"max_marks": 2,
+				"marks_awarded": 2,
+				"answer_type": "short",
+				"correctness": "correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[concept] State the definition of set",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[detail] Give a valid example of a set",
+						"is_correct": true,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["Definition of set as well-defined collection", "Example: A = {1, 2, 3}"],
+				"key_points_missing": null,
+				"feedback": {
+					"strengths": "Correctly stated the definition and provided a valid example of a set.",
+					"improvements": "None. Both parts are correct."
+				}
+			},
+			{
+				"question_id": "10",
+				"max_marks": 2,
+				"marks_awarded": 2,
+				"answer_type": "short",
+				"correctness": "correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[concept] State domain as all real numbers",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[detail] Range as set of non-negative real numbers",
+						"is_correct": true,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["Domain: ℝ", "Range: [0, ∞)"],
+				"key_points_missing": null,
+				"feedback": {
+					"strengths": "Correctly identified both domain and range for the function.",
+					"improvements": "None. Both domain and range are correct."
+				}
+			},
+			{
+				"question_id": "11",
+				"max_marks": 2,
+				"marks_awarded": 2,
+				"answer_type": "numerical",
+				"correctness": "correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[setup] Write standard values sin 45° = 1/√2, cos 45° = 1/√2",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[final] Multiply the values to get the answer",
+						"is_correct": true,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["Standard values for sin 45° and cos 45°", "Correct multiplication to get 1/2"],
+				"key_points_missing": null,
+				"feedback": {
+					"strengths": "Standard values and multiplication are both correct.",
+					"improvements": "None. The answer is fully correct."
+				}
+			},
+			{
+				"question_id": "12",
+				"max_marks": 2,
+				"marks_awarded": 2,
+				"answer_type": "numerical",
+				"correctness": "correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[setup] Recall the formula nPr = n!/(n-r)!",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[final] For 5P2, calculate: 5 × 4 = 20",
+						"is_correct": true,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["Correct formula for nPr", "Correct calculation for 5P2"],
+				"key_points_missing": null,
+				"feedback": {
+					"strengths": "Formula and calculation are both correct.",
+					"improvements": "None. The answer is fully correct."
+				}
+			},
+			{
+				"question_id": "13",
+				"max_marks": 2,
+				"marks_awarded": 2,
+				"answer_type": "numerical",
+				"correctness": "correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[concept] Recall power set formula: 2^n",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[final] A has 4 elements, so 2^4 = 16",
+						"is_correct": true,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["Power set formula used", "Correct calculation for 4 elements"],
+				"key_points_missing": null,
+				"feedback": {
+					"strengths": "Correct formula and calculation for power set.",
+					"improvements": "None. The answer is fully correct."
+				}
+			},
+			{
+				"question_id": "14",
+				"max_marks": 2,
+				"marks_awarded": 2,
+				"answer_type": "short",
+				"correctness": "correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[detail] Provide an example of a one–one function",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[final] Provide an example of a many–one function",
+						"is_correct": true,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["Example of one-one: f(x) = x", "Example of many-one: f(x) = x²"],
+				"key_points_missing": null,
+				"feedback": {
+					"strengths": "Both examples are correct and standard.",
+					"improvements": "None. Both examples are valid."
+				}
+			},
+			{
+				"question_id": "15",
+				"max_marks": 3,
+				"marks_awarded": 1,
+				"answer_type": "long",
+				"correctness": "partially_correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[setup] Start from LHS and take common denominator",
+						"is_correct": false,
+						"marks": 1
+					},
+					{
+						"step": "[steps] Expand (1 + cosθ)² and combine terms in numerator",
+						"is_correct": false,
+						"marks": 1
+					},
+					{
+						"step": "[final] State that LHS = RHS = 2 cosecθ",
+						"is_correct": true,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["Stated LHS and RHS are equal"],
+				"key_points_missing": [
+					"Taking common denominator and expanding numerator",
+					"Using trigonometric identities in detail"
+				],
+				"feedback": {
+					"strengths": "Correctly identified the final result and stated LHS = RHS.",
+					"improvements": "Did not show intermediate steps such as taking common denominator and expanding numerator. Write all steps explicitly for full marks."
+				}
+			},
+			{
+				"question_id": "16",
+				"max_marks": 3,
+				"marks_awarded": 3,
+				"answer_type": "short",
+				"correctness": "correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[setup] Identify and write all unique elements from both sets for union",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[steps] Find common elements for intersection",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[final] State both union and intersection correctly",
+						"is_correct": true,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["Correct union", "Correct intersection"],
+				"key_points_missing": null,
+				"feedback": {
+					"strengths": "Both union and intersection are correct and clearly stated.",
+					"improvements": "None. The answer is fully correct."
+				}
+			},
+			{
+				"question_id": "17",
+				"max_marks": 3,
+				"marks_awarded": 3,
+				"answer_type": "numerical",
+				"correctness": "correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[setup] Total digits to pick is 3, order matters, use permutation nPr",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[steps] Calculate 5 × 4 × 3 = 60",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[final] State the total number of 3-digit numbers",
+						"is_correct": true,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["Permutation method used", "Correct calculation", "Correct final answer"],
+				"key_points_missing": null,
+				"feedback": {
+					"strengths": "Correct method, calculation, and answer.",
+					"improvements": "None. The answer is fully correct."
+				}
+			},
+			{
+				"question_id": "18",
+				"max_marks": 3,
+				"marks_awarded": 2,
+				"answer_type": "short",
+				"correctness": "partially_correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[setup] Check if all (a,a) are in R for reflexivity",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[steps] Verify symmetry: if (a,b) ∈ R then (b,a) ∈ R",
+						"is_correct": false,
+						"marks": 1
+					},
+					{
+						"step": "[final] Verify transitivity: if (a,b), (b,c) ∈ R then (a,c) ∈ R",
+						"is_correct": true,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["Reflexivity checked", "Transitivity checked"],
+				"key_points_missing": ["Explicit check for symmetry"],
+				"feedback": {
+					"strengths": "Correctly identified reflexivity and transitivity.",
+					"improvements": "Did not explicitly check symmetry. For full marks, state that for all (a,b) ∈ R, (b,a) ∈ R is also in R."
+				}
+			},
+			{
+				"question_id": "19",
+				"max_marks": 4,
+				"marks_awarded": 2,
+				"answer_type": "long",
+				"correctness": "partially_correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[concept] Recall trigonometric identity: 1 + tan²θ = sec²θ",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[steps] Substitute and simplify LHS to get sec²θ(1 + sin²θ) = RHS",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[final] State LHS = RHS",
+						"is_correct": false,
+						"marks": 1
+					},
+					{
+						"step": "[final] No evidence provided.",
+						"is_correct": false,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["Used correct identity", "Substituted and simplified"],
+				"key_points_missing": ["Explicitly stated LHS = RHS at the end"],
+				"feedback": {
+					"strengths": "Correctly used the identity and performed the main simplification.",
+					"improvements": "Did not explicitly write the final statement 'LHS = RHS'. Always conclude the proof with this statement for full marks."
+				}
+			}
+		]
+	}
+}

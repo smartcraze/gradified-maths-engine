@@ -1,0 +1,498 @@
+{
+	"timestamp": "2026-04-27T17:44:55.108Z",
+	"module": "grading",
+	"model": "gpt-4.1",
+	"metadata": {
+		"totalQuestions": 20,
+		"mcqQuestionCount": 8,
+		"nonMcqQuestionCount": 12
+	},
+	"response": {
+		"final_summary": {
+			"total_questions": 20,
+			"total_max_marks": 40,
+			"total_awarded_marks": 29,
+			"percentage": 72.5
+		},
+		"student": {
+			"name": "Utkarsh Kumar Shukla",
+			"roll_number": "M003",
+			"registration_number": null,
+			"class": null,
+			"subject": null
+		},
+		"overall_feedback": "Very strong performance in short and numerical answers. For full marks in proofs and theory, always show all intermediate steps and provide reasoning for properties. Attempt all questions for best results.",
+		"mcq_evaluation": [
+			{
+				"question_id": "1",
+				"max_marks": 1,
+				"marks_awarded": 1,
+				"answer_type": "mcq",
+				"correctness": "correct",
+				"correct_option": "B",
+				"student_option": "B",
+				"steps_analysis": null,
+				"key_points_covered": null,
+				"key_points_missing": null,
+				"feedback": null
+			},
+			{
+				"question_id": "2",
+				"max_marks": 1,
+				"marks_awarded": 1,
+				"answer_type": "mcq",
+				"correctness": "correct",
+				"correct_option": "B",
+				"student_option": "B",
+				"steps_analysis": null,
+				"key_points_covered": null,
+				"key_points_missing": null,
+				"feedback": null
+			},
+			{
+				"question_id": "3",
+				"max_marks": 1,
+				"marks_awarded": 0,
+				"answer_type": "mcq",
+				"correctness": "incorrect",
+				"correct_option": "A",
+				"student_option": "C",
+				"steps_analysis": null,
+				"key_points_covered": null,
+				"key_points_missing": null,
+				"feedback": null
+			},
+			{
+				"question_id": "4",
+				"max_marks": 1,
+				"marks_awarded": 1,
+				"answer_type": "mcq",
+				"correctness": "correct",
+				"correct_option": "C",
+				"student_option": "C",
+				"steps_analysis": null,
+				"key_points_covered": null,
+				"key_points_missing": null,
+				"feedback": null
+			},
+			{
+				"question_id": "5",
+				"max_marks": 1,
+				"marks_awarded": 1,
+				"answer_type": "mcq",
+				"correctness": "correct",
+				"correct_option": "B",
+				"student_option": "B",
+				"steps_analysis": null,
+				"key_points_covered": null,
+				"key_points_missing": null,
+				"feedback": null
+			},
+			{
+				"question_id": "6",
+				"max_marks": 1,
+				"marks_awarded": 1,
+				"answer_type": "mcq",
+				"correctness": "correct",
+				"correct_option": "C",
+				"student_option": "C",
+				"steps_analysis": null,
+				"key_points_covered": null,
+				"key_points_missing": null,
+				"feedback": null
+			},
+			{
+				"question_id": "7",
+				"max_marks": 1,
+				"marks_awarded": 1,
+				"answer_type": "mcq",
+				"correctness": "correct",
+				"correct_option": "B",
+				"student_option": "B",
+				"steps_analysis": null,
+				"key_points_covered": null,
+				"key_points_missing": null,
+				"feedback": null
+			},
+			{
+				"question_id": "8",
+				"max_marks": 1,
+				"marks_awarded": 0,
+				"answer_type": "mcq",
+				"correctness": "incorrect",
+				"correct_option": "C",
+				"student_option": "A",
+				"steps_analysis": null,
+				"key_points_covered": null,
+				"key_points_missing": null,
+				"feedback": null
+			}
+		],
+		"non_mcq_evaluation": [
+			{
+				"question_id": "9",
+				"max_marks": 2,
+				"marks_awarded": 2,
+				"answer_type": "short",
+				"correctness": "correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[concept] Definition of set",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[detail] Example provided",
+						"is_correct": true,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["Well-defined collection of objects", "Example: A = {1, 2, 3}"],
+				"key_points_missing": null,
+				"feedback": {
+					"strengths": "Correct definition and valid example provided.",
+					"improvements": "None; answer is complete."
+				}
+			},
+			{
+				"question_id": "10",
+				"max_marks": 2,
+				"marks_awarded": 2,
+				"answer_type": "short",
+				"correctness": "correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[concept] Domain stated as ℝ",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[detail] Range stated as [0, ∞)",
+						"is_correct": true,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["Domain: ℝ", "Range: [0, ∞)"],
+				"key_points_missing": null,
+				"feedback": {
+					"strengths": "Both domain and range are correctly stated.",
+					"improvements": "None; answer is complete."
+				}
+			},
+			{
+				"question_id": "11",
+				"max_marks": 2,
+				"marks_awarded": 2,
+				"answer_type": "numerical",
+				"correctness": "correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[setup] Values of sin45° and cos45° written as 1/√2",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[final] Multiplied to get 1/2",
+						"is_correct": true,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["sin45° = 1/√2", "cos45° = 1/√2", "Product = 1/2"],
+				"key_points_missing": null,
+				"feedback": {
+					"strengths": "Correct values and multiplication shown.",
+					"improvements": "None; answer is complete."
+				}
+			},
+			{
+				"question_id": "12",
+				"max_marks": 2,
+				"marks_awarded": 2,
+				"answer_type": "numerical",
+				"correctness": "correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[setup] Used nPr formula: 5P2 = 5 × 4",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[final] Calculated product as 20",
+						"is_correct": true,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["Used nPr formula", "Correct calculation"],
+				"key_points_missing": null,
+				"feedback": {
+					"strengths": "Correct formula and calculation.",
+					"improvements": "None; answer is complete."
+				}
+			},
+			{
+				"question_id": "13",
+				"max_marks": 2,
+				"marks_awarded": 2,
+				"answer_type": "numerical",
+				"correctness": "correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[setup] Stated n = 4",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[final] Calculated 2⁴ = 16",
+						"is_correct": true,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["n = 4", "2⁴ = 16"],
+				"key_points_missing": null,
+				"feedback": {
+					"strengths": "Correctly identified n and calculated power set size.",
+					"improvements": "None; answer is complete."
+				}
+			},
+			{
+				"question_id": "14",
+				"max_marks": 2,
+				"marks_awarded": 2,
+				"answer_type": "short",
+				"correctness": "correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[detail] Example of one-one function: f(x) = x",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[detail] Example of many-one function: f(x) = x²",
+						"is_correct": true,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["One-one: f(x) = x", "Many-one: f(x) = x²"],
+				"key_points_missing": null,
+				"feedback": {
+					"strengths": "Both examples are correct and standard.",
+					"improvements": "None; answer is complete."
+				}
+			},
+			{
+				"question_id": "15",
+				"max_marks": 3,
+				"marks_awarded": 1,
+				"answer_type": "long",
+				"correctness": "partially_correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[setup] Wrote LHS expression correctly",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[steps] Combined terms and mentioned LCM/simplification (not shown)",
+						"is_correct": false,
+						"marks": 1
+					},
+					{
+						"step": "[final] Stated RHS = 2 cosecθ, but no working shown",
+						"is_correct": false,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["LHS written", "Final result stated"],
+				"key_points_missing": ["No algebraic manipulation shown", "No expansion or simplification steps"],
+				"feedback": {
+					"strengths": "Correctly wrote the initial expression and final result.",
+					"improvements": "Show all intermediate algebraic steps, including combining terms and simplification, to justify the proof."
+				}
+			},
+			{
+				"question_id": "16",
+				"max_marks": 3,
+				"marks_awarded": 3,
+				"answer_type": "short",
+				"correctness": "correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[setup] Found union: {1,2,3,4,5,6}",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[steps] Found intersection: {3,4}",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[final] Both answers clearly stated",
+						"is_correct": true,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["Union correct", "Intersection correct"],
+				"key_points_missing": null,
+				"feedback": {
+					"strengths": "Both union and intersection are correct and clearly stated.",
+					"improvements": "None; answer is complete."
+				}
+			},
+			{
+				"question_id": "17",
+				"max_marks": 3,
+				"marks_awarded": 3,
+				"answer_type": "numerical",
+				"correctness": "correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[setup] Used 5P3 formula",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[steps] Calculated 5 × 4 × 3",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[final] Final answer 60",
+						"is_correct": true,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["Used correct formula", "Correct calculation", "Correct answer"],
+				"key_points_missing": null,
+				"feedback": {
+					"strengths": "Correct formula, calculation, and answer.",
+					"improvements": "None; answer is complete."
+				}
+			},
+			{
+				"question_id": "18",
+				"max_marks": 3,
+				"marks_awarded": 2,
+				"answer_type": "short",
+				"correctness": "partially_correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[setup] Stated relation is reflexive, symmetric, transitive",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[steps] Did not justify each property with reasoning",
+						"is_correct": false,
+						"marks": 1
+					},
+					{
+						"step": "[final] Concluded all properties hold",
+						"is_correct": true,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["All properties named", "Conclusion stated"],
+				"key_points_missing": ["No justification for reflexivity, symmetry, or transitivity"],
+				"feedback": {
+					"strengths": "Correctly identified all three properties and conclusion.",
+					"improvements": "Provide reasoning for each property (e.g., show (a,a) ∈ R for all a ∈ A, etc.) to justify the answer."
+				}
+			},
+			{
+				"question_id": "19",
+				"max_marks": 4,
+				"marks_awarded": 2,
+				"answer_type": "long",
+				"correctness": "partially_correct",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[concept] Used identity 1 + tan²θ = sec²θ",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[steps] Substituted to get sec²θ (1 + sin2θ)",
+						"is_correct": true,
+						"marks": 1
+					},
+					{
+						"step": "[final] Stated LHS = RHS, hence proved",
+						"is_correct": false,
+						"marks": 1
+					},
+					{
+						"step": "[final] No evidence provided.",
+						"is_correct": false,
+						"marks": 1
+					}
+				],
+				"key_points_covered": ["Identity used", "Substitution done"],
+				"key_points_missing": ["Did not explicitly compare to RHS or state 'hence proved' in detail"],
+				"feedback": {
+					"strengths": "Correct use of identity and substitution.",
+					"improvements": "Explicitly state the comparison to RHS and write 'hence proved' for full marks."
+				}
+			},
+			{
+				"question_id": "20",
+				"max_marks": 4,
+				"marks_awarded": 0,
+				"answer_type": "long",
+				"correctness": "incorrect",
+				"correct_option": null,
+				"student_option": null,
+				"steps_analysis": [
+					{
+						"step": "[concept] Counted total letters or repeated letters",
+						"is_correct": false,
+						"marks": 1
+					},
+					{
+						"step": "[steps] No calculation or formula shown",
+						"is_correct": false,
+						"marks": 1
+					},
+					{
+						"step": "[method] Did not identify repeated letters or use correct formula",
+						"is_correct": false,
+						"marks": 1
+					},
+					{
+						"step": "[final] No answer provided",
+						"is_correct": false,
+						"marks": 1
+					}
+				],
+				"key_points_covered": null,
+				"key_points_missing": ["Did not attempt the question"],
+				"feedback": {
+					"strengths": "No attempt made.",
+					"improvements": "Attempt the question by identifying repeated letters and applying the permutation formula with repetitions."
+				}
+			}
+		]
+	}
+}
